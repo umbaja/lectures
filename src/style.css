@@ -1,0 +1,172 @@
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #4f46e5;
+  --accent-fg: #ffffff;
+  --sidebar-bg: #f9fafb;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111827;
+    --fg: #f3f4f6;
+    --muted: #9ca3af;
+    --border: #1f2937;
+    --sidebar-bg: #0b1220;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.sidebar h1 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: 0 0 1rem;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0.35rem 0 1.25rem;
+}
+
+.module h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 1rem 0 0.5rem;
+}
+
+.module ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lesson-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.lesson-link:hover {
+  background: var(--border);
+}
+
+.lesson-link.active {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.check {
+  width: 1.2em;
+  text-align: center;
+}
+
+.content {
+  flex: 1;
+  padding: 2.5rem;
+  max-width: 760px;
+}
+
+.lesson-content {
+  line-height: 1.65;
+}
+
+.quiz {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.quiz fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.quiz legend {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.quiz label {
+  display: block;
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.quiz button,
+.mark-done {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.mark-done {
+  margin-top: 1.5rem;
+}
+
+.quiz-result {
+  font-weight: 600;
+  margin-top: 0.75rem;
+}
