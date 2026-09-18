@@ -127,6 +127,98 @@ body {
   line-height: 1.65;
 }
 
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-embed iframe,
+.video-embed > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.checkpoint-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.checkpoint-modal {
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+.checkpoint-modal h3 {
+  margin-top: 0;
+}
+
+.checkpoint-modal fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.checkpoint-modal legend {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.checkpoint-modal label {
+  display: block;
+  margin: 0.35rem 0;
+  font-size: 0.9rem;
+}
+
+.checkpoint-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.checkpoint-actions button {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.checkpoint-feedback {
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.checkpoint-feedback.correct {
+  color: #16a34a;
+}
+
+.checkpoint-feedback.incorrect {
+  color: #dc2626;
+}
+
+.hidden {
+  display: none;
+}
+
 .quiz {
   margin-top: 2rem;
   padding: 1.25rem;

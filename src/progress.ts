@@ -3,15 +3,21 @@ const STORAGE_KEY = "course-progress";
 interface ProgressState {
   completedLessons: string[];
   quizScores: Record<string, number>;
+  answeredCheckpoints: string[];
 }
 
 function load(): ProgressState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { completedLessons: [], quizScores: {} };
-    return JSON.parse(raw) as ProgressState;
+    if (!raw) return { completedLessons: [], quizScores: {}, answeredCheckpoints: [] };
+    const parsed = JSON.parse(raw) as Partial<ProgressState>;
+    return {
+      completedLessons: parsed.completedLessons ?? [],
+      quizScores: parsed.quizScores ?? {},
+      answeredCheckpoints: parsed.answeredCheckpoints ?? [],
+    };
   } catch {
-    return { completedLessons: [], quizScores: {} };
+    return { completedLessons: [], quizScores: {}, answeredCheckpoints: [] };
   }
 }
 
@@ -43,4 +49,16 @@ export function recordQuizScore(lessonId: string, score: number) {
 
 export function completionCount(): number {
   return load().completedLessons.length;
+}
+
+export function isCheckpointAnswered(checkpointId: string): boolean {
+  return load().answeredCheckpoints.includes(checkpointId);
+}
+
+export function markCheckpointAnswered(checkpointId: string) {
+  const state = load();
+  if (!state.answeredCheckpoints.includes(checkpointId)) {
+    state.answeredCheckpoints.push(checkpointId);
+    save(state);
+  }
 }

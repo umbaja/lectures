@@ -9,11 +9,25 @@ export interface Quiz {
   questions: QuizQuestion[];
 }
 
+export interface VideoCheckpoint {
+  id: string;
+  /** Playback position, in seconds, at which the video pauses to ask this question. */
+  atSeconds: number;
+  question: QuizQuestion;
+}
+
+export interface LessonVideo {
+  /** The part after "v=" in a youtube.com/watch?v=... URL, or the youtu.be/... slug. */
+  youtubeId: string;
+  checkpoints?: VideoCheckpoint[];
+}
+
 export interface Lesson {
   id: string;
   title: string;
   /** Lesson body as HTML string (keep it simple — no markdown renderer required). */
   content: string;
+  video?: LessonVideo;
   quiz?: Quiz;
 }
 

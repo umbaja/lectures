@@ -31,7 +31,30 @@ const modules: Module[] = [
     id: "m1",
     title: "Modul 1: Neuroscience of Food (IVI)",
     lessons: [
-      { id: "m1-l1", title: "1.1 Ako mozog rozhoduje o jedle", content: "<p>Obsah lekcie doplní partner IVI.</p>" },
+      {
+        id: "m1-l1",
+        title: "1.1 Ako mozog rozhoduje o jedle",
+        content:
+          "<p>Obsah lekcie doplní partner IVI.</p>" +
+          "<p><em>Video nižšie je len UKÁŽKA mechanizmu (video + kvízové zastávky) — " +
+          "nahraďte <code>youtubeId</code> a otázky v <code>course-content.ts</code> skutočným " +
+          "videom lekcie 1.1 z YouTube kanála AGRI-TOUR.</em></p>",
+        video: {
+          youtubeId: "aqz-KE-bpKQ",
+          checkpoints: [
+            {
+              id: "m1-l1-cp1",
+              atSeconds: 10,
+              question: draftQuestion("m1-l1-cp1-q", "UKÁŽKOVÁ otázka č. 1 (doplniť skutočnú otázku k video obsahu v čase 0:10)"),
+            },
+            {
+              id: "m1-l1-cp2",
+              atSeconds: 25,
+              question: draftQuestion("m1-l1-cp2-q", "UKÁŽKOVÁ otázka č. 2 (doplniť skutočnú otázku k video obsahu v čase 0:25)"),
+            },
+          ],
+        },
+      },
       { id: "m1-l2", title: "1.2 Zmyslové vnímanie a zážitkové aktivity v agroturistike", content: "<p>Obsah lekcie doplní partner IVI.</p>" },
       { id: "m1-l3", title: "1.3 Aplikovaná sociálna psychológia spotrebiteľského správania", content: "<p>Obsah lekcie doplní partner IVI.</p>" },
       { id: "m1-l4", title: "1.4 Podpora udržateľnej a zdravej spotreby", content: "<p>Obsah lekcie doplní partner IVI.</p>" },

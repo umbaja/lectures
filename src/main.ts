@@ -1,14 +1,23 @@
 import { course } from "./data/course-content";
-import { allLessons, findLesson, type Lesson } from "./course";
-import { isLessonComplete, markLessonComplete, recordQuizScore, completionCount } from "./progress";
+import { allLessons, findLesson, type Lesson, type VideoCheckpoint } from "./course";
+import {
+  isLessonComplete,
+  markLessonComplete,
+  markCheckpointAnswered,
+  recordQuizScore,
+  completionCount,
+} from "./progress";
+import { VideoController } from "./video-player";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
+const videoController = new VideoController();
 
 let currentLessonId = lessons[0]?.id ?? "";
 let lastQuizResult: { lessonId: string; text: string } | null = null;
 
 function render() {
+  videoController.destroy();
   const currentLesson = findLesson(course, currentLessonId);
   app.innerHTML = `
     <div class="layout">
@@ -72,12 +81,17 @@ function render() {
     e.preventDefault();
     handleQuizSubmit(quizForm, currentLesson!);
   });
+
+  if (currentLesson?.video) {
+    void mountLessonVideo(currentLesson);
+  }
 }
 
 function renderLesson(lesson: Lesson): string {
   return `
     <article>
       <h2>${escapeHtml(lesson.title)}</h2>
+      ${lesson.video ? `<div class="video-embed"><div id="yt-player"></div></div>` : ""}
       <div class="lesson-content">${lesson.content}</div>
       ${lesson.quiz ? renderQuiz(lesson) : ""}
       <button data-mark-done class="mark-done">
@@ -85,6 +99,66 @@ function renderLesson(lesson: Lesson): string {
       </button>
     </article>
   `;
+}
+
+async function mountLessonVideo(lesson: Lesson) {
+  if (!lesson.video) return;
+  await videoController.mount("yt-player", lesson.video.youtubeId, lesson.video.checkpoints ?? [], showCheckpointOverlay);
+}
+
+function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
+  const overlay = document.createElement("div");
+  overlay.className = "checkpoint-overlay";
+  overlay.innerHTML = `
+    <div class="checkpoint-modal">
+      <h3>Otázka</h3>
+      <form data-checkpoint-form>
+        <fieldset>
+          <legend>${escapeHtml(checkpoint.question.question)}</legend>
+          ${checkpoint.question.options
+            .map(
+              (opt, oi) => `
+            <label>
+              <input type="radio" name="answer" value="${oi}" required />
+              ${escapeHtml(opt)}
+            </label>
+          `,
+            )
+            .join("")}
+        </fieldset>
+        <p class="checkpoint-feedback" data-checkpoint-feedback></p>
+        <div class="checkpoint-actions">
+          <button type="submit" data-checkpoint-submit>Odpovedať</button>
+          <button type="button" data-checkpoint-continue class="hidden">Pokračovať vo videu</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const form = overlay.querySelector<HTMLFormElement>("[data-checkpoint-form]")!;
+  const submitBtn = overlay.querySelector<HTMLButtonElement>("[data-checkpoint-submit]")!;
+  const continueBtn = overlay.querySelector<HTMLButtonElement>("[data-checkpoint-continue]")!;
+  const feedback = overlay.querySelector<HTMLElement>("[data-checkpoint-feedback]")!;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const answer = new FormData(form).get("answer");
+    const correct = answer !== null && Number(answer) === checkpoint.question.correctIndex;
+    feedback.textContent = correct ? "Správne!" : "Nesprávne, ale pokračujme ďalej.";
+    feedback.classList.add(correct ? "correct" : "incorrect");
+    submitBtn.classList.add("hidden");
+    continueBtn.classList.remove("hidden");
+    form.querySelectorAll("input").forEach((input) => {
+      (input as HTMLInputElement).disabled = true;
+    });
+  });
+
+  continueBtn.addEventListener("click", () => {
+    markCheckpointAnswered(checkpoint.id);
+    overlay.remove();
+    videoController.resume();
+  });
 }
 
 function renderQuiz(lesson: Lesson): string {
