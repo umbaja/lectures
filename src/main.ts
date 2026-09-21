@@ -1,5 +1,13 @@
 import { course } from "./data/course-content";
-import { allLessons, findLesson, type Lesson, type VideoCheckpoint } from "./course";
+import {
+  allLessons,
+  findLesson,
+  type Lesson,
+  type Module,
+  type SupplementaryMaterial,
+  type SupplementaryMaterialType,
+  type VideoCheckpoint,
+} from "./course";
 import {
   isLessonComplete,
   markLessonComplete,
@@ -58,7 +66,7 @@ function render() {
         </nav>
       </aside>
       <main class="content">
-        ${currentLesson ? renderLesson(currentLesson) : "<p>Vyberte lekciu.</p>"}
+        ${currentLesson ? renderLesson(currentLesson, findModule(currentLesson)) : "<p>Vyberte lekciu.</p>"}
       </main>
     </div>
   `;
@@ -87,9 +95,18 @@ function render() {
   }
 }
 
-function renderLesson(lesson: Lesson): string {
+function findModule(lesson: Lesson): Module {
+  const module = course.modules.find((m) => m.lessons.some((l) => l.id === lesson.id));
+  if (!module) throw new Error(`No module contains lesson ${lesson.id}`);
+  return module;
+}
+
+function renderLesson(lesson: Lesson, module: Module): string {
+  const isFirst = module.lessons[0]?.id === lesson.id;
+  const isLast = module.lessons[module.lessons.length - 1]?.id === lesson.id;
   return `
     <article>
+      ${isFirst ? renderModuleIntro(module) : ""}
       <h2>${escapeHtml(lesson.title)}</h2>
       ${lesson.video ? `<div class="video-embed"><div id="yt-player"></div></div>` : ""}
       <div class="lesson-content">${lesson.content}</div>
@@ -97,7 +114,66 @@ function renderLesson(lesson: Lesson): string {
       <button data-mark-done class="mark-done">
         ${isLessonComplete(lesson.id) ? "Lekcia dokončená ✓" : "Označiť ako dokončenú"}
       </button>
+      ${isLast ? renderModuleWrapUp(module) : ""}
     </article>
+  `;
+}
+
+function renderModuleIntro(module: Module): string {
+  return `
+    <div class="module-intro">
+      <p class="module-owner">Zodpovedný partner: ${escapeHtml(module.owner)}</p>
+      <p>${escapeHtml(module.intro)}</p>
+    </div>
+  `;
+}
+
+const MATERIAL_TYPE_LABELS: Record<SupplementaryMaterialType, string> = {
+  "case-study": "Prípadová štúdia",
+  infographic: "Infografika",
+  checklist: "Checklist",
+  worksheet: "Pracovný list",
+  "fact-sheet": "Fact sheet / glosár",
+  "photo-story": "Fotopríbeh",
+  "interview-video": "Rozhovor / video z terénu",
+  "recommended-links": "Odporúčané odkazy",
+};
+
+function renderMaterial(material: SupplementaryMaterial): string {
+  const label = MATERIAL_TYPE_LABELS[material.type];
+  const body = material.url
+    ? `<a href="${escapeAttr(material.url)}" target="_blank" rel="noopener">${escapeHtml(material.title)}</a>`
+    : escapeHtml(material.title);
+  return `
+    <li>
+      <span class="material-type">${escapeHtml(label)}</span>
+      ${body}
+      ${material.note ? `<span class="material-note"> — ${escapeHtml(material.note)}</span>` : ""}
+    </li>
+  `;
+}
+
+function renderModuleWrapUp(module: Module): string {
+  if (module.supplementaryMaterials.length === 0 && module.references.length === 0) return "";
+  return `
+    <section class="module-wrapup">
+      ${
+        module.supplementaryMaterials.length > 0
+          ? `
+        <h3>Doplnkové materiály</h3>
+        <ul class="materials-list">${module.supplementaryMaterials.map(renderMaterial).join("")}</ul>
+      `
+          : ""
+      }
+      ${
+        module.references.length > 0
+          ? `
+        <h3>Referencie</h3>
+        <ul class="references-list">${module.references.map((r) => `<li>${escapeHtml(r)}</li>`).join("")}</ul>
+      `
+          : ""
+      }
+    </section>
   `;
 }
 
@@ -217,6 +293,10 @@ function escapeHtml(str: string): string {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
+}
+
+function escapeAttr(str: string): string {
+  return escapeHtml(str).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
 render();

@@ -1,15 +1,22 @@
-import type { Course, Module } from "../course";
+import type { Course, Module, SupplementaryMaterial } from "../course";
 
 /**
  * AGRI-TOUR MOOC — "Agritourism applied in the Pacific: Applied Green Deal
  * and Farm to Fork" (Erasmus+ CBHE Strand 1, WP3).
  *
- * Module titles, owners and structure (8 modules × 6 lectures = 48 lectures,
- * 480 minutes total) come from the project's Application Form and the D3.5
- * Piloting Methodology. Lecture titles inside each module and the 10-item
- * proficiency test bank are drafts — the module-owner partner listed in each
- * module still needs to confirm/replace them for Pilot Release v0.9 per the
- * Partner Instructions (10 MCQ items/module, 4 alternatives, pass ≥ 7/10).
+ * Structure (8 modules × 6 learning units = 48 units) and per-module
+ * requirements come from the project's Application Form and the D3.2
+ * Practical Guidelines for Preparing Educational Materials: each module
+ * needs an intro (~100-150 words), 6 core learning-unit scripts, at least
+ * 4 supplementary materials spanning at least 3 different formats, a
+ * 10-item proficiency test (4 alternatives, pass ≥ 7/10) and a reference
+ * list. Everything below except the structure itself is a DRAFT for the
+ * module-owner partner to confirm or replace before Pilot Release v0.9.
+ *
+ * Note: the Application Form lists M2's owner as UNISG (University of
+ * Gastronomic Sciences, Pollenzo); the D3.2 guidelines table instead says
+ * "UNICATT" for the same module. Kept as UNISG here (grant is authoritative)
+ * — worth double-checking with the project team which is correct.
  */
 
 function draftQuestion(id: string, question: string): {
@@ -26,10 +33,27 @@ function draftQuestion(id: string, question: string): {
   };
 }
 
+function draftMaterial(
+  id: string,
+  type: SupplementaryMaterial["type"],
+  title: string,
+  note: string,
+): SupplementaryMaterial {
+  return { id, type, title, note };
+}
+
 const modules: Module[] = [
   {
     id: "m1",
     title: "Modul 1: Neuroscience of Food (IVI)",
+    owner: "IVI",
+    intro:
+      "Modul skúma, ako mozog a zmysly ovplyvňujú rozhodovanie o jedle a ako tieto poznatky využiť pri tvorbe " +
+      "zážitkovej agroturistiky. Študenti sa oboznámia so základmi aplikovanej sociálnej psychológie " +
+      "spotrebiteľského správania, princípmi eko-gastronómie a podpory udržateľnej a zdravej konzumácie. Súčasťou " +
+      "modulu sú cvičenia zamerané na zmenu správania, ktoré pomôžu navrhnúť vlastnú zážitkovú aktivitu spojenú " +
+      "s jedlom pre návštevníkov agroturistickej prevádzky, doplnené prípadovými štúdiami zo skutočných " +
+      "prevádzok v Pacifiku aj Európe.",
     lessons: [
       {
         id: "m1-l1",
@@ -72,10 +96,24 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m1-mat1", "case-study", "Prípadová štúdia: zážitková degustácia na agroturistickej farme", "TBD od IVI"),
+      draftMaterial("m1-mat2", "worksheet", "Pracovný list: navrhni cvičenie na zmenu spotrebiteľského správania", "TBD od IVI"),
+      draftMaterial("m1-mat3", "infographic", "Infografika: ako mozog rozhoduje o jedle (proces v 5 krokoch)", "TBD od IVI"),
+      draftMaterial("m1-mat4", "recommended-links", "Odporúčané zdroje k aplikovanej psychológii jedla", "TBD od IVI"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner IVI"],
   },
   {
     id: "m2",
     title: "Modul 2: Cultural sustainability of food (UNISG)",
+    owner: "UNISG",
+    intro:
+      "Modul sa venuje kultúrnej udržateľnosti jedla a úlohe potravinových labelov a označení pôvodu v " +
+      "agroturistike. Študenti sa naučia, prečo je transparentnosť pôvodu potravín dôležitá pre dôveru " +
+      "návštevníkov, ako fungujú geografické označenia a certifikáty tradičných produktov, a ako príbehy " +
+      "lokálnych producentov posilňujú hodnotu destinácie. Modul vychádza z princípov hnutia Slow Food a ukazuje, " +
+      "ako spojiť tradíciu s inováciou pri komunikácii lokálneho jedla turistom.",
     lessons: [
       { id: "m2-l1", title: "2.1 Kultúrna udržateľnosť jedla — úvod", content: "<p>Obsah lekcie doplní partner UNISG.</p>" },
       { id: "m2-l2", title: "2.2 Význam označení pôvodu a potravinových labelov", content: "<p>Obsah lekcie doplní partner UNISG.</p>" },
@@ -95,10 +133,24 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m2-mat1", "fact-sheet", "Fact sheet: glosár pojmov (GI, PDO, PGI, tradičný produkt)", "TBD od UNISG"),
+      draftMaterial("m2-mat2", "case-study", "Príbeh lokálneho producenta a jeho certifikácie", "TBD od UNISG"),
+      draftMaterial("m2-mat3", "infographic", "Infografika: typy označení pôvodu potravín v EÚ a Pacifiku", "TBD od UNISG"),
+      draftMaterial("m2-mat4", "checklist", "Checklist: ako čítať potravinový label a overiť pôvod", "TBD od UNISG"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner UNISG"],
   },
   {
     id: "m3",
     title: "Modul 3: Rural culture & agritourism planning (NewEdu)",
+    owner: "NewEdu",
+    intro:
+      "Modul predstavuje európsky model agroturistiky a ukazuje, ako ho prenášať do podmienok tichomorských " +
+      "ostrovov. Študenti sa oboznámia s plánovaním malej agroturistickej ponuky, budovaním lokálnych " +
+      "hodnotových reťazcov a rozprávaním príbehu vidieckej komunity ako súčasti zážitku návštevníka. Dôraz je " +
+      "kladený na praktické kroky — od prvého nápadu po fungujúcu ponuku — a na prípadové štúdie z ostrovných " +
+      "prostredí, kde je prenos know-how z Európy najviac relevantný.",
     lessons: [
       { id: "m3-l1", title: "3.1 Model agroturistiky a jeho prenos na ostrovy Pacifiku", content: "<p>Obsah lekcie doplní partner NewEdu.</p>" },
       { id: "m3-l2", title: "3.2 Podpora vidieckej kultúry a komunít", content: "<p>Obsah lekcie doplní partner NewEdu.</p>" },
@@ -118,10 +170,24 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m3-mat1", "checklist", "Checklist: kroky na spustenie malej agroturistickej ponuky", "TBD od NewEdu"),
+      draftMaterial("m3-mat2", "case-study", "Prípadová štúdia agroturistiky na ostrove", "TBD od NewEdu"),
+      draftMaterial("m3-mat3", "worksheet", "Pracovný list: mapovanie zážitku návštevníka", "TBD od NewEdu"),
+      draftMaterial("m3-mat4", "photo-story", "Fotopríbeh z vidieckej komunity", "TBD od NewEdu"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner NewEdu"],
   },
   {
     id: "m4",
     title: "Modul 4: Precision agriculture in micro-farming (SUA)",
+    owner: "SUA",
+    intro:
+      "Modul predstavuje základy precízneho poľnohospodárstva a jeho využitie na mikro-farmách typických pre " +
+      "Pacifik. Študenti sa naučia o senzoroch a IoT technológiách, inteligentnej závlahe, diaľkovom snímaní " +
+      "pomocou dronov (UAV) a rozhodovaní na základe dát. Modul ukazuje, ako tieto nástroje zvyšujú produktivitu " +
+      "aj udržateľnosť malých fariem a ako ich prepojiť s agroturistickou ponukou — napríklad formou demonštrácií " +
+      "smart-farm technológií pre návštevníkov.",
     lessons: [
       { id: "m4-l1", title: "4.1 Precízne poľnohospodárstvo — základné princípy", content: "<p>Obsah lekcie doplní partner SUA.</p>" },
       { id: "m4-l2", title: "4.2 Nástroje precízneho poľnohospodárstva pre mikro-farmy", content: "<p>Obsah lekcie doplní partner SUA.</p>" },
@@ -141,10 +207,24 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m4-mat1", "infographic", "Infografika: senzory a IoT na mikro-farme", "TBD od SUA"),
+      draftMaterial("m4-mat2", "case-study", "Prípadová štúdia smart-farm demonštrácie", "TBD od SUA"),
+      draftMaterial("m4-mat3", "checklist", "Checklist: základy precízneho poľnohospodárstva", "TBD od SUA"),
+      draftMaterial("m4-mat4", "recommended-links", "Odporúčané zdroje k precíznemu poľnohospodárstvu", "TBD od SUA"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner SUA"],
   },
   {
     id: "m5",
     title: "Modul 5: Samoan Culture of Food (NUS)",
+    owner: "NUS",
+    intro:
+      "Modul približuje samojskú kultúru jedla, tradičné plodiny ako taro a kokos, a ich úlohu v zdravej výžive " +
+      "aj v modeli farm-to-table. Študenti sa oboznámia s tým, ako prepojiť kulinárske dedičstvo s " +
+      "agroturistickou ponukou a ako farmy a plantáže môžu byť súčasťou zážitku návštevníka. Modul kladie dôraz " +
+      "na zachovanie tradície jedla ako formy kultúrneho dedičstva a na jej hodnotu pre miestnu komunitu aj pre " +
+      "turizmus.",
     lessons: [
       { id: "m5-l1", title: "5.1 Samojská kultúra jedla — úvod", content: "<p>Obsah lekcie doplní partner NUS.</p>" },
       { id: "m5-l2", title: "5.2 Tradičné plodiny (taro, kokos) a ich úloha", content: "<p>Obsah lekcie doplní partner NUS.</p>" },
@@ -164,10 +244,24 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m5-mat1", "photo-story", "Fotopríbeh: farm-to-table na Samoe", "TBD od NUS"),
+      draftMaterial("m5-mat2", "fact-sheet", "Fact sheet: glosár tradičných ingrediencií", "TBD od NUS"),
+      draftMaterial("m5-mat3", "case-study", "Prípadová štúdia rodinnej farmy/plantáže", "TBD od NUS"),
+      draftMaterial("m5-mat4", "worksheet", "Pracovný list: navrhni farm-to-table zážitok", "TBD od NUS"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner NUS"],
   },
   {
     id: "m6",
     title: "Modul 6: Women's empowerment & leadership (FNU)",
+    owner: "FNU",
+    intro:
+      "Modul sa zameriava na postavenie žien v poľnohospodárstve a turizme na Fidži a v širšom pacifickom " +
+      "regióne. Študenti sa dozvedia o bariérach, ktorým ženy čelia, o modeloch podpory rodovej rovnosti a " +
+      "líderstva, a o konkrétnych príkladoch žien-líderiek v agroturistike. Cieľom modulu je ukázať, ako " +
+      "inkluzívna agroturistika a rozvoj líderských zručností v odľahlých ostrovných komunitách prispievajú k " +
+      "posilneniu postavenia žien v sektore.",
     lessons: [
       { id: "m6-l1", title: "6.1 Postavenie žien v poľnohospodárstve a turizme na Fidži", content: "<p>Obsah lekcie doplní partner FNU.</p>" },
       { id: "m6-l2", title: "6.2 Bariéry a príležitosti pre líderky", content: "<p>Obsah lekcie doplní partner FNU.</p>" },
@@ -187,10 +281,24 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m6-mat1", "interview-video", "Rozhovor so ženou-líderkou v agroturistike na Fidži", "TBD od FNU"),
+      draftMaterial("m6-mat2", "case-study", "Prípadová štúdia podniku vedeného ženou", "TBD od FNU"),
+      draftMaterial("m6-mat3", "checklist", "Checklist: bariéry inklúzie a ako ich riešiť", "TBD od FNU"),
+      draftMaterial("m6-mat4", "infographic", "Infografika: ženy v agroturistike Fidži v číslach", "TBD od FNU"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner FNU"],
   },
   {
     id: "m7",
     title: "Modul 7: Micro agri-tourism in remote islands (USP)",
+    owner: "USP",
+    intro:
+      "Modul sa venuje mikro-agroturistike na odľahlých ostrovoch a jej špecifikám oproti pevninskému modelu. " +
+      "Študenti spoznajú princípy komunitného turizmu, zachovania jedinečnosti kultúry ostrovných štátov " +
+      "Pacifiku (PICs) a budovania lokálnych partnerstiev v pohostinstve. Modul rieši aj to, ako geografická " +
+      "odľahlosť súčasne predstavuje výzvu aj príležitosť — napríklad pre online prístup k vzdelávaniu z " +
+      "odľahlých kampusov USP — a ako tieto faktory formujú odolnosť ostrovných komunít.",
     lessons: [
       { id: "m7-l1", title: "7.1 Špecifiká mikro-agroturistiky na odľahlých ostrovoch", content: "<p>Obsah lekcie doplní partner USP.</p>" },
       { id: "m7-l2", title: "7.2 Zachovanie jedinečnosti kultúry PICs", content: "<p>Obsah lekcie doplní partner USP.</p>" },
@@ -210,10 +318,25 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m7-mat1", "case-study", "Prípadová štúdia komunitného turizmu na odľahlom ostrove", "TBD od USP"),
+      draftMaterial("m7-mat2", "photo-story", "Fotopríbeh z ostrovnej komunity USP", "TBD od USP"),
+      draftMaterial("m7-mat3", "checklist", "Checklist: pripravenosť na hosťovanie návštevníkov", "TBD od USP"),
+      draftMaterial("m7-mat4", "recommended-links", "Odporúčané zdroje o komunitnom turizme v Pacifiku", "TBD od USP"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner USP"],
   },
   {
     id: "m8",
     title: "Modul 8: Environmental rights in remote Pacific islands (NUV)",
+    owner: "NUV",
+    intro:
+      "Modul sa zaoberá environmentálnymi právami a klimatickou spravodlivosťou v odľahlých ostrovných štátoch " +
+      "Pacifiku. Študenti spoznajú právny rámec ochrany životného prostredia v regióne, otázky prírodných " +
+      "zdrojov, biodiverzity, vody a odpadu, a úlohu komunitných záujmov pri environmentálnych rozhodnutiach v " +
+      "agroturistike. Modul vychádza aj z iniciatívy Vanuatu na pôde OSN v oblasti klimatickej spravodlivosti a " +
+      "ukazuje, ako dopady klimatickej zmeny priamo ovplyvňujú agroturistiku v regióne a aké zelené praktiky " +
+      "zvyšujú odolnosť komunít.",
     lessons: [
       { id: "m8-l1", title: "8.1 Environmentálne práva a klimatická spravodlivosť v Pacifiku", content: "<p>Obsah lekcie doplní partner NUV.</p>" },
       { id: "m8-l2", title: "8.2 Vanuatu a rezolúcia OSN o klimatickej spravodlivosti", content: "<p>Obsah lekcie doplní partner NUV.</p>" },
@@ -233,6 +356,13 @@ const modules: Module[] = [
         },
       },
     ],
+    supplementaryMaterials: [
+      draftMaterial("m8-mat1", "fact-sheet", "Fact sheet: glosár environmentálnych práv a pojmov", "TBD od NUV"),
+      draftMaterial("m8-mat2", "case-study", "Prípadová štúdia: Vanuatu a rezolúcia OSN o klimatickej spravodlivosti", "TBD od NUV"),
+      draftMaterial("m8-mat3", "checklist", "Checklist: environmentálne rozhodovanie v agroturistike", "TBD od NUV"),
+      draftMaterial("m8-mat4", "infographic", "Infografika: dopady klimatickej zmeny na ostrovné komunity", "TBD od NUV"),
+    ],
+    references: ["TBD — zoznam referencií doplní partner NUV"],
   },
 ];
 
