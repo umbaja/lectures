@@ -14,19 +14,26 @@ import {
   markCheckpointAnswered,
   recordQuizScore,
   completionCount,
+  PASS_SCORE,
 } from "./progress";
 import { VideoController } from "./video-player";
+import { getParticipant, isRegistered, registerParticipant } from "./participant";
+import { syncParticipant, syncProgress } from "./backend";
+import { renderCertificateView } from "./certificate";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
 const videoController = new VideoController();
 
-let currentLessonId = lessons[0]?.id ?? "";
+const CERTIFICATE_VIEW = "certificate";
+
+let currentLessonId: string = lessons[0]?.id ?? "";
 let lastQuizResult: { lessonId: string; text: string } | null = null;
 
 function render() {
   videoController.destroy();
-  const currentLesson = findLesson(course, currentLessonId);
+  const participant = getParticipant();
+  const currentLesson = currentLessonId === CERTIFICATE_VIEW ? undefined : findLesson(course, currentLessonId);
   app.innerHTML = `
     <div class="layout">
       <aside class="sidebar">
@@ -36,6 +43,14 @@ function render() {
           <div class="progress-bar-fill" style="width:${progressPercent()}%"></div>
         </div>
         <p class="progress-label">${completionCount()} / ${lessons.length} lessons completed</p>
+        ${
+          participant
+            ? `<button
+                 class="lesson-link certificate-link ${currentLessonId === CERTIFICATE_VIEW ? "active" : ""}"
+                 data-view-certificate
+               >🎓 My certificate</button>`
+            : ""
+        }
         <nav>
           ${course.modules
             .map(
@@ -66,7 +81,15 @@ function render() {
         </nav>
       </aside>
       <main class="content">
-        ${currentLesson ? renderLesson(currentLesson, findModule(currentLesson)) : "<p>Select a lesson.</p>"}
+        ${
+          currentLessonId === CERTIFICATE_VIEW
+            ? participant
+              ? renderCertificateView(course, participant)
+              : "<p>Register from a module test to track certificate progress.</p>"
+            : currentLesson
+              ? renderLesson(currentLesson, findModule(currentLesson))
+              : "<p>Select a lesson.</p>"
+        }
       </main>
     </div>
   `;
@@ -78,9 +101,18 @@ function render() {
     });
   });
 
+  app.querySelector<HTMLButtonElement>("[data-view-certificate]")?.addEventListener("click", () => {
+    currentLessonId = CERTIFICATE_VIEW;
+    render();
+  });
+
+  app.querySelector<HTMLButtonElement>("[data-print-certificate]")?.addEventListener("click", () => {
+    window.print();
+  });
+
   const markDoneBtn = app.querySelector<HTMLButtonElement>("[data-mark-done]");
   markDoneBtn?.addEventListener("click", () => {
-    markLessonComplete(currentLessonId);
+    completeLesson(currentLessonId);
     render();
   });
 
@@ -90,8 +122,21 @@ function render() {
     handleQuizSubmit(quizForm, currentLesson!);
   });
 
+  const registrationBtn = app.querySelector<HTMLButtonElement>("[data-open-registration]");
+  registrationBtn?.addEventListener("click", () => {
+    showRegistrationModal(() => render());
+  });
+
   if (currentLesson?.video) {
     void mountLessonVideo(currentLesson);
+  }
+}
+
+function completeLesson(lessonId: string) {
+  markLessonComplete(lessonId);
+  const participant = getParticipant();
+  if (participant) {
+    void syncProgress(participant.email, lessonId, { completed: true });
   }
 }
 
@@ -104,19 +149,89 @@ function findModule(lesson: Lesson): Module {
 function renderLesson(lesson: Lesson, module: Module): string {
   const isFirst = module.lessons[0]?.id === lesson.id;
   const isLast = module.lessons[module.lessons.length - 1]?.id === lesson.id;
+  const needsGate = Boolean(lesson.quiz) && !isRegistered();
   return `
     <article>
       ${isFirst ? renderModuleIntro(module) : ""}
       <h2>${escapeHtml(lesson.title)}</h2>
       ${lesson.video ? `<div class="video-embed"><div id="yt-player"></div></div>` : ""}
       <div class="lesson-content">${lesson.content}</div>
-      ${lesson.quiz ? renderQuiz(lesson) : ""}
-      <button data-mark-done class="mark-done">
-        ${isLessonComplete(lesson.id) ? "Lesson completed ✓" : "Mark as completed"}
-      </button>
+      ${
+        needsGate
+          ? renderRegistrationGate()
+          : `
+        ${lesson.quiz ? renderQuiz(lesson) : ""}
+        <button data-mark-done class="mark-done">
+          ${isLessonComplete(lesson.id) ? "Lesson completed ✓" : "Mark as completed"}
+        </button>
+      `
+      }
       ${isLast ? renderModuleWrapUp(module) : ""}
     </article>
   `;
+}
+
+function renderRegistrationGate(): string {
+  return `
+    <div class="progress-gate">
+      <h3>Test your knowledge</h3>
+      <p>This module's proficiency test is open to registered participants, so we can track pilot results
+      and — if you'd like one — issue a certificate once you pass every module. Browsing the lessons and
+      materials stays free for everyone.</p>
+      <button type="button" data-open-registration class="mark-done">Register to take the test</button>
+    </div>
+  `;
+}
+
+function showRegistrationModal(onDone: () => void) {
+  const overlay = document.createElement("div");
+  overlay.className = "checkpoint-overlay";
+  overlay.innerHTML = `
+    <div class="checkpoint-modal">
+      <h3>Register for module tests</h3>
+      <form data-registration-form>
+        <label class="registration-field">
+          Name
+          <input type="text" name="name" required />
+        </label>
+        <label class="registration-field">
+          Email
+          <input type="email" name="email" required />
+        </label>
+        <label class="registration-checkbox">
+          <input type="checkbox" name="wantsCertificate" />
+          I'd like a certificate once I pass every module's test
+        </label>
+        <label class="registration-checkbox">
+          <input type="checkbox" name="consent" required />
+          I agree that my name, email and course progress are stored for AGRI-TOUR project reporting
+        </label>
+        <div class="checkpoint-actions">
+          <button type="submit">Register</button>
+          <button type="button" data-cancel-registration class="secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const form = overlay.querySelector<HTMLFormElement>("[data-registration-form]")!;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const participant = registerParticipant({
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      wantsCertificate: data.get("wantsCertificate") !== null,
+    });
+    void syncParticipant(participant);
+    overlay.remove();
+    onDone();
+  });
+
+  overlay.querySelector<HTMLButtonElement>("[data-cancel-registration]")?.addEventListener("click", () => {
+    overlay.remove();
+  });
 }
 
 function renderModuleIntro(module: Module): string {
@@ -280,7 +395,12 @@ function handleQuizSubmit(form: HTMLFormElement, lesson: Lesson) {
   const score = Math.round((correct / quiz.questions.length) * 100);
   recordQuizScore(lesson.id, score);
   lastQuizResult = { lessonId: lesson.id, text: `Score: ${correct} / ${quiz.questions.length} (${score}%)` };
-  if (score >= 70) markLessonComplete(lesson.id);
+  const passed = score >= PASS_SCORE;
+  if (passed) markLessonComplete(lesson.id);
+  const participant = getParticipant();
+  if (participant) {
+    void syncProgress(participant.email, lesson.id, { completed: passed, quizScore: score });
+  }
   render();
 }
 

@@ -356,3 +356,130 @@ h3 {
   font-weight: 600;
   margin-top: 0.75rem;
 }
+
+.certificate-link {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.progress-gate {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px dashed var(--accent);
+  border-radius: 10px;
+  background: var(--sidebar-bg);
+}
+
+.progress-gate h3 {
+  margin-top: 0;
+}
+
+.registration-field {
+  display: block;
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.registration-field input {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.registration-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0.6rem 0;
+  font-size: 0.85rem;
+}
+
+.registration-checkbox input {
+  margin-top: 0.2rem;
+}
+
+.checkpoint-actions button.secondary {
+  background: none;
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+
+.certificate-view {
+  max-width: 600px;
+}
+
+.certificate-paper {
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.certificate-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+}
+
+.certificate-course {
+  margin: 0 0 1rem;
+}
+
+.certificate-awarded-to {
+  margin: 0;
+  color: var(--muted);
+}
+
+.certificate-name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.certificate-detail {
+  max-width: 420px;
+  margin: 0 auto 1rem;
+  color: var(--muted);
+}
+
+.certificate-date {
+  margin: 0;
+  font-weight: 600;
+}
+
+.certificate-progress {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.certificate-progress th,
+.certificate-progress td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media print {
+  .sidebar,
+  .mark-done {
+    display: none !important;
+  }
+
+  .content {
+    max-width: none;
+    padding: 0;
+  }
+}

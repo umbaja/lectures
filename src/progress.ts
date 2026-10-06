@@ -1,5 +1,8 @@
 const STORAGE_KEY = "course-progress";
 
+/** Minimum quiz score (%) to count as a pass, for lesson completion and certificate eligibility. */
+export const PASS_SCORE = 70;
+
 interface ProgressState {
   completedLessons: string[];
   quizScores: Record<string, number>;
@@ -49,6 +52,10 @@ export function recordQuizScore(lessonId: string, score: number) {
 
 export function completionCount(): number {
   return load().completedLessons.length;
+}
+
+export function getQuizScore(lessonId: string): number | undefined {
+  return load().quizScores[lessonId];
 }
 
 export function isCheckpointAnswered(checkpointId: string): boolean {
