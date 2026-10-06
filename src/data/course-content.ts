@@ -506,24 +506,73 @@ const modules: Module[] = [
   },
   {
     id: "m4",
-    title: "Modul 4: Precision agriculture in micro-farming (SUA)",
+    title: "Modul 4: Precision Agriculture for Micro-Farms (SUA)",
     owner: "SUA",
     intro:
-      "Modul predstavuje základy precízneho poľnohospodárstva a jeho využitie na mikro-farmách typických pre " +
-      "Pacifik. Študenti sa naučia o senzoroch a IoT technológiách, inteligentnej závlahe, diaľkovom snímaní " +
-      "pomocou dronov (UAV) a rozhodovaní na základe dát. Modul ukazuje, ako tieto nástroje zvyšujú produktivitu " +
-      "aj udržateľnosť malých fariem a ako ich prepojiť s agroturistickou ponukou — napríklad formou demonštrácií " +
-      "smart-farm technológií pre návštevníkov.",
+      "Modul ukazuje, ako sa dá precízne poľnohospodárstvo prispôsobiť malým farmám, mikro-farmám a " +
+      "agroturistickým prevádzkam pomocou dostupných, praktických a lokálne relevantných nástrojov. Namiesto " +
+      "drahých strojov a satelitov modul stavia na jednoduchom rozhodovacom cykle Nameraj – Pochop – Konaj – " +
+      "Vyhodnoť – Komunikuj a na nástrojoch ako pôdny senzor vlhkosti, malá meteostanica, dron či digitálny " +
+      "denník farmy. Autorka: prof. Ing. Zuzana Palková, PhD. (Slovenská poľnohospodárska univerzita v Nitre).",
     lessons: [
       {
         id: "m4-l1",
-        title: "4.1 Precízne poľnohospodárstvo — základné princípy",
+        title: "4.1 Precízne poľnohospodárstvo pre mikro-farmy: význam, relevancia a východiská",
         content:
-          "<p>Prezentácia partnera SUA (Slovenská poľnohospodárska univerzita): precízne poľnohospodárstvo nie " +
-          "je len o drahých strojoch, drónoch alebo umelej inteligencii — dá sa začať aj s jednoduchými " +
-          "krokmi zameranými na kritické miesta farmy. Základný rozhodovací cyklus: nameraj dáta → pochop dáta " +
-          "→ konaj → vyhodnoť výsledok → komunikuj. Technológie môžu znížiť náklady na vodu a hnojivá, čo je " +
-          "dôležité najmä v čase rastúcich cien vstupov.</p>",
+          "<h3>Ciele lekcie</h3>" +
+          "<ul>" +
+          "<li>definovať precízne poľnohospodárstvo v praktických pojmoch;</li>" +
+          "<li>vysvetliť, prečo mikro-farmy potrebujú byť produktívne, udržateľné a viditeľné;</li>" +
+          "<li>rozlíšiť precízne poľnohospodárstvo od technologicky vedenej inovácie;</li>" +
+          "<li>vysvetliť, prečo technológia musí sedieť na farmu, nie naopak.</li>" +
+          "</ul>" +
+          "<h3>Prečo je táto téma dôležitá</h3>" +
+          "<p>Mikro-farmy čelia klimatickej neistote, nepravidelným zrážkam, obmedzenej pôde, pracovnej sile a " +
+          "financiám, rastúcim vstupným nákladom a rastúcemu dopytu spotrebiteľov po transparentnosti. Kľúčová " +
+          "myšlienka: malé farmy musia byť <strong>produktívne, udržateľné a viditeľné</strong>. Precízne " +
+          "poľnohospodárstvo môže podporiť všetky tri rozmery tým, že pomáha farmárom šetrnejšie využívať " +
+          "zdroje a vysvetliť svoje postupy návštevníkom.</p>" +
+          "<h3>Precízne poľnohospodárstvo ako lepšie rozhodovanie</h3>" +
+          "<p>Ide o využitie pozorovania, dát a technológie na podporu lepších farmárskych rozhodnutí — " +
+          "aplikovať správny vstup, na správnom mieste, v správnom čase a v správnom množstve na základe " +
+          "reálnych podmienok. Na mikro-farme to nemusí znamenať drahý systém. Môže to začať jedným pôdnym " +
+          "senzorom vlhkosti, jednoduchou meteostanicou, dronovým záberom, mobilnou aplikáciou, tabuľkou, " +
+          "denníkom farmy alebo QR kódom.</p>" +
+          "<h3>Realita mikro-farmy</h3>" +
+          "<p>Mikro-farma zvyčajne pracuje s menšou plochou, menším počtom pracovníkov, obmedzeným kapitálom " +
+          "a bližším kontaktom s miestnymi zákazníkmi či návštevníkmi. Preto technológia musí byť: dostupná, " +
+          "jednoduchá na používanie, ľahko udržiavateľná, lokálne relevantná, užitočná pre každodenné " +
+          "rozhodnutia a škálovateľná krok za krokom.</p>" +
+          "<h3>Od rutiny k rozhodnutiam podloženým dôkazmi</h3>" +
+          "<p>Tradičná farmárska skúsenosť zostáva nenahraditeľná — precízne poľnohospodárstvo ju nenahrádza, " +
+          "ale dopĺňa meraním, pozorovaním a záznamami. Namiesto zalievania len z rutiny môže farmár overiť, " +
+          "či pôda a plodina naozaj potrebujú vodu.</p>" +
+          "<h3>Relevancia pre agroturistiku</h3>" +
+          "<p>Precízne poľnohospodárstvo robí farmárske rozhodnutia viditeľnými pre návštevníkov. Senzor, " +
+          "dronový záber alebo digitálny denník sa stávajú viac než manažérskym nástrojom — pomáhajú farmárovi " +
+          "vysvetliť starostlivosť, zodpovednosť a udržateľnosť, čím robia príbeh farmy dôveryhodnejším.</p>" +
+          "<h3>Aplikovaná aktivita: Micro-Farm Problem–Tool Match</h3>" +
+          "<p>Vyber si jednu mikro-farmu a identifikuj jeden reálny problém: využitie vody, stres plodín, slabú " +
+          "propagáciu, zapojenie návštevníkov alebo klimatické riziko. Vyber jeden jednoduchý precízny nástroj, " +
+          "ktorý by mohol pomôcť, a vysvetli, prečo sa pre danú farmu hodí. (Pracovný list nižšie v doplnkových " +
+          "materiáloch — Worksheet 1.)</p>" +
+          "<h3>Kľúčové poznatky</h3>" +
+          "<ul>" +
+          "<li>Precízne poľnohospodárstvo nie je len pre veľké farmy.</li>" +
+          "<li>Mikro-farmy by mali vychádzať z reálnych potrieb, nie z technológie.</li>" +
+          "<li>Hodnota nástroja závisí od toho, či zlepšuje rozhodnutie.</li>" +
+          "<li>Precízne poľnohospodárstvo môže podporiť produkciu, udržateľnosť aj komunikáciu s návštevníkmi.</li>" +
+          "</ul>" +
+          "<h3>Sebakontrola</h3>" +
+          "<ul>" +
+          "<li>Viem vysvetliť precízne poľnohospodárstvo v jednej vete.</li>" +
+          "<li>Viem pomenovať tri tlaky, ktorým čelia mikro-farmy.</li>" +
+          "<li>Viem zdôvodniť, prečo môže byť jednoduchý nástroj lepší než komplexný systém.</li>" +
+          "</ul>" +
+          "<h3>Reflexia</h3>" +
+          "<p>Napíš krátku odpoveď (150–200 slov): Ktorý nápad z tejto jednotky by sa dal reálne použiť na malej " +
+          "farme vo tvojom regióne? Aké informácie by farmár potreboval pred jeho použitím? Ako by si to " +
+          "vysvetlil/a návštevníkovi jednoduchým jazykom?</p>",
         video: {
           youtubeId: "a1KFgO1732I",
           checkpoints: [
@@ -560,30 +609,410 @@ const modules: Module[] = [
           ],
         },
       },
-      { id: "m4-l2", title: "4.2 Nástroje precízneho poľnohospodárstva pre mikro-farmy", content: "<p>Obsah lekcie doplní partner SUA.</p>" },
-      { id: "m4-l3", title: "4.3 Udržateľné pestovateľské postupy", content: "<p>Obsah lekcie doplní partner SUA.</p>" },
-      { id: "m4-l4", title: "4.4 Prepojenie precízneho poľnohospodárstva s agroturistikou", content: "<p>Obsah lekcie doplní partner SUA.</p>" },
-      { id: "m4-l5", title: "4.5 Prípadové štúdie mikro-fariem", content: "<p>Obsah lekcie doplní partner SUA.</p>" },
+      {
+        id: "m4-l2",
+        title: "4.2 Rozhodovací cyklus precízneho poľnohospodárstva",
+        content:
+          "<h3>Ciele lekcie</h3>" +
+          "<ul>" +
+          "<li>opísať päťkrokový rozhodovací cyklus použitý v module;</li>" +
+          "<li>rozlíšiť zber dát od ich interpretácie;</li>" +
+          "<li>vysvetliť, prečo sú vyhodnotenie a komunikácia súčasťou precízneho poľnohospodárstva;</li>" +
+          "<li>použiť cyklus na analýzu jedného rozhodnutia na malej farme.</li>" +
+          "</ul>" +
+          "<h3>1. Nameraj (Measure)</h3>" +
+          "<p>Farmár zbiera informácie o pôde, počasí, plodinách, škodcoch, kvalite úrody alebo spätnej väzbe " +
+          "od návštevníkov. Meranie nemusí byť vždy digitálne — môže ísť o fotografie, poznámky z poľa, " +
+          "vizuálne pozorovanie či jednoduché záznamy.</p>" +
+          "<h3>2. Pochop (Understand)</h3>" +
+          "<p>Dáta sú užitočné, až keď ich prepojíme s farmárskymi znalosťami. Nízka vlhkosť pôdy sa musí " +
+          "interpretovať vo vzťahu k typu plodiny, hĺbke koreňov, počasiu, rastovej fáze a stavu pôdy.</p>" +
+          "<h3>3. Konaj (Act)</h3>" +
+          "<p>Farmár použije informáciu na zavlažovanie, hnojenie, ochranu plodín, zber úrody, úpravu trasy " +
+          "návštevníkov alebo prípravu demonštrácie. Akcia by mala byť primeraná a prepojená s pôvodným " +
+          "problémom.</p>" +
+          "<h3>4. Vyhodnoť (Evaluate)</h3>" +
+          "<p>Po akcii farmár overí, či rozhodnutie zafungovalo: Zotavili sa rastliny? Ušetrila sa voda? " +
+          "Pochopili návštevníci demonštráciu? Vyhodnotenie mení jedno rozhodnutie na poučenie pre ďalšiu " +
+          "sezónu.</p>" +
+          "<h3>5. Komunikuj (Communicate)</h3>" +
+          "<p>Pre agroturistiku je komunikácia súčasťou systému. Tá istá informácia, ktorá podporuje " +
+          "manažment farmy, sa môže stať aj príbehom pre návštevníkov: ako farma šetrí vodu, chráni pôdu, " +
+          "monitoruje plodiny alebo sa učí z predchádzajúcich sezón.</p>" +
+          "<h3>Digitálne denníky farmy</h3>" +
+          "<p>Digitálny denník môže zaznamenávať výsadbu, zavlažovanie, hnojenie, škodcov, dátumy zberu, " +
+          "výnos, kvalitu, poznámky o počasí a spätnú väzbu návštevníkov — ako mobilná appka, tabuľka, " +
+          "kalendár alebo zdieľaný dokument. Záznamy časom pomáhajú porovnávať sezóny.</p>" +
+          "<h3>Aplikovaná aktivita: Decision Cycle Canvas</h3>" +
+          "<p>Vyber jedno rozhodnutie (napr. zavlažovanie, hnojenie, plánovanie trasy návštevníkov) a vyplň " +
+          "všetkých päť krokov cyklu. (Worksheet 2 v doplnkových materiáloch.)</p>" +
+          "<h3>Kľúčové poznatky</h3>" +
+          "<ul>" +
+          "<li>Samotné dáta nerobia rozhodnutia.</li>" +
+          "<li>Farmár musí dáta interpretovať v kontexte.</li>" +
+          "<li>Vyhodnotenie je potrebné na overenie, či akcia zafungovala.</li>" +
+          "<li>Komunikácia prepája precízne poľnohospodárstvo s agroturistikou.</li>" +
+          "</ul>" +
+          "<h3>Sebakontrola</h3>" +
+          "<ul>" +
+          "<li>Viem opísať všetkých päť krokov rozhodovacieho cyklu.</li>" +
+          "<li>Viem vysvetliť, prečo je interpretácia dát dôležitá.</li>" +
+          "<li>Viem premeniť jedno farmárske rozhodnutie na príbeh pre návštevníka.</li>" +
+          "</ul>" +
+          "<h3>Reflexia</h3>" +
+          "<p>Napíš krátku odpoveď (150–200 slov) aplikujúcu túto jednotku na jednu reálnu alebo hypotetickú " +
+          "mikro-farmu.</p>",
+      },
+      {
+        id: "m4-l3",
+        title: "4.3 Pôda, voda a inteligentné zavlažovanie",
+        content:
+          "<h3>Ciele lekcie</h3>" +
+          "<ul>" +
+          "<li>vysvetliť, prečo je voda silným východiskovým bodom pre precízne poľnohospodárstvo;</li>" +
+          "<li>identifikovať jednoduché nástroje pre inteligentné zavlažovanie na mikro-farmách;</li>" +
+          "<li>analyzovať, kedy je zavlažovanie skutočne potrebné;</li>" +
+          "<li>prepojiť rozhodnutia o zavlažovaní s komunikáciou o udržateľnosti.</li>" +
+          "</ul>" +
+          "<h3>Voda ako východiskový bod</h3>" +
+          "<p>Voda priamo ovplyvňuje rast plodín, kvalitu produktu a produktivitu. Klimatická zmena a " +
+          "nepravidelné zrážky robia manažment vody čoraz dôležitejším — plytvanie vodou na mikro-farme môže " +
+          "znamenať zbytočné náklady aj environmentálnu záťaž.</p>" +
+          "<h3>Inteligentné zavlažovanie nemusí byť komplikované</h3>" +
+          "<p>Môže zahŕňať kvapkové zavlažovanie, časovače, pôdne senzory vlhkosti, monitoring zrážok, " +
+          "jednoduché harmonogramy a pozorovanie farmára podporené dátami. Cieľ je jednoduchý: použiť vodu " +
+          "len vtedy a tam, kde je potrebná.</p>" +
+          "<h3>Od vizuálneho dojmu k dôkazu</h3>" +
+          "<p>Povrch pôdy môže vyzerať suchý, zatiaľ čo hlbšie vrstvy ešte obsahujú vodu. Senzor alebo " +
+          "dôsledné sledovanie môže zabrániť zbytočnému zalievaniu alebo naopak pomôcť aplikovať vodu skôr, " +
+          "než nastane vážny stres plodiny.</p>" +
+          "<h3>Prípadová štúdia: CODECS Living Lab</h3>" +
+          "<p>Prezentácia používa slovenský Living Lab z projektu CODECS ako praktický príklad — pôdne " +
+          "senzory vlhkosti, meteostanice a IoT zariadenia podporujú rozhodnutia o zavlažovaní a dajú sa " +
+          "využiť aj na farmárske demonštrácie a virtuálne prehliadky farmy. Ponaučenie: nástroj pre manažment " +
+          "farmy môže zároveň učiť návštevníkov o šetrení vodou.</p>" +
+          "<h3>Odkaz na udržateľnosť</h3>" +
+          "<p>Inteligentné zavlažovanie sa návštevníkom ľahko vysvetľuje: „Nezalievame náhodne — kontrolujeme " +
+          "pôdu a vodu používame len vtedy, keď ju rastliny potrebujú.“ Toto robí udržateľnosť viditeľnou a " +
+          "konkrétnou.</p>" +
+          "<h3>Aplikovaná aktivita: Irrigation Decision Worksheet</h3>" +
+          "<p>Na základe zadanej situácie (vlhkosť pôdy, predpoveď zrážok, fáza plodiny, teplota) rozhodni, " +
+          "či zavlažovať, aké ďalšie informácie potrebuješ a ako by sa rozhodnutie dalo vysvetliť " +
+          "návštevníkom. (Worksheet 3.)</p>" +
+          "<h3>Kľúčové poznatky</h3>" +
+          "<ul>" +
+          "<li>Voda je praktickým východiskovým bodom pre precízne poľnohospodárstvo.</li>" +
+          "<li>Inteligentné zavlažovanie môže byť jednoduché a dostupné.</li>" +
+          "<li>Vlhkosť pôdy sa musí interpretovať v kontexte.</li>" +
+          "<li>Šetrenie vodou sa môže stať silným agroturistickým posolstvom.</li>" +
+          "</ul>" +
+          "<h3>Sebakontrola</h3>" +
+          "<ul>" +
+          "<li>Viem vysvetliť, kedy je pôdny senzor vlhkosti užitočný.</li>" +
+          "<li>Viem pomenovať tri nástroje používané pri inteligentnom zavlažovaní.</li>" +
+          "<li>Viem vytvoriť jedno posolstvo o šetrení vodou pre návštevníkov.</li>" +
+          "</ul>" +
+          "<h3>Reflexia</h3>" +
+          "<p>Napíš krátku odpoveď (150–200 slov) aplikujúcu túto jednotku na jednu reálnu alebo hypotetickú " +
+          "mikro-farmu.</p>",
+      },
+      {
+        id: "m4-l4",
+        title: "4.4 Drony, snímky a monitoring farmy",
+        content:
+          "<h3>Ciele lekcie</h3>" +
+          "<ul>" +
+          "<li>vysvetliť, ako drony môžu podporiť pozorovanie mikro-fariem;</li>" +
+          "<li>identifikovať, čo možno a čo nemožno vyvodiť z leteckých snímok;</li>" +
+          "<li>opísať, ako dronové snímky podporujú monitoring aj rozprávanie príbehu;</li>" +
+          "<li>rozpoznať otázky bezpečnosti, súkromia a primeranosti.</li>" +
+          "</ul>" +
+          "<h3>Pohľad na farmu zhora</h3>" +
+          "<p>Drony umožňujú farmárom pozorovať farmu z iného uhla — zhora je ľahšie vidieť suché oblasti, " +
+          "slabý rast plodín, eróziu, problémy s odvodnením, poškodenie škodcami, rozdiely medzi radmi plodín " +
+          "či trasy návštevníkov.</p>" +
+          "<h3>Monitoring v čase</h3>" +
+          "<p>Pri pravidelnom zbere snímok je možné dokumentovať sezónne zmeny, čo podporuje manažment farmy " +
+          "aj propagáciu a vzdelávanie.</p>" +
+          "<h3>Viditeľný stres plodín a limity</h3>" +
+          "<p>Základný dronový záber ukáže viditeľné rozdiely, no nenahrádza odbornú diagnostiku — slabšie " +
+          "miesto si stále vyžaduje bližšiu kontrolu v teréne. Pokročilejšie prípady môžu využiť " +
+          "multispektrálne snímkovanie, no aj jednoduchý vizuálny záber je pre mnohé mikro-farmy užitočný.</p>" +
+          "<h3>Hodnota pre rozprávanie príbehu</h3>" +
+          "<p>Pre agroturistiku môžu dronové zábery ukázať krásu farmy, rozmanitosť plodín, krajinu, vodné " +
+          "zdroje a trasy pre návštevníkov — využiteľné na začiatku prehliadky alebo na webstránke pri " +
+          "vysvetlení usporiadania farmy.</p>" +
+          "<h3>Zodpovedné používanie</h3>" +
+          "<p>Drony sú atraktívne, no vyžadujú pozornosť voči bezpečnosti, súkromiu, návštevníkom, susedným " +
+          "pozemkom a právnym pravidlám. Technológia má podporovať príbeh farmy, nie nahradiť farmára, pôdu, " +
+          "produkt a ľudský vzťah.</p>" +
+          "<h3>Aplikovaná aktivita: Read the Farm from Above</h3>" +
+          "<p>Na základe (predstaveného) leteckého záberu farmy identifikuj, čo sa dá vyčítať priamo, čo si " +
+          "vyžaduje overenie v teréne a ako by sa záber dal využiť počas prehliadky pre návštevníkov. " +
+          "(Worksheet 4.)</p>" +
+          "<h3>Kľúčové poznatky</h3>" +
+          "<ul>" +
+          "<li>Dronové snímky odhaľujú vzory, ktoré zo zeme nie sú viditeľné.</li>" +
+          "<li>Snímky si vyžadujú interpretáciu a overenie v teréne.</li>" +
+          "<li>Pohľad z drona podporuje aj orientáciu návštevníkov a propagáciu.</li>" +
+          "<li>Používanie dronov musí rešpektovať bezpečnosť, súkromie a autenticitu.</li>" +
+          "</ul>" +
+          "<h3>Sebakontrola</h3>" +
+          "<ul>" +
+          "<li>Viem pomenovať tri využitia dronových snímok na mikro-farme.</li>" +
+          "<li>Viem vysvetliť jeden limit leteckých snímok.</li>" +
+          "<li>Viem navrhnúť vysvetlenie pre návštevníka pomocou dronového záberu.</li>" +
+          "</ul>" +
+          "<h3>Reflexia</h3>" +
+          "<p>Napíš krátku odpoveď (150–200 slov) aplikujúcu túto jednotku na jednu reálnu alebo hypotetickú " +
+          "mikro-farmu.</p>",
+      },
+      {
+        id: "m4-l5",
+        title: "4.5 Udržateľnosť, riziká a postupná implementácia",
+        content:
+          "<h3>Ciele lekcie</h3>" +
+          "<ul>" +
+          "<li>vysvetliť, ako precízne poľnohospodárstvo robí udržateľnosť viditeľnou;</li>" +
+          "<li>identifikovať riziká a obmedzenia pre mikro-farmy;</li>" +
+          "<li>použiť jednoduchý postupný model na zavedenie jedného nástroja;</li>" +
+          "<li>vyhnúť sa technológii bez jasného účelu.</li>" +
+          "</ul>" +
+          "<h3>Udržateľnosť zviditeľnená</h3>" +
+          "<p>Farmy, hotely aj destinácie často hovoria, že sú udržateľné, no návštevníci sa čoraz viac " +
+          "pýtajú, čo to v praxi znamená. Precízne poľnohospodárstvo ponúka konkrétne príklady: monitoring " +
+          "spotreby vody, kvapkové zavlažovanie, záznam hnojenia, znižovanie zbytočného tlaku pesticídov, " +
+          "ochrana pôdy a dokumentácia výrobných postupov.</p>" +
+          "<h3>Klimatická odolnosť</h3>" +
+          "<p>Monitoring pôdy, vody, počasia a stavu plodín pomáha farmárom reagovať na sucho, horúčavy, " +
+          "nepravidelné zrážky a nové tlaky škodcov — a podporuje odolnosť pri zachovaní realistických, " +
+          "lokálnych rozhodnutí.</p>" +
+          "<h3>Riziká a obmedzenia</h3>" +
+          "<p>Prezentácia zdôrazňuje niekoľko rizík: vysoké investičné náklady, nedostatok digitálnych " +
+          "zručností, slabé internetové pripojenie, údržba zariadení, nesprávna interpretácia dát, technológia " +
+          "bez jasného účelu, pravidlá bezpečnosti a súkromia pri dronoch, a strata autenticity v " +
+          "agroturistike.</p>" +
+          "<h3>Postupný model</h3>" +
+          "<p>Mikro-farmy môžu začať identifikáciou jedného problému, výberom jedného jednoduchého nástroja, " +
+          "jeho otestovaním v malom rozsahu, zmeraním prínosu a premenením postupu na príbeh. Tento model " +
+          "<em>problém – nástroj – test – prínos – príbeh</em> pomáha vyhnúť sa nadmernej investícii.</p>" +
+          "<h3>Autenticita na prvom mieste</h3>" +
+          "<p>Precízne poľnohospodárstvo by nemalo spôsobiť, že sa farma bude cítiť umelo. Návštevníci " +
+          "prichádzajú kvôli ľuďom, jedlu, krajine, kultúre a atmosfére — technológia má príbeh farmy " +
+          "podporovať, nie ho nahradiť.</p>" +
+          "<h3>Aplikovaná aktivita: One Tool, One Problem, One Season</h3>" +
+          "<p>Vyber jeden farmársky problém a navrhni malý test jedného nástroja pre jednu plodinu, pole, " +
+          "sezónu alebo aktivitu pre návštevníkov. Definuj, ako sa zmeria úspech a ako sa výsledok " +
+          "odkomunikuje. (Worksheet 5.)</p>" +
+          "<h3>Kľúčové poznatky</h3>" +
+          "<ul>" +
+          "<li>Udržateľnosť sa musí preukázať konkrétnymi postupmi.</li>" +
+          "<li>Technológia bez účelu alebo náročná na údržbu môže vytvárať riziko.</li>" +
+          "<li>Mikro-farma môže začať jedným malým testom.</li>" +
+          "<li>Farmár, pôda a produkt zostávajú v centre.</li>" +
+          "</ul>" +
+          "<h3>Sebakontrola</h3>" +
+          "<ul>" +
+          "<li>Viem vymenovať štyri riziká digitálnych nástrojov na mikro-farmách.</li>" +
+          "<li>Viem navrhnúť malý test jedného nástroja.</li>" +
+          "<li>Viem premeniť jeden smart postup na jednoduchý príbeh o udržateľnosti.</li>" +
+          "</ul>" +
+          "<h3>Reflexia</h3>" +
+          "<p>Napíš krátku odpoveď (150–200 slov) aplikujúcu túto jednotku na jednu reálnu alebo hypotetickú " +
+          "mikro-farmu.</p>",
+      },
       {
         id: "m4-l6",
-        title: "4.6 Zhrnutie modulu a proficiency test",
-        content: "<p>Zhrnutie modulu 4 pripraví partner SUA.</p>",
+        title: "4.6 Smart agroturistika a digitálne rozprávanie príbehov",
+        content:
+          "<h3>Ciele lekcie</h3>" +
+          "<ul>" +
+          "<li>vysvetliť, ako sa farmárska prax môže stať zážitkom pre návštevníka;</li>" +
+          "<li>navrhnúť smart agroturistickú aktivitu s použitím jedného precízneho nástroja;</li>" +
+          "<li>vytvoriť jasné posolstvo o udržateľnosti pre návštevníkov;</li>" +
+          "<li>použiť jednoduché digitálne rozprávanie príbehu na budovanie dôvery a transparentnosti.</li>" +
+          "</ul>" +
+          "<h3>Od farmárskej praxe k zážitku návštevníka</h3>" +
+          "<p>Pôdny senzor pomáha farmárovi vedieť, kedy rastliny potrebujú vodu — a zároveň sa môže stať " +
+          "demonštráciou. Meteostanica podporuje manažment farmy a zároveň učí návštevníkov o klíme. Kvapkové " +
+          "zavlažovanie šetrí vodu a dá sa predviesť na workshope o šetrení vodou. Digitálny denník sa môže " +
+          "stať príbehom „od semienka po tanier“.</p>" +
+          "<h3>Príklady smart agroturistických aktivít</h3>" +
+          "<p>Smart prehliadky farmy, demonštrácie vlhkosti pôdy, prezentácie s dronovým pohľadom, workshopy o " +
+          "šetrení vodou, zážitky „od pôdy po tanier“, ochutnávky produktov s QR kódom, kútiky „klimaticky " +
+          "inteligentného poľnohospodárstva“ či detská aktivita „Mladý farmársky vedec“.</p>" +
+          "<h3>Digitálne rozprávanie príbehov a propagácia</h3>" +
+          "<p>Precízne poľnohospodárstvo poskytuje skutočný komunikačný obsah: krátke zábery z poľa, vizuály " +
+          "„pred a po“, vysvetlenia farmára, dronové zábery, QR kódy, vzdelávacie príspevky. Posolstvo " +
+          "prezentácie: nehovor len „sme udržateľní“ — ukáž, ako udržateľnosť funguje.</p>" +
+          "<h3>Príklad: Water-Smart Garden Walk</h3>" +
+          "<p>Malá zeleninová farma používa pôdny senzor vlhkosti a kvapkové zavlažovanie. Návštevníci najprv " +
+          "hádajú, či rastliny potrebujú vodu, potom skontrolujú pôdu senzorom, naučia sa, ako funguje " +
+          "kvapkové zavlažovanie, a ochutnajú zeleninu pestovanú so starostlivým využitím vody. Propagačné " +
+          "posolstvo: „Ochutnaj zeleninu pestovanú s úctou ku každej kvapke vody.“</p>" +
+          "<h3>Diskusia a adaptácia</h3>" +
+          "<p>Posledným krokom je prispôsobiť nápad miestnym farmám a regiónom — zvážiť, ktorý nástroj je " +
+          "realistický, aký problém sa dá vyriešiť jednoduchými dátami, ako vysvetliť smart farming " +
+          "návštevníkom a ako skĺbiť tradíciu s inováciou bez straty autenticity.</p>" +
+          "<h3>Aplikovaná aktivita: Design a Smart Agritourism Experience</h3>" +
+          "<p>Vyber typ farmy, jeden precízny nástroj, aktivitu pre návštevníkov, posolstvo o udržateľnosti a " +
+          "jednu propagačnú vetu. Výsledok by mal byť dostatočne praktický pre reálneho farmára s obmedzenými " +
+          "zdrojmi. (Worksheet 6.)</p>" +
+          "<h3>Kľúčové poznatky</h3>" +
+          "<ul>" +
+          "<li>Reálne farmárske postupy sa môžu stať vzdelávacími zážitkami pre návštevníkov.</li>" +
+          "<li>Smart agroturistika má byť jednoduchá, autentická a zmysluplná.</li>" +
+          "<li>Digitálne nástroje budujú dôveru, keď robia postupy transparentnými.</li>" +
+          "<li>Dobré rozprávanie príbehu ukazuje, ako udržateľnosť funguje.</li>" +
+          "</ul>" +
+          "<h3>Sebakontrola</h3>" +
+          "<ul>" +
+          "<li>Viem premeniť pôdny senzor, dronový záber alebo QR kód na aktivitu pre návštevníkov.</li>" +
+          "<li>Viem napísať krátke posolstvo o udržateľnosti pre návštevníkov.</li>" +
+          "<li>Viem vysvetliť, ako sa smart farming a agroturistika vzájomne podporujú.</li>" +
+          "</ul>" +
+          "<h3>Zhrnutie modulu a proficiency test</h3>" +
+          "<p>Nasleduje 10-otázkový test overujúci pochopenie modulu (min. 7/10 na úspešné absolvovanie). " +
+          "Hraničné skóre: 8–10 správne = silné pochopenie; 6–7 = akceptovateľné, odporúča sa zopakovať " +
+          "jednotky spojené s nesprávnymi odpoveďami; 0–5 = odporúča sa zopakovať materiály modulu.</p>",
         quiz: {
           questions: [
-            draftQuestion("m4-q1", "Čo charakterizuje precízne poľnohospodárstvo?"),
-            draftQuestion("m4-q2", "Prečo je precízne poľnohospodárstvo relevantné pre mikro-farmy do 1 ha?"),
-            draftQuestion("m4-q3", "Ako môže precízne poľnohospodárstvo podporiť agroturistiku?"),
+            {
+              id: "m4-q1",
+              question: "Ktoré tvrdenie najlepšie opisuje precízne poľnohospodárstvo v tomto module?",
+              options: [
+                "Systém používaný len veľkými farmami s drahými strojmi",
+                "Praktický prístup využívajúci pozorovanie, dáta a technológiu na podporu lepších farmárskych rozhodnutí",
+                "Marketingový termín pre organické poľnohospodárstvo",
+                "Spôsob, ako úplne nahradiť farmársku skúsenosť",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q2",
+              question: "Pre mikro-farmy by malo byť precízne poľnohospodárstvo:",
+              options: [
+                "Drahé a vysoko automatizované",
+                "Štandardizované presne ako na veľkých obilninárskych farmách",
+                "Dostupné, jednoduché, lokálne relevantné a škálovateľné krok za krokom",
+                "Používané len pre exportne orientované farmy",
+              ],
+              correctIndex: 2,
+            },
+            {
+              id: "m4-q3",
+              question: "Aké je správne poradie rozhodovacieho cyklu použitého v module?",
+              options: [
+                "Konaj – Nameraj – Komunikuj – Pochop – Vyhodnoť",
+                "Nameraj – Pochop – Konaj – Vyhodnoť – Komunikuj",
+                "Komunikuj – Konaj – Nameraj – Vyhodnoť – Pochop",
+                "Pochop – Komunikuj – Nameraj – Konaj – Vyhodnoť",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q4",
+              question: "Prečo sú pôdne senzory vlhkosti užitočné pre malé farmy?",
+              options: [
+                "Rozhodujú úplne automaticky bez interpretácie farmára",
+                "Pomáhajú farmárom pochopiť, či je zavlažovanie naozaj potrebné",
+                "Nahrádzajú monitoring zrážok",
+                "Používajú sa iba na zábavu pre návštevníkov",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q5",
+              question: "Aký je hlavný cieľ inteligentného zavlažovania v module?",
+              options: [
+                "Zalievať plodiny každý deň v rovnakom čase",
+                "Použiť vodu len vtedy a tam, kde je potrebná",
+                "Nahradiť všetky farmárske rozhodnutia softvérom",
+                "Zvýšiť spotrebu vody v suchých obdobiach",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q6",
+              question: "Ktoré tvrdenie o dronoch je najpresnejšie?",
+              options: [
+                "Drony môžu ukázať vzory zhora, no výsledky si stále vyžadujú interpretáciu a overenie v teréne",
+                "Drony vždy identifikujú presnú príčinu každého problému s plodinou",
+                "Drony sú užitočné len pre veľké farmy",
+                "Drony by mali nahradiť vysvetlenia pre návštevníkov",
+              ],
+              correctIndex: 0,
+            },
+            {
+              id: "m4-q7",
+              question: "Digitálny denník farmy môže pomôcť mikro-farme hlavne tým, že:",
+              options: [
+                "Odstraňuje potrebu pozorovania",
+                "Mení sezónnu skúsenosť na štruktúrované záznamy",
+                "Garantuje vyšší výnos",
+                "Nahrádza prehliadky farmy",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q8",
+              question: "Ako môže precízne poľnohospodárstvo podporiť komunikáciu o udržateľnosti?",
+              options: [
+                "Tvrdeniami bez dôkazov",
+                "Ukázaním konkrétnych postupov, ako je monitoring vody, kvapkové zavlažovanie alebo záznamy o plodinách",
+                "Skrývaním farmárskych postupov pred návštevníkmi",
+                "Používaním len odborného jazyka",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q9",
+              question: "Ktoré riziko je v module konkrétne spomenuté?",
+              options: [
+                "Príliš veľa návštevníkov vždy zlepšuje autenticitu",
+                "Nesprávna interpretácia dát",
+                "Precízne poľnohospodárstvo nemá žiadne nároky na údržbu",
+                "Slabé internetové pripojenie zlepšuje zber dát",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m4-q10",
+              question: "Aká je hlavná myšlienka smart agroturistiky v tomto module?",
+              options: [
+                "Vytvárať umelé atrakcie nesúvisiace s poľnohospodárstvom",
+                "Premeniť reálne farmárske postupy na vzdelávacie zážitky pre návštevníkov",
+                "Používať technológiu len na sociálne siete",
+                "Vyhýbať sa vysvetľovaniu výrobných postupov návštevníkom",
+              ],
+              correctIndex: 1,
+            },
           ],
         },
       },
     ],
     supplementaryMaterials: [
-      draftMaterial("m4-mat1", "infographic", "Infografika: senzory a IoT na mikro-farme", "TBD od SUA"),
-      draftMaterial("m4-mat2", "case-study", "Rozhovor so študentom VAC — Plant Science Cert III (Vanuatu Agricultural College)", "Reálne video — https://www.youtube.com/watch?v=RQygpO_AKk8"),
-      draftMaterial("m4-mat3", "checklist", "Checklist: základy precízneho poľnohospodárstva", "TBD od SUA"),
-      draftMaterial("m4-mat4", "interview-video", "Rozhovor so študentom VAC — Agribusiness Cert IV", "Reálne video, bez prepisu — https://www.youtube.com/watch?v=__9XltiDXrk"),
+      draftMaterial("m4-mat1", "fact-sheet", "Glosár pojmov modulu (precízne poľnohospodárstvo, mikro-farma, decision cycle, smart agroturistika a ďalšie)", "Reálny obsah — D3.2 Module 4 Scripts & Annexes, sekcia 2"),
+      draftMaterial("m4-mat2", "worksheet", "Worksheet 1 – Micro-Farm Problem–Tool Match", "Reálny pracovný list k jednotke 4.1 — D3.2 Module 4 Worksheets"),
+      draftMaterial("m4-mat3", "worksheet", "Worksheet 2 – Decision Cycle Canvas", "Reálny pracovný list k jednotke 4.2 — D3.2 Module 4 Worksheets"),
+      draftMaterial("m4-mat4", "worksheet", "Worksheet 3 – Irrigation Decision Worksheet", "Reálny pracovný list k jednotke 4.3 — D3.2 Module 4 Worksheets"),
+      draftMaterial("m4-mat5", "worksheet", "Worksheet 4 – Farm Image / Drone Interpretation", "Reálny pracovný list k jednotke 4.4 — D3.2 Module 4 Worksheets"),
+      draftMaterial("m4-mat6", "worksheet", "Worksheet 5 – One Tool, One Problem, One Season", "Reálny pracovný list k jednotke 4.5 — D3.2 Module 4 Worksheets"),
+      draftMaterial("m4-mat7", "worksheet", "Worksheet 6 – Smart Agritourism Experience Template", "Reálny pracovný list k jednotke 4.6 — D3.2 Module 4 Worksheets"),
+      draftMaterial("m4-mat8", "checklist", "Postupný model zavádzania: problém – nástroj – test – prínos – príbeh", "Reálny obsah — D3.2 Module 4 Scripts & Annexes, Unit 5 \"Step-by-step model\""),
+      draftMaterial("m4-mat9", "case-study", "CODECS Slovak Living Lab: podpora zavlažovacích rozhodnutí", "Reálna prípadová štúdia — D3.2 Module 4, Annex B"),
+      draftMaterial("m4-mat10", "case-study", "Dingle Peninsula, Írsko / PLOUTOS SIP5: senzorové dáta, food tourism a lokálny branding", "Reálna prípadová štúdia — D3.2 Module 4, Annex B"),
+      draftMaterial("m4-mat11", "case-study", "Egejské ostrovy a Kréta, Grécko: AI, drony a precízne poľnohospodárstvo pre udržateľný ostrovný turizmus", "Reálna prípadová štúdia — D3.2 Module 4, Annex B"),
+      draftMaterial("m4-mat12", "case-study", "Rozhovor so študentom VAC — Plant Science Cert III (Vanuatu Agricultural College)", "Reálne video — https://www.youtube.com/watch?v=RQygpO_AKk8"),
+      draftMaterial("m4-mat13", "interview-video", "Rozhovor so študentom VAC — Agribusiness Cert IV", "Reálne video, bez prepisu — https://www.youtube.com/watch?v=__9XltiDXrk"),
     ],
-    references: ["TBD — zoznam referencií doplní partner SUA"],
+    references: [
+      "AGRI-TOUR SUA prezentácia: Precision Agriculture for Micro-Farms (prof. Ing. Zuzana Palková, PhD., Slovenská poľnohospodárska univerzita v Nitre)",
+      "AGRI-TOUR súvisiaci materiál: Farm to Fork in Practice (ak dostupné na platforme projektu)",
+      "CODECS Horizon Europe project – Slovak Living Lab / Artificial Irrigation Management Systems",
+      "PLOUTOS SIP5 / Dingle Peninsula case study",
+      "Aegean Islands and Crete smart agriculture examples",
+    ],
   },
   {
     id: "m5",
