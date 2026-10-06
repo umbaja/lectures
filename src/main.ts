@@ -35,7 +35,7 @@ function render() {
         <div class="progress-bar">
           <div class="progress-bar-fill" style="width:${progressPercent()}%"></div>
         </div>
-        <p class="progress-label">${completionCount()} / ${lessons.length} lekcií dokončených</p>
+        <p class="progress-label">${completionCount()} / ${lessons.length} lessons completed</p>
         <nav>
           ${course.modules
             .map(
@@ -66,7 +66,7 @@ function render() {
         </nav>
       </aside>
       <main class="content">
-        ${currentLesson ? renderLesson(currentLesson, findModule(currentLesson)) : "<p>Vyberte lekciu.</p>"}
+        ${currentLesson ? renderLesson(currentLesson, findModule(currentLesson)) : "<p>Select a lesson.</p>"}
       </main>
     </div>
   `;
@@ -112,7 +112,7 @@ function renderLesson(lesson: Lesson, module: Module): string {
       <div class="lesson-content">${lesson.content}</div>
       ${lesson.quiz ? renderQuiz(lesson) : ""}
       <button data-mark-done class="mark-done">
-        ${isLessonComplete(lesson.id) ? "Lekcia dokončená ✓" : "Označiť ako dokončenú"}
+        ${isLessonComplete(lesson.id) ? "Lesson completed ✓" : "Mark as completed"}
       </button>
       ${isLast ? renderModuleWrapUp(module) : ""}
     </article>
@@ -122,21 +122,21 @@ function renderLesson(lesson: Lesson, module: Module): string {
 function renderModuleIntro(module: Module): string {
   return `
     <div class="module-intro">
-      <p class="module-owner">Zodpovedný partner: ${escapeHtml(module.owner)}</p>
+      <p class="module-owner">Lead partner: ${escapeHtml(module.owner)}</p>
       <p>${escapeHtml(module.intro)}</p>
     </div>
   `;
 }
 
 const MATERIAL_TYPE_LABELS: Record<SupplementaryMaterialType, string> = {
-  "case-study": "Prípadová štúdia",
-  infographic: "Infografika",
+  "case-study": "Case study",
+  infographic: "Infographic",
   checklist: "Checklist",
-  worksheet: "Pracovný list",
-  "fact-sheet": "Fact sheet / glosár",
-  "photo-story": "Fotopríbeh",
-  "interview-video": "Rozhovor / video z terénu",
-  "recommended-links": "Odporúčané odkazy",
+  worksheet: "Worksheet",
+  "fact-sheet": "Fact sheet / glossary",
+  "photo-story": "Photo story",
+  "interview-video": "Interview / field video",
+  "recommended-links": "Recommended links",
 };
 
 function renderMaterial(material: SupplementaryMaterial): string {
@@ -160,7 +160,7 @@ function renderModuleWrapUp(module: Module): string {
       ${
         module.supplementaryMaterials.length > 0
           ? `
-        <h3>Doplnkové materiály</h3>
+        <h3>Supplementary materials</h3>
         <ul class="materials-list">${module.supplementaryMaterials.map(renderMaterial).join("")}</ul>
       `
           : ""
@@ -168,7 +168,7 @@ function renderModuleWrapUp(module: Module): string {
       ${
         module.references.length > 0
           ? `
-        <h3>Referencie</h3>
+        <h3>References</h3>
         <ul class="references-list">${module.references.map((r) => `<li>${escapeHtml(r)}</li>`).join("")}</ul>
       `
           : ""
@@ -187,7 +187,7 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
   overlay.className = "checkpoint-overlay";
   overlay.innerHTML = `
     <div class="checkpoint-modal">
-      <h3>Otázka</h3>
+      <h3>Question</h3>
       <form data-checkpoint-form>
         <fieldset>
           <legend>${escapeHtml(checkpoint.question.question)}</legend>
@@ -204,8 +204,8 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
         </fieldset>
         <p class="checkpoint-feedback" data-checkpoint-feedback></p>
         <div class="checkpoint-actions">
-          <button type="submit" data-checkpoint-submit>Odpovedať</button>
-          <button type="button" data-checkpoint-continue class="hidden">Pokračovať vo videu</button>
+          <button type="submit" data-checkpoint-submit>Answer</button>
+          <button type="button" data-checkpoint-continue class="hidden">Resume video</button>
         </div>
       </form>
     </div>
@@ -221,7 +221,7 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
     e.preventDefault();
     const answer = new FormData(form).get("answer");
     const correct = answer !== null && Number(answer) === checkpoint.question.correctIndex;
-    feedback.textContent = correct ? "Správne!" : "Nesprávne, ale pokračujme ďalej.";
+    feedback.textContent = correct ? "Correct!" : "Not quite, but let's move on.";
     feedback.classList.add(correct ? "correct" : "incorrect");
     submitBtn.classList.add("hidden");
     continueBtn.classList.remove("hidden");
@@ -241,7 +241,7 @@ function renderQuiz(lesson: Lesson): string {
   const quiz = lesson.quiz!;
   return `
     <form data-quiz-form class="quiz">
-      <h3>Kvíz</h3>
+      <h3>Quiz</h3>
       ${quiz.questions
         .map(
           (q, qi) => `
@@ -261,7 +261,7 @@ function renderQuiz(lesson: Lesson): string {
       `,
         )
         .join("")}
-      <button type="submit">Vyhodnotiť</button>
+      <button type="submit">Submit</button>
       <p class="quiz-result" data-quiz-result>${
         lastQuizResult && lastQuizResult.lessonId === lesson.id ? escapeHtml(lastQuizResult.text) : ""
       }</p>
@@ -279,7 +279,7 @@ function handleQuizSubmit(form: HTMLFormElement, lesson: Lesson) {
   });
   const score = Math.round((correct / quiz.questions.length) * 100);
   recordQuizScore(lesson.id, score);
-  lastQuizResult = { lessonId: lesson.id, text: `Výsledok: ${correct} / ${quiz.questions.length} (${score} %)` };
+  lastQuizResult = { lessonId: lesson.id, text: `Score: ${correct} / ${quiz.questions.length} (${score}%)` };
   if (score >= 70) markLessonComplete(lesson.id);
   render();
 }
