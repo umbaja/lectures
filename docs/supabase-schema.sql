@@ -52,20 +52,29 @@ alter table video_watch enable row level security;
 -- key, so anon is allowed to insert/update but never to select — partners
 -- read the data from the Supabase dashboard (or a service-role key), not the
 -- public site.
+-- Each policy is dropped first so this whole file is safe to re-run as-is
+-- (e.g. after a new table/policy is added later) without "already exists" errors.
+drop policy if exists "anon can register" on participants;
 create policy "anon can register" on participants
   for insert to anon with check (true);
+drop policy if exists "anon can update own registration" on participants;
 create policy "anon can update own registration" on participants
   for update to anon using (true);
 
+drop policy if exists "anon can write progress" on progress;
 create policy "anon can write progress" on progress
   for insert to anon with check (true);
+drop policy if exists "anon can update own progress" on progress;
 create policy "anon can update own progress" on progress
   for update to anon using (true);
 
+drop policy if exists "anon can log checkpoint answers" on checkpoint_answers;
 create policy "anon can log checkpoint answers" on checkpoint_answers
   for insert to anon with check (true);
 
+drop policy if exists "anon can write video watch stats" on video_watch;
 create policy "anon can write video watch stats" on video_watch
   for insert to anon with check (true);
+drop policy if exists "anon can update own video watch stats" on video_watch;
 create policy "anon can update own video watch stats" on video_watch
   for update to anon using (true);
