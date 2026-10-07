@@ -6,6 +6,7 @@ interface YTPlayerInstance {
   playVideo(): void;
   pauseVideo(): void;
   getCurrentTime(): number;
+  seekTo(seconds: number, allowSeekAhead: boolean): void;
   destroy(): void;
 }
 
@@ -57,6 +58,7 @@ export class VideoController {
   private player: YTPlayerInstance | null = null;
   private pollHandle: number | null = null;
   private answeredIds = new Set<string>();
+  private pendingCheckpointId: string | null = null;
 
   async mount(
     containerId: string,
@@ -75,11 +77,17 @@ export class VideoController {
       events: {
         onReady: () => {
           this.pollHandle = window.setInterval(() => {
-            if (!this.player) return;
+            // While a question is open, don't scan for the next checkpoint — the
+            // learner is stopped exactly where they are until they resolve it.
+            if (!this.player || this.pendingCheckpointId) return;
             const t = this.player.getCurrentTime();
             for (const cp of checkpoints) {
               if (!this.answeredIds.has(cp.id) && t >= cp.atSeconds) {
-                this.answeredIds.add(cp.id);
+                this.pendingCheckpointId = cp.id;
+                // Snap the playhead back to the checkpoint itself: this is what
+                // stops the native seek bar from skipping past an unanswered
+                // question — scrubbing ahead just lands back here instead.
+                this.player.seekTo(cp.atSeconds, true);
                 this.player.pauseVideo();
                 onCheckpoint(cp);
                 break;
@@ -91,7 +99,21 @@ export class VideoController {
     });
   }
 
+  /** Call once a checkpoint is resolved for good (correct, or an unregistered skip). */
+  markAnswered(checkpointId: string) {
+    this.answeredIds.add(checkpointId);
+  }
+
+  /** Continue playing from the checkpoint onward (correct answer, or an unregistered skip). */
   resume() {
+    this.pendingCheckpointId = null;
+    this.player?.playVideo();
+  }
+
+  /** Rewind to the start of the explanatory passage and keep playing (wrong answer, registered learner). */
+  rewindAndResume(seconds: number) {
+    this.pendingCheckpointId = null;
+    this.player?.seekTo(seconds, true);
     this.player?.playVideo();
   }
 

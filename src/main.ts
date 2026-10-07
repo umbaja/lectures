@@ -440,12 +440,34 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
   const continueBtn = overlay.querySelector<HTMLButtonElement>("[data-checkpoint-continue]")!;
   const feedback = overlay.querySelector<HTMLElement>("[data-checkpoint-feedback]")!;
 
+  let onContinue = () => videoController.resume();
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const answer = new FormData(form).get("answer");
     const correct = answer !== null && Number(answer) === checkpoint.question.correctIndex;
-    feedback.textContent = correct ? "Correct!" : "Not quite, but let's move on.";
-    feedback.classList.add(correct ? "correct" : "incorrect");
+
+    if (correct) {
+      feedback.textContent = "Correct!";
+      feedback.classList.add("correct");
+      videoController.markAnswered(checkpoint.id);
+      markCheckpointAnswered(checkpoint.id);
+      continueBtn.textContent = "Resume video";
+      onContinue = () => videoController.resume();
+    } else if (isRegistered()) {
+      feedback.textContent = "Not quite — we'll rewind so you can find the answer, then you can try again.";
+      feedback.classList.add("incorrect");
+      continueBtn.textContent = "Rewatch this part";
+      onContinue = () => videoController.rewindAndResume(checkpoint.rewindToSeconds ?? 0);
+    } else {
+      feedback.textContent = "Not quite, but let's move on.";
+      feedback.classList.add("incorrect");
+      videoController.markAnswered(checkpoint.id);
+      markCheckpointAnswered(checkpoint.id);
+      continueBtn.textContent = "Resume video";
+      onContinue = () => videoController.resume();
+    }
+
     submitBtn.classList.add("hidden");
     continueBtn.classList.remove("hidden");
     form.querySelectorAll("input").forEach((input) => {
@@ -454,9 +476,8 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
   });
 
   continueBtn.addEventListener("click", () => {
-    markCheckpointAnswered(checkpoint.id);
     overlay.remove();
-    videoController.resume();
+    onContinue();
   });
 }
 

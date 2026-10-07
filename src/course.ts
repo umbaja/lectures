@@ -13,6 +13,13 @@ export interface VideoCheckpoint {
   id: string;
   /** Playback position, in seconds, at which the video pauses to ask this question. */
   atSeconds: number;
+  /**
+   * Where a registered participant is rewound to after answering incorrectly —
+   * the start of the passage that contains the answer, so they can find it and
+   * try again. Defaults to 0 (the start of the video) if omitted. Unregistered
+   * visitors are never rewound: an incorrect answer just lets the video continue.
+   */
+  rewindToSeconds?: number;
   question: QuizQuestion;
 }
 

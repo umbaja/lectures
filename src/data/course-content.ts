@@ -597,6 +597,7 @@ const modules: Module[] = [
             {
               id: "m4-l1-cp1",
               atSeconds: 399,
+              rewindToSeconds: 362,
               question: {
                 id: "m4-l1-cp1-q",
                 question: "According to the SUA presentation, precision agriculture is NOT only about what?",
@@ -612,6 +613,7 @@ const modules: Module[] = [
             {
               id: "m4-l1-cp2",
               atSeconds: 1065,
+              rewindToSeconds: 1025,
               question: {
                 id: "m4-l1-cp2-q",
                 question: "What is the basic decision cycle of precision agriculture described in the presentation?",
