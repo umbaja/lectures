@@ -612,16 +612,96 @@ const modules: Module[] = [
             },
             {
               id: "m4-l1-cp2",
+              atSeconds: 760,
+              rewindToSeconds: 634,
+              question: {
+                id: "m4-l1-cp2-q",
+                question: "What does the presentation say must happen before adopting any new farm technology?",
+                options: [
+                  "The technology must fit the farm's real, locally relevant needs — not the other way around",
+                  "The farm must first buy the newest and most advanced equipment available",
+                  "The farm must already have fast, reliable internet everywhere",
+                  "The farm must copy exactly what large European cereal farms do",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m4-l1-cp3",
               atSeconds: 1065,
               rewindToSeconds: 1025,
               question: {
-                id: "m4-l1-cp2-q",
+                id: "m4-l1-cp3-q",
                 question: "What is the basic decision cycle of precision agriculture described in the presentation?",
                 options: [
                   "Measure → Understand → Act → Evaluate → Communicate",
                   "Buy the technology → install it → forget about it",
                   "Drone first, then sensors, then AI",
                   "Plan → fund → sell",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m4-l1-cp4",
+              atSeconds: 2060,
+              rewindToSeconds: 1946,
+              question: {
+                id: "m4-l1-cp4-q",
+                question: "According to the presentation, what is the first step in using precision agriculture to enrich agritourism?",
+                options: [
+                  "Make sustainability visible to visitors",
+                  "Install the most advanced sensors available",
+                  "Reduce the number of farm visitors",
+                  "Hide technical details from visitors",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m4-l1-cp5",
+              atSeconds: 2560,
+              rewindToSeconds: 2506,
+              question: {
+                id: "m4-l1-cp5-q",
+                question: "In the presenter's research, what do small and family farmers say is the main barrier to precision agriculture?",
+                options: [
+                  "High investment costs",
+                  "Too much free time",
+                  "Excessive government support",
+                  "Lack of interest from tourists",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m4-l1-cp6",
+              atSeconds: 2670,
+              rewindToSeconds: 2617,
+              question: {
+                id: "m4-l1-cp6-q",
+                question: "Which risk, specific to drones, does the presentation mention?",
+                options: [
+                  "Safety, privacy rules and certification/licensing requirements",
+                  "Drones cannot be used on any kind of farm",
+                  "Drones remove the need for any farmer knowledge",
+                  "Drones are illegal everywhere in Europe",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m4-l1-cp7",
+              atSeconds: 3310,
+              rewindToSeconds: 3257,
+              question: {
+                id: "m4-l1-cp7-q",
+                question: "What is presented as the final key message of the lecture?",
+                options: [
+                  "Precision agriculture is not only for large farms — it matters for micro-farms too, if used wisely",
+                  "Micro-farms should avoid any new technology",
+                  "Agritourism has no real connection to precision agriculture",
+                  "Only fully automated farms can benefit from data",
                 ],
                 correctIndex: 0,
               },

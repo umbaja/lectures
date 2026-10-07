@@ -17,10 +17,11 @@ import {
   PASS_SCORE,
 } from "./progress";
 import { VideoController } from "./video-player";
-import { getParticipant, isRegistered, registerParticipant } from "./participant";
-import { syncParticipant, syncProgress } from "./backend";
+import { getParticipant, isRegistered, registerParticipant, clearParticipant } from "./participant";
+import { syncParticipant, syncProgress, syncCheckpointAnswer, syncVideoWatch } from "./backend";
 import { renderCertificateView } from "./certificate";
 import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
+import { logCheckpointAnswer, recordVideoWatch } from "./video-analytics";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
@@ -30,8 +31,25 @@ const CERTIFICATE_VIEW = "certificate";
 
 let currentLessonId: string = lessons[0]?.id ?? "";
 let lastQuizResult: { lessonId: string; text: string } | null = null;
+let mountedVideoLessonId: string | null = null;
+const checkpointAttempts = new Map<string, number>();
+
+/** Persist (and sync, if registered) watch stats for whatever video is currently mounted. */
+function flushVideoWatchStats() {
+  if (!mountedVideoLessonId) return;
+  const lessonId = mountedVideoLessonId;
+  mountedVideoLessonId = null;
+  const stats = videoController.getWatchStats();
+  if (stats.watchedSeconds === 0 && stats.seekCount === 0) return;
+  const totals = recordVideoWatch(lessonId, stats);
+  const participant = getParticipant();
+  if (participant) void syncVideoWatch(participant.email, lessonId, totals);
+}
+
+window.addEventListener("beforeunload", flushVideoWatchStats);
 
 function render() {
+  flushVideoWatchStats();
   videoController.destroy();
   const participant = getParticipant();
   const currentLesson = currentLessonId === CERTIFICATE_VIEW ? undefined : findLesson(course, currentLessonId);
@@ -44,14 +62,23 @@ function render() {
           <div class="progress-bar-fill" style="width:${progressPercent()}%"></div>
         </div>
         <p class="progress-label">${completionCount()} / ${lessons.length} lessons completed</p>
-        ${
-          participant
-            ? `<button
-                 class="lesson-link certificate-link ${currentLessonId === CERTIFICATE_VIEW ? "active" : ""}"
-                 data-view-certificate
-               >🎓 My certificate</button>`
-            : ""
-        }
+        <div class="account-status">
+          ${
+            participant
+              ? `
+            <p class="account-label">Signed in as <strong>${escapeHtml(participant.name)}</strong></p>
+            <button
+              class="lesson-link certificate-link ${currentLessonId === CERTIFICATE_VIEW ? "active" : ""}"
+              data-view-certificate
+            >🎓 My certificate</button>
+            <button type="button" class="account-action" data-switch-guest>Switch to guest</button>
+          `
+              : `
+            <p class="account-label">Browsing as a guest</p>
+            <button type="button" class="mark-done" data-open-registration>Register as a student</button>
+          `
+          }
+        </div>
         <nav>
           ${course.modules
             .map(
@@ -123,9 +150,14 @@ function render() {
     handleQuizSubmit(quizForm, currentLesson!);
   });
 
-  const registrationBtn = app.querySelector<HTMLButtonElement>("[data-open-registration]");
-  registrationBtn?.addEventListener("click", () => {
-    showRegistrationModal(() => render());
+  app.querySelectorAll<HTMLButtonElement>("[data-open-registration]").forEach((btn) => {
+    btn.addEventListener("click", () => showRegistrationModal(() => render()));
+  });
+
+  app.querySelector<HTMLButtonElement>("[data-switch-guest]")?.addEventListener("click", () => {
+    clearParticipant();
+    if (currentLessonId === CERTIFICATE_VIEW) currentLessonId = lessons[0]?.id ?? "";
+    render();
   });
 
   app.querySelectorAll<HTMLTextAreaElement>(".worksheet-form textarea").forEach((textarea) => {
@@ -402,10 +434,13 @@ function renderModuleWrapUp(module: Module): string {
 
 async function mountLessonVideo(lesson: Lesson) {
   if (!lesson.video) return;
-  await videoController.mount("yt-player", lesson.video.youtubeId, lesson.video.checkpoints ?? [], showCheckpointOverlay);
+  mountedVideoLessonId = lesson.id;
+  await videoController.mount("yt-player", lesson.video.youtubeId, lesson.video.checkpoints ?? [], (checkpoint) =>
+    showCheckpointOverlay(checkpoint, lesson.id),
+  );
 }
 
-function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
+function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
   const overlay = document.createElement("div");
   overlay.className = "checkpoint-overlay";
   overlay.innerHTML = `
@@ -446,6 +481,20 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint) {
     e.preventDefault();
     const answer = new FormData(form).get("answer");
     const correct = answer !== null && Number(answer) === checkpoint.question.correctIndex;
+
+    const attempt = (checkpointAttempts.get(checkpoint.id) ?? 0) + 1;
+    checkpointAttempts.set(checkpoint.id, attempt);
+    const answerEntry = {
+      lessonId,
+      checkpointId: checkpoint.id,
+      selectedIndex: answer !== null ? Number(answer) : -1,
+      correct,
+      attempt,
+      answeredAt: new Date().toISOString(),
+    };
+    logCheckpointAnswer(answerEntry);
+    const participant = getParticipant();
+    if (participant) void syncCheckpointAnswer(participant.email, answerEntry);
 
     if (correct) {
       feedback.textContent = "Correct!";

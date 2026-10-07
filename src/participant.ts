@@ -35,3 +35,11 @@ export function registerParticipant(data: { name: string; email: string; wantsCe
   }
   return participant;
 }
+
+export function clearParticipant() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // localStorage unavailable — nothing to clear.
+  }
+}

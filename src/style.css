@@ -436,9 +436,41 @@ h3 {
   margin-top: 0.75rem;
 }
 
-.certificate-link {
-  margin-bottom: 1rem;
+.account-status {
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 0.85rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.account-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.account-status .certificate-link {
+  width: 100%;
+  margin-bottom: 0.4rem;
   font-weight: 600;
+}
+
+.account-status .mark-done {
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+.account-action {
+  display: block;
+  width: 100%;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  cursor: pointer;
 }
 
 .progress-gate {

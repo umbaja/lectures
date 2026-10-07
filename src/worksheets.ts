@@ -1,22 +1,7 @@
+import { loadJson, saveJson } from "./storage";
+
 const ANSWERS_KEY = "course-worksheet-answers";
 const CHECKLIST_KEY = "course-checklist-items";
-
-function loadJson<T>(key: string, fallback: T): T {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-function saveJson(key: string, value: unknown) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    // localStorage unavailable — answers just won't persist across reloads.
-  }
-}
 
 export function getWorksheetAnswers(worksheetId: string): string[] {
   const all = loadJson<Record<string, string[]>>(ANSWERS_KEY, {});
