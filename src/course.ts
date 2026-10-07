@@ -53,6 +53,12 @@ export interface SupplementaryMaterial {
   url?: string;
   /** Short note — e.g. what it will contain, if not produced yet. */
   note?: string;
+  /** Rich HTML shown inline when the learner expands the item (e.g. a full glossary or case study). */
+  body?: string;
+  /** For a fillable "worksheet" material: one prompt per field, saved and printable in the browser. */
+  worksheetFields?: string[];
+  /** For a "checklist" material: one trackable step per item. */
+  checklistItems?: string[];
 }
 
 export interface Module {

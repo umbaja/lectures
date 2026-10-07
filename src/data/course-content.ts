@@ -42,6 +42,24 @@ function draftMaterial(
   return { id, type, title, note };
 }
 
+/** The same four reflection prompts close every D3.2 Module 4 worksheet. */
+const WORKSHEET_REFLECTION_QUESTIONS = [
+  "Reflection — what is the strongest part of your idea?",
+  "Reflection — what would be difficult for a real farmer?",
+  "Reflection — how could the activity be simplified?",
+  "Reflection — how does the idea connect precision agriculture with agritourism?",
+];
+
+function worksheetMaterial(id: string, title: string, fields: string[]): SupplementaryMaterial {
+  return {
+    id,
+    type: "worksheet",
+    title,
+    note: "Real, fillable worksheet — D3.2 Module 4 Worksheets",
+    worksheetFields: [...fields, ...WORKSHEET_REFLECTION_QUESTIONS],
+  };
+}
+
 const modules: Module[] = [
   {
     id: "m1",
@@ -992,17 +1010,137 @@ const modules: Module[] = [
       },
     ],
     supplementaryMaterials: [
-      draftMaterial("m4-mat1", "fact-sheet", "Module glossary (precision agriculture, micro-farm, decision cycle, smart agritourism and more)", "Real content — D3.2 Module 4 Scripts & Annexes, Section 2"),
-      draftMaterial("m4-mat2", "worksheet", "Worksheet 1 – Micro-Farm Problem–Tool Match", "Real worksheet for unit 4.1 — D3.2 Module 4 Worksheets"),
-      draftMaterial("m4-mat3", "worksheet", "Worksheet 2 – Decision Cycle Canvas", "Real worksheet for unit 4.2 — D3.2 Module 4 Worksheets"),
-      draftMaterial("m4-mat4", "worksheet", "Worksheet 3 – Irrigation Decision Worksheet", "Real worksheet for unit 4.3 — D3.2 Module 4 Worksheets"),
-      draftMaterial("m4-mat5", "worksheet", "Worksheet 4 – Farm Image / Drone Interpretation", "Real worksheet for unit 4.4 — D3.2 Module 4 Worksheets"),
-      draftMaterial("m4-mat6", "worksheet", "Worksheet 5 – One Tool, One Problem, One Season", "Real worksheet for unit 4.5 — D3.2 Module 4 Worksheets"),
-      draftMaterial("m4-mat7", "worksheet", "Worksheet 6 – Smart Agritourism Experience Template", "Real worksheet for unit 4.6 — D3.2 Module 4 Worksheets"),
-      draftMaterial("m4-mat8", "checklist", "Step-by-step implementation model: problem – tool – test – benefit – story", "Real content — D3.2 Module 4 Scripts & Annexes, Unit 5 \"Step-by-step model\""),
-      draftMaterial("m4-mat9", "case-study", "CODECS Slovak Living Lab: supporting irrigation decisions", "Real case study — D3.2 Module 4, Annex B"),
-      draftMaterial("m4-mat10", "case-study", "Dingle Peninsula, Ireland / PLOUTOS SIP5: sensor data, food tourism and local branding", "Real case study — D3.2 Module 4, Annex B"),
-      draftMaterial("m4-mat11", "case-study", "Aegean Islands and Crete, Greece: AI, drones and precision agriculture for sustainable island tourism", "Real case study — D3.2 Module 4, Annex B"),
+      {
+        id: "m4-mat1",
+        type: "fact-sheet",
+        title: "Module glossary",
+        note: "Real content — D3.2 Module 4 Scripts & Annexes, Section 2",
+        body:
+          "<dl>" +
+          [
+            ["Precision agriculture", "Use of observation, data and technology to support better farm decisions. In the module, the focus is on practical, affordable and locally relevant use on micro-farms."],
+            ["Micro-farm", "A small farm with limited land, labour and financial resources, often closely connected with local customers, visitors and community life."],
+            ["Farm monitoring", "The regular observation or measurement of conditions on a farm, such as soil moisture, weather, crop condition or production activities."],
+            ["Farm data", "Information collected from observations, sensors, weather stations, digital records, maps or other farm-management tools and used to support decisions."],
+            ["Data-driven decision-making", "Making a farm-management decision on the basis of relevant observations and data instead of relying only on routine or assumptions."],
+            ["Decision cycle", "A five-step process used in the module: Measure, Understand, Act, Evaluate and Communicate."],
+            ["Soil moisture sensor", "A tool that helps farmers understand whether water is available in the soil and whether irrigation may be needed."],
+            ["Weather station", "A device or set of sensors that records local weather conditions such as temperature, rainfall, wind, humidity or solar radiation."],
+            ["Soil and water management", "Farm practices aimed at monitoring and managing soil and water resources efficiently, including decisions about when and how much to irrigate."],
+            ["Smart irrigation", "Irrigation supported by observation, sensors, rainfall information, schedules or timers so that water is used only when and where it is needed."],
+            ["Digital farm diary", "A simple digital record of planting, irrigation, fertilisation, pests, harvest, quality, weather and visitor feedback."],
+            ["Drone imagery", "Images or video taken from above to observe the farm, identify visible patterns and support communication or promotion."],
+            ["QR code", "A scannable code that connects a physical product or farm location with digital information, for example product origin, production methods or the farm story."],
+            ["Smart agritourism", "Agritourism that uses real farming practices and simple technologies as learning points for visitors."],
+            ["Authenticity", "The quality of keeping the farmer, land, product, culture and human story at the centre, while using technology only as support."],
+            ["Climate resilience", "The capacity of a farm to respond and adapt to conditions such as drought, heat, irregular rainfall and changing pest pressures."],
+            ["Sustainability", "In this module, the responsible management of resources and farming practices that can reduce water use, protect soil, improve input efficiency, reduce losses and strengthen resilience."],
+          ]
+            .map(([term, def]) => `<dt>${term}</dt><dd>${def}</dd>`)
+            .join("") +
+          "</dl>",
+      },
+      worksheetMaterial("m4-mat2", "Worksheet 1 – Micro-Farm Problem–Tool Match", [
+        "Type of farm",
+        "Main farm problem",
+        "Why this problem matters",
+        "Possible precision tool",
+        "Why this tool fits the farm",
+        "Expected benefit",
+        "Possible visitor explanation",
+      ]),
+      worksheetMaterial("m4-mat3", "Worksheet 2 – Decision Cycle Canvas", [
+        "Decision to be made",
+        "Measure: what information is collected?",
+        "Understand: what does the information mean?",
+        "Act: what will the farmer do?",
+        "Evaluate: how will success be checked?",
+        "Communicate: how will this be explained to visitors?",
+      ]),
+      worksheetMaterial("m4-mat4", "Worksheet 3 – Irrigation Decision Worksheet", [
+        "Crop and growth stage",
+        "Current soil moisture information",
+        "Recent rainfall",
+        "Weather forecast",
+        "Farmer observation",
+        "Would you irrigate today? Why / why not?",
+        "What could happen if the decision is wrong?",
+        "How would you explain the decision to visitors?",
+      ]),
+      worksheetMaterial("m4-mat5", "Worksheet 4 – Farm Image / Drone Interpretation", [
+        "What can be seen from above?",
+        "Which areas look different?",
+        "What could be the possible reasons?",
+        "What must be checked in the field?",
+        "How could this image be used in a farm tour?",
+        "What privacy or safety issues must be considered?",
+      ]),
+      worksheetMaterial("m4-mat6", "Worksheet 5 – One Tool, One Problem, One Season", [
+        "Problem to solve",
+        "Chosen tool",
+        "Pilot area or crop",
+        "Duration of the test",
+        "What will be measured?",
+        "How will benefit be evaluated?",
+        "What is the next step if the test works?",
+        "What is the next step if the test does not work?",
+      ]),
+      worksheetMaterial("m4-mat7", "Worksheet 6 – Smart Agritourism Experience Template", [
+        "Type of farm",
+        "Precision agriculture tool",
+        "Visitor activity",
+        "Sustainability message",
+        "What visitors see",
+        "What visitors do",
+        "What visitors learn",
+        "Promotional sentence",
+      ]),
+      {
+        id: "m4-mat8",
+        type: "checklist",
+        title: "Step-by-step implementation model: problem – tool – test – benefit – story",
+        note: "Real content — D3.2 Module 4 Scripts & Annexes, Unit 5 \"Step-by-step model\"",
+        checklistItems: [
+          "Identify one real problem on the farm",
+          "Choose one simple, affordable tool",
+          "Test it on a small scale (one crop, field or season)",
+          "Measure the benefit",
+          "Turn the practice into a visitor story",
+        ],
+      },
+      {
+        id: "m4-mat9",
+        type: "case-study",
+        title: "CODECS Slovak Living Lab: supporting irrigation decisions",
+        note: "Real case study — D3.2 Module 4, Annex B",
+        body:
+          "<p>The presentation introduces the Slovak Living Lab – CODECS as a relevant case study. It describes " +
+          "soil moisture sensors, weather stations and IoT devices as tools that support irrigation decisions " +
+          "and can also be used for farm demonstrations and virtual farm tours. In this module, the case study " +
+          "is used to show that precision agriculture is not only about collecting data — it is about " +
+          "translating data into a practical decision and communicating the decision in an educational way.</p>",
+      },
+      {
+        id: "m4-mat10",
+        type: "case-study",
+        title: "Dingle Peninsula, Ireland / PLOUTOS SIP5: sensor data, food tourism and local branding",
+        note: "Real case study — D3.2 Module 4, Annex B",
+        body:
+          "<p>The presentation uses this case as an example of farm sensor data supporting smart farming, food " +
+          "tourism, local branding and rural business diversification. It helps learners understand that farm " +
+          "data can contribute not only to internal farm management, but also to local identity and tourism " +
+          "value.</p>",
+      },
+      {
+        id: "m4-mat11",
+        type: "case-study",
+        title: "Aegean Islands and Crete, Greece: AI, drones and precision agriculture for sustainable island tourism",
+        note: "Real case study — D3.2 Module 4, Annex B",
+        body:
+          "<p>The presentation refers to AI, UAVs and precision agriculture as tools explored for sustainable " +
+          "island agriculture and tourism development. This supports the module's focus on island and remote " +
+          "contexts, where agriculture, tourism and climate vulnerability are connected.</p>",
+      },
       draftMaterial("m4-mat12", "case-study", "Interview with a VAC student — Plant Science Cert III (Vanuatu Agricultural College)", "Real video — https://www.youtube.com/watch?v=RQygpO_AKk8"),
       draftMaterial("m4-mat13", "interview-video", "Interview with a VAC student — Agribusiness Cert IV", "Real video, no transcript — https://www.youtube.com/watch?v=__9XltiDXrk"),
     ],

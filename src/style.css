@@ -221,6 +221,85 @@ h3 {
   font-size: 0.85rem;
 }
 
+.material-expandable summary {
+  cursor: pointer;
+}
+
+.material-expandable summary::marker {
+  color: var(--accent);
+}
+
+.material-body {
+  margin-top: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.material-body dt {
+  font-weight: 600;
+  margin-top: 0.6rem;
+}
+
+.material-body dt:first-child {
+  margin-top: 0;
+}
+
+.material-body dd {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+}
+
+.worksheet-form {
+  margin-top: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+}
+
+.worksheet-field {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.worksheet-field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: normal;
+  resize: vertical;
+}
+
+.checklist {
+  margin: 0.75rem 0 0;
+  padding: 0.9rem 1rem;
+  list-style: none;
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.checklist li {
+  margin: 0.3rem 0;
+}
+
+.checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
 .video-embed {
   position: relative;
   width: 100%;

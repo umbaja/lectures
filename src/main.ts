@@ -20,6 +20,7 @@ import { VideoController } from "./video-player";
 import { getParticipant, isRegistered, registerParticipant } from "./participant";
 import { syncParticipant, syncProgress } from "./backend";
 import { renderCertificateView } from "./certificate";
+import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
@@ -127,9 +128,43 @@ function render() {
     showRegistrationModal(() => render());
   });
 
+  app.querySelectorAll<HTMLTextAreaElement>(".worksheet-form textarea").forEach((textarea) => {
+    textarea.addEventListener("blur", () => {
+      const form = textarea.closest<HTMLFormElement>("[data-worksheet-id]")!;
+      saveWorksheetAnswer(form.dataset.worksheetId!, Number(textarea.dataset.fieldIndex), textarea.value);
+    });
+  });
+
+  app.querySelectorAll<HTMLButtonElement>("[data-download-worksheet]").forEach((btn) => {
+    btn.addEventListener("click", () => downloadWorksheet(btn.dataset.worksheetId!, btn.dataset.worksheetTitle!));
+  });
+
+  app.querySelectorAll<HTMLInputElement>("[data-checklist-id]").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      setChecklistItem(checkbox.dataset.checklistId!, Number(checkbox.dataset.itemIndex), checkbox.checked);
+    });
+  });
+
   if (currentLesson?.video) {
     void mountLessonVideo(currentLesson);
   }
+}
+
+function downloadWorksheet(worksheetId: string, title: string) {
+  const form = app.querySelector<HTMLFormElement>(`[data-worksheet-id="${worksheetId}"]`)!;
+  const lines = [title, ""];
+  form.querySelectorAll<HTMLLabelElement>(".worksheet-field").forEach((label) => {
+    const prompt = label.childNodes[0]?.textContent?.trim() ?? "";
+    const answer = label.querySelector("textarea")!.value.trim();
+    lines.push(prompt, answer || "(not answered)", "");
+  });
+  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${title.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function completeLesson(lessonId: string) {
@@ -256,13 +291,86 @@ const MATERIAL_TYPE_LABELS: Record<SupplementaryMaterialType, string> = {
 
 function renderMaterial(material: SupplementaryMaterial): string {
   const label = MATERIAL_TYPE_LABELS[material.type];
-  const body = material.url
+  const summary = `<span class="material-type">${escapeHtml(label)}</span> ${escapeHtml(material.title)}`;
+
+  if (material.worksheetFields) {
+    const answers = getWorksheetAnswers(material.id);
+    return `
+      <li>
+        <details class="material-expandable">
+          <summary>${summary}</summary>
+          <form class="worksheet-form" data-worksheet-id="${escapeAttr(material.id)}">
+            ${material.worksheetFields
+              .map(
+                (field, i) => `
+              <label class="worksheet-field">
+                ${escapeHtml(field)}
+                <textarea data-field-index="${i}" rows="2">${escapeHtml(answers[i] ?? "")}</textarea>
+              </label>
+            `,
+              )
+              .join("")}
+            <button
+              type="button"
+              class="mark-done"
+              data-download-worksheet
+              data-worksheet-id="${escapeAttr(material.id)}"
+              data-worksheet-title="${escapeAttr(material.title)}"
+            >Download my answers</button>
+          </form>
+        </details>
+      </li>
+    `;
+  }
+
+  if (material.checklistItems) {
+    const checked = getCheckedItems(material.id);
+    return `
+      <li>
+        <details class="material-expandable">
+          <summary>${summary}</summary>
+          <ul class="checklist">
+            ${material.checklistItems
+              .map(
+                (item, i) => `
+              <li>
+                <label>
+                  <input
+                    type="checkbox"
+                    data-checklist-id="${escapeAttr(material.id)}"
+                    data-item-index="${i}"
+                    ${checked.includes(i) ? "checked" : ""}
+                  />
+                  ${escapeHtml(item)}
+                </label>
+              </li>
+            `,
+              )
+              .join("")}
+          </ul>
+        </details>
+      </li>
+    `;
+  }
+
+  if (material.body) {
+    return `
+      <li>
+        <details class="material-expandable">
+          <summary>${summary}</summary>
+          <div class="material-body">${material.body}</div>
+        </details>
+      </li>
+    `;
+  }
+
+  const titleHtml = material.url
     ? `<a href="${escapeAttr(material.url)}" target="_blank" rel="noopener">${escapeHtml(material.title)}</a>`
     : escapeHtml(material.title);
   return `
     <li>
       <span class="material-type">${escapeHtml(label)}</span>
-      ${body}
+      ${titleHtml}
       ${material.note ? `<span class="material-note"> — ${escapeHtml(material.note)}</span>` : ""}
     </li>
   `;
