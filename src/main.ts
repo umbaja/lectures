@@ -23,6 +23,7 @@ import { syncParticipant, syncProgress, syncCheckpointAnswer, syncVideoWatch } f
 import { renderCertificateView } from "./certificate";
 import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
 import { logCheckpointAnswer, recordVideoWatch, markVideoWatched, isVideoWatched } from "./video-analytics";
+import { getSummaryDraft, saveSummaryDraft, requestSummaryFeedback } from "./ai-summary";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
@@ -178,8 +179,54 @@ function render() {
     });
   });
 
+  app.querySelector<HTMLButtonElement>("[data-ai-summary-submit]")?.addEventListener("click", () => {
+    void handleAiSummarySubmit();
+  });
+
   if (currentLesson?.video) {
     void mountLessonVideo(currentLesson);
+  }
+}
+
+async function handleAiSummarySubmit() {
+  const section = app.querySelector<HTMLElement>("[data-ai-summary]");
+  if (!section) return;
+  const lessonId = section.dataset.aiSummaryLessonId!;
+  const lesson = findLesson(course, lessonId);
+  const participant = getParticipant();
+  if (!lesson?.aiSummaryPrompt || !participant) return;
+
+  const textarea = section.querySelector<HTMLTextAreaElement>("[data-ai-summary-input]")!;
+  const submitBtn = section.querySelector<HTMLButtonElement>("[data-ai-summary-submit]")!;
+  const statusEl = section.querySelector<HTMLElement>("[data-ai-summary-status]")!;
+  const feedbackEl = section.querySelector<HTMLElement>("[data-ai-summary-feedback]")!;
+
+  const summary = textarea.value.trim();
+  if (summary.length < 20) {
+    statusEl.textContent = "Write a bit more first — at least a couple of sentences.";
+    return;
+  }
+
+  saveSummaryDraft(lessonId, summary);
+  submitBtn.disabled = true;
+  statusEl.textContent = "Getting feedback…";
+  feedbackEl.textContent = "";
+
+  try {
+    const feedback = await requestSummaryFeedback({
+      lessonId,
+      lessonTitle: lesson.title,
+      prompt: lesson.aiSummaryPrompt,
+      summary,
+      email: participant.email,
+    });
+    feedbackEl.textContent = feedback;
+    statusEl.textContent = "";
+  } catch (err) {
+    statusEl.textContent = "Couldn't get feedback right now — please try again in a moment.";
+    console.error("[AGRI-TOUR] AI summary feedback failed:", err);
+  } finally {
+    submitBtn.disabled = false;
   }
 }
 
@@ -230,7 +277,13 @@ function renderLesson(lesson: Lesson, module: Module): string {
       <div class="lesson-content">${lesson.content}</div>
       ${
         needsGate
-          ? renderRegistrationGate()
+          ? renderRegistrationGate(
+              "Test your knowledge",
+              "This module's proficiency test is open to registered participants, so we can track pilot results " +
+                "and — if you'd like one — issue a certificate once you pass every module. Browsing the lessons and " +
+                "materials stays free for everyone.",
+              "Register to take the test",
+            )
           : `
         ${lesson.quiz ? renderQuiz(lesson) : ""}
         <button data-mark-done class="mark-done">
@@ -238,20 +291,42 @@ function renderLesson(lesson: Lesson, module: Module): string {
         </button>
       `
       }
+      ${lesson.aiSummaryPrompt ? renderAiSummarySection(lesson) : ""}
       ${isLast ? renderModuleWrapUp(module) : ""}
     </article>
   `;
 }
 
-function renderRegistrationGate(): string {
+function renderRegistrationGate(heading: string, body: string, buttonLabel: string): string {
   return `
     <div class="progress-gate">
-      <h3>Test your knowledge</h3>
-      <p>This module's proficiency test is open to registered participants, so we can track pilot results
-      and — if you'd like one — issue a certificate once you pass every module. Browsing the lessons and
-      materials stays free for everyone.</p>
-      <button type="button" data-open-registration class="mark-done">Register to take the test</button>
+      <h3>${escapeHtml(heading)}</h3>
+      <p>${escapeHtml(body)}</p>
+      <button type="button" data-open-registration class="mark-done">${escapeHtml(buttonLabel)}</button>
     </div>
+  `;
+}
+
+function renderAiSummarySection(lesson: Lesson): string {
+  if (!isRegistered()) {
+    return renderRegistrationGate(
+      "Write a short summary",
+      "Registered participants can write a short summary of this lesson and get instant AI feedback on it.",
+      "Register to try it",
+    );
+  }
+  const saved = getSummaryDraft(lesson.id);
+  return `
+    <section class="ai-summary" data-ai-summary data-ai-summary-lesson-id="${escapeAttr(lesson.id)}">
+      <h3>Write a short summary</h3>
+      <p class="ai-summary-prompt">${escapeHtml(lesson.aiSummaryPrompt!)}</p>
+      <textarea data-ai-summary-input rows="6" placeholder="Write your summary here…">${escapeHtml(saved)}</textarea>
+      <div class="ai-summary-actions">
+        <button type="button" data-ai-summary-submit class="mark-done">Get AI feedback</button>
+        <span class="ai-summary-status" data-ai-summary-status></span>
+      </div>
+      <div class="ai-summary-feedback" data-ai-summary-feedback></div>
+    </section>
   `;
 }
 
@@ -529,8 +604,12 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
     const participant = getParticipant();
     if (participant) void syncCheckpointAnswer(participant.email, answerEntry);
 
+    const correctAnswerHtml = `<span class="checkpoint-correct-answer">Correct answer: ${escapeHtml(
+      checkpoint.question.options[checkpoint.question.correctIndex],
+    )}</span>`;
+
     if (correct) {
-      feedback.textContent = "Correct!";
+      feedback.innerHTML = `Correct!<br />${correctAnswerHtml}`;
       feedback.classList.add("correct");
       videoController.markAnswered(checkpoint.id);
       markCheckpointAnswered(checkpoint.id);
@@ -538,12 +617,12 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
       onContinue = () => videoController.resume();
       refreshVideoStatus(findLesson(course, lessonId)!);
     } else if (isRegistered()) {
-      feedback.textContent = "Not quite — we'll rewind so you can find the answer, then you can try again.";
+      feedback.innerHTML = `Not quite — we'll rewind so you can find the answer, then you can try again.<br />${correctAnswerHtml}`;
       feedback.classList.add("incorrect");
       continueBtn.textContent = "Rewatch this part";
       onContinue = () => videoController.rewindAndResume(checkpoint.rewindToSeconds ?? 0);
     } else {
-      feedback.textContent = "Not quite, but let's move on.";
+      feedback.innerHTML = `Not quite, but let's move on.<br />${correctAnswerHtml}`;
       feedback.classList.add("incorrect");
       videoController.markAnswered(checkpoint.id);
       markCheckpointAnswered(checkpoint.id);

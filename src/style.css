@@ -402,6 +402,64 @@ h3 {
   color: #dc2626;
 }
 
+.checkpoint-correct-answer {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-weight: normal;
+  color: var(--fg);
+}
+
+.ai-summary {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.ai-summary h3 {
+  margin-top: 0;
+}
+
+.ai-summary-prompt {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.ai-summary textarea {
+  display: block;
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.ai-summary-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ai-summary-status {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ai-summary-feedback {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--sidebar-bg);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
 .hidden {
   display: none;
 }

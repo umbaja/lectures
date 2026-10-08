@@ -708,6 +708,9 @@ const modules: Module[] = [
             },
           ],
         },
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words) of this lesson: what precision agriculture means for a " +
+          "micro-farm, and one way it could realistically help a small farm you know (real or imagined).",
       },
       {
         id: "m4-l2",

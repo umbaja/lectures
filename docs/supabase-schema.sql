@@ -48,10 +48,23 @@ create table if not exists video_watch (
 -- created the table without it.
 alter table video_watch add column if not exists watched boolean not null default false;
 
+-- Written only by the evaluate-summary Edge Function, using the project's
+-- service-role key (bypasses RLS) — never written directly by the client,
+-- so there is no "anon" insert policy for it below.
+create table if not exists summary_reviews (
+  id bigint generated always as identity primary key,
+  participant_email text not null references participants(email),
+  lesson_id text not null,
+  summary_text text not null,
+  ai_feedback text not null,
+  created_at timestamptz not null default now()
+);
+
 alter table participants enable row level security;
 alter table progress enable row level security;
 alter table checkpoint_answers enable row level security;
 alter table video_watch enable row level security;
+alter table summary_reviews enable row level security;
 
 -- The app only ever reads/writes its own visitor's row using the public anon
 -- key, so anon is allowed to insert/update but never to select — partners

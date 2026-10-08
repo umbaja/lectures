@@ -36,6 +36,12 @@ export interface Lesson {
   content: string;
   video?: LessonVideo;
   quiz?: Quiz;
+  /**
+   * If set, shows a "write a short summary" box (registered participants only)
+   * that gets AI feedback via a Supabase Edge Function. This is the task/prompt
+   * shown to the learner and sent to the AI as the lesson's topic context.
+   */
+  aiSummaryPrompt?: string;
 }
 
 /**
