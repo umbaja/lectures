@@ -89,12 +89,17 @@ export function syncCheckpointAnswer(email: string, entry: CheckpointAnswerEntry
 }
 
 /** Replaces the row with the learner's running total for this lesson's video. */
-export function syncVideoWatch(email: string, lessonId: string, stats: VideoWatchStats): Promise<void> {
+export function syncVideoWatch(
+  email: string,
+  lessonId: string,
+  stats: VideoWatchStats & { watched?: boolean },
+): Promise<void> {
   return upsert("video_watch", {
     participant_email: email,
     lesson_id: lessonId,
     watched_seconds: stats.watchedSeconds,
     seek_count: stats.seekCount,
+    watched: stats.watched,
     updated_at: new Date().toISOString(),
   });
 }

@@ -61,6 +61,7 @@ function loadYouTubeApi(): Promise<void> {
 }
 
 const POLL_INTERVAL_MS = 400;
+const YT_STATE_ENDED = 0;
 const YT_STATE_PLAYING = 1;
 // A jump bigger than this between two polls, while playing, means the learner
 // dragged the seek bar rather than just watching — not our own corrective seeks.
@@ -82,6 +83,7 @@ export class VideoController {
     youtubeId: string,
     checkpoints: VideoCheckpoint[],
     onCheckpoint: (checkpoint: VideoCheckpoint) => void,
+    onEnded?: () => void,
   ) {
     this.answeredIds = new Set(checkpoints.filter((cp) => isCheckpointAnswered(cp.id)).map((cp) => cp.id));
     this.watchedSeconds = 0;
@@ -99,6 +101,7 @@ export class VideoController {
       events: {
         onStateChange: (event) => {
           this.isPlaying = event.data === YT_STATE_PLAYING;
+          if (event.data === YT_STATE_ENDED) onEnded?.();
         },
         onReady: () => {
           this.pollHandle = window.setInterval(() => {

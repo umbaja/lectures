@@ -16,6 +16,7 @@ export interface VideoWatchStats {
 
 const ANSWERS_KEY = "course-checkpoint-answers";
 const WATCH_KEY = "course-video-watch";
+const WATCHED_KEY = "course-video-watched";
 
 export function logCheckpointAnswer(entry: CheckpointAnswerEntry) {
   const all = loadJson<CheckpointAnswerEntry[]>(ANSWERS_KEY, []);
@@ -43,4 +44,17 @@ export function recordVideoWatch(lessonId: string, stats: VideoWatchStats): Vide
 export function getVideoWatch(lessonId: string): VideoWatchStats {
   const all = loadJson<Record<string, VideoWatchStats>>(WATCH_KEY, {});
   return all[lessonId] ?? { watchedSeconds: 0, seekCount: 0 };
+}
+
+/** The video reached its natural end at least once — a one-time flag, not a running total. */
+export function markVideoWatched(lessonId: string) {
+  const all = loadJson<string[]>(WATCHED_KEY, []);
+  if (!all.includes(lessonId)) {
+    all.push(lessonId);
+    saveJson(WATCHED_KEY, all);
+  }
+}
+
+export function isVideoWatched(lessonId: string): boolean {
+  return loadJson<string[]>(WATCHED_KEY, []).includes(lessonId);
 }

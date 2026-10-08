@@ -39,9 +39,14 @@ create table if not exists video_watch (
   lesson_id text not null,
   watched_seconds int not null default 0,
   seek_count int not null default 0,
+  watched boolean not null default false,
   updated_at timestamptz not null default now(),
   primary key (participant_email, lesson_id)
 );
+
+-- Safe to re-run: adds the column if an earlier version of this file already
+-- created the table without it.
+alter table video_watch add column if not exists watched boolean not null default false;
 
 alter table participants enable row level security;
 alter table progress enable row level security;

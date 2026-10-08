@@ -12,6 +12,7 @@ import {
   isLessonComplete,
   markLessonComplete,
   markCheckpointAnswered,
+  isCheckpointAnswered,
   recordQuizScore,
   completionCount,
   PASS_SCORE,
@@ -21,7 +22,7 @@ import { getParticipant, isRegistered, registerParticipant, clearParticipant } f
 import { syncParticipant, syncProgress, syncCheckpointAnswer, syncVideoWatch } from "./backend";
 import { renderCertificateView } from "./certificate";
 import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
-import { logCheckpointAnswer, recordVideoWatch } from "./video-analytics";
+import { logCheckpointAnswer, recordVideoWatch, markVideoWatched, isVideoWatched } from "./video-analytics";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
@@ -221,7 +222,11 @@ function renderLesson(lesson: Lesson, module: Module): string {
     <article>
       ${isFirst ? renderModuleIntro(module) : ""}
       <h2>${escapeHtml(lesson.title)}</h2>
-      ${lesson.video ? `<div class="video-embed"><div id="yt-player"></div></div>` : ""}
+      ${
+        lesson.video
+          ? `<div class="video-embed"><div id="yt-player"></div></div><div class="video-status" data-video-status>${renderVideoStatus(lesson)}</div>`
+          : ""
+      }
       <div class="lesson-content">${lesson.content}</div>
       ${
         needsGate
@@ -435,9 +440,37 @@ function renderModuleWrapUp(module: Module): string {
 async function mountLessonVideo(lesson: Lesson) {
   if (!lesson.video) return;
   mountedVideoLessonId = lesson.id;
-  await videoController.mount("yt-player", lesson.video.youtubeId, lesson.video.checkpoints ?? [], (checkpoint) =>
-    showCheckpointOverlay(checkpoint, lesson.id),
+  await videoController.mount(
+    "yt-player",
+    lesson.video.youtubeId,
+    lesson.video.checkpoints ?? [],
+    (checkpoint) => showCheckpointOverlay(checkpoint, lesson.id),
+    () => handleVideoEnded(lesson),
   );
+}
+
+function handleVideoEnded(lesson: Lesson) {
+  markVideoWatched(lesson.id);
+  const participant = getParticipant();
+  if (participant) {
+    void syncVideoWatch(participant.email, lesson.id, { ...videoController.getWatchStats(), watched: true });
+  }
+  refreshVideoStatus(lesson);
+}
+
+function renderVideoStatus(lesson: Lesson): string {
+  const checkpoints = lesson.video?.checkpoints ?? [];
+  const answered = checkpoints.filter((cp) => isCheckpointAnswered(cp.id)).length;
+  const watched = isVideoWatched(lesson.id);
+  return `
+    ${checkpoints.length > 0 ? `<span>${answered} / ${checkpoints.length} questions answered</span>` : ""}
+    <span class="${watched ? "watched" : ""}">${watched ? "✓ Watched to the end" : "Not yet watched to the end"}</span>
+  `;
+}
+
+function refreshVideoStatus(lesson: Lesson) {
+  const el = document.querySelector<HTMLElement>("[data-video-status]");
+  if (el) el.innerHTML = renderVideoStatus(lesson);
 }
 
 function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
@@ -503,6 +536,7 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
       markCheckpointAnswered(checkpoint.id);
       continueBtn.textContent = "Resume video";
       onContinue = () => videoController.resume();
+      refreshVideoStatus(findLesson(course, lessonId)!);
     } else if (isRegistered()) {
       feedback.textContent = "Not quite — we'll rewind so you can find the answer, then you can try again.";
       feedback.classList.add("incorrect");
@@ -515,6 +549,7 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
       markCheckpointAnswered(checkpoint.id);
       continueBtn.textContent = "Resume video";
       onContinue = () => videoController.resume();
+      refreshVideoStatus(findLesson(course, lessonId)!);
     }
 
     submitBtn.classList.add("hidden");

@@ -318,6 +318,20 @@ h3 {
   height: 100%;
 }
 
+.video-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: -0.75rem 0 1.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.video-status .watched {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .checkpoint-overlay {
   position: fixed;
   inset: 0;
