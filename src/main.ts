@@ -23,7 +23,13 @@ import { syncParticipant, syncProgress, syncCheckpointAnswer, syncVideoWatch } f
 import { renderCertificateView } from "./certificate";
 import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
 import { logCheckpointAnswer, recordVideoWatch, markVideoWatched, isVideoWatched } from "./video-analytics";
-import { getSummaryDraft, saveSummaryDraft, requestSummaryFeedback } from "./ai-summary";
+import {
+  getSummaryDraft,
+  saveSummaryDraft,
+  getSummaryFeedback,
+  saveSummaryFeedback,
+  requestSummaryFeedback,
+} from "./ai-summary";
 
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
@@ -213,21 +219,48 @@ async function handleAiSummarySubmit() {
   feedbackEl.textContent = "";
 
   try {
-    const feedback = await requestSummaryFeedback({
+    const { feedback, passed } = await requestSummaryFeedback({
       lessonId,
       lessonTitle: lesson.title,
       prompt: lesson.aiSummaryPrompt,
       summary,
       email: participant.email,
     });
+    saveSummaryFeedback(lessonId, feedback);
+    if (passed) {
+      completeLesson(lessonId);
+      refreshAiSummarySection(lesson);
+      refreshLessonCompletionUi(lessonId);
+      return;
+    }
     feedbackEl.textContent = feedback;
-    statusEl.textContent = "";
+    statusEl.textContent = "Not quite there yet — revise your summary below and try again.";
   } catch (err) {
     statusEl.textContent = "Couldn't get feedback right now — please try again in a moment.";
     console.error("[AGRI-TOUR] AI summary feedback failed:", err);
   } finally {
     submitBtn.disabled = false;
   }
+}
+
+/** Swaps the AI summary section's own markup in place (avoids a full render(), which would interrupt a playing video). */
+function refreshAiSummarySection(lesson: Lesson) {
+  const section = app.querySelector<HTMLElement>("[data-ai-summary]");
+  if (!section) return;
+  section.outerHTML = renderAiSummarySection(lesson);
+  app.querySelector<HTMLButtonElement>("[data-ai-summary-submit]")?.addEventListener("click", () => {
+    void handleAiSummarySubmit();
+  });
+}
+
+/** Updates the sidebar checkmark and overall progress bar without a full render(). */
+function refreshLessonCompletionUi(lessonId: string) {
+  const checkEl = app.querySelector<HTMLElement>(`[data-lesson-id="${lessonId}"] .check`);
+  if (checkEl) checkEl.textContent = isLessonComplete(lessonId) ? "✓" : "○";
+  const label = app.querySelector<HTMLElement>(".progress-label");
+  if (label) label.textContent = `${completionCount()} / ${lessons.length} lessons completed`;
+  const fill = app.querySelector<HTMLElement>(".progress-bar-fill");
+  if (fill) fill.style.width = `${progressPercent()}%`;
 }
 
 function downloadWorksheet(worksheetId: string, title: string) {
@@ -265,6 +298,9 @@ function renderLesson(lesson: Lesson, module: Module): string {
   const isFirst = module.lessons[0]?.id === lesson.id;
   const isLast = module.lessons[module.lessons.length - 1]?.id === lesson.id;
   const needsGate = Boolean(lesson.quiz) && !isRegistered();
+  // For a registered participant, a lesson with an AI summary prompt (and no quiz) is
+  // completed only by the AI's verdict — no self-service "Mark as completed" button.
+  const aiControlsCompletion = Boolean(lesson.aiSummaryPrompt) && !lesson.quiz && isRegistered();
   return `
     <article>
       ${isFirst ? renderModuleIntro(module) : ""}
@@ -284,7 +320,9 @@ function renderLesson(lesson: Lesson, module: Module): string {
                 "materials stays free for everyone.",
               "Register to take the test",
             )
-          : `
+          : aiControlsCompletion
+            ? ""
+            : `
         ${lesson.quiz ? renderQuiz(lesson) : ""}
         <button data-mark-done class="mark-done">
           ${isLessonComplete(lesson.id) ? "Lesson completed ✓" : "Mark as completed"}
@@ -311,18 +349,33 @@ function renderAiSummarySection(lesson: Lesson): string {
   if (!isRegistered()) {
     return renderRegistrationGate(
       "Write a short summary",
-      "Registered participants can write a short summary of this lesson and get instant AI feedback on it.",
+      "Registered participants write a short summary of this lesson; an AI checks it and marks the lesson " +
+        "complete once it shows real understanding — you don't mark it yourself.",
       "Register to try it",
     );
   }
+
+  if (isLessonComplete(lesson.id)) {
+    const feedback = getSummaryFeedback(lesson.id);
+    return `
+      <section class="ai-summary ai-summary-done" data-ai-summary data-ai-summary-lesson-id="${escapeAttr(lesson.id)}">
+        <h3>✓ Lesson completed</h3>
+        <p class="ai-summary-prompt">The AI reviewed your summary and marked this lesson complete — nice work.</p>
+        ${feedback ? `<div class="ai-summary-feedback">${escapeHtml(feedback)}</div>` : ""}
+      </section>
+    `;
+  }
+
   const saved = getSummaryDraft(lesson.id);
   return `
     <section class="ai-summary" data-ai-summary data-ai-summary-lesson-id="${escapeAttr(lesson.id)}">
       <h3>Write a short summary</h3>
       <p class="ai-summary-prompt">${escapeHtml(lesson.aiSummaryPrompt!)}</p>
+      <p class="ai-summary-note">An AI reviews your summary and marks this lesson complete once it shows real
+      understanding — there's no "mark as completed" button here.</p>
       <textarea data-ai-summary-input rows="6" placeholder="Write your summary here…">${escapeHtml(saved)}</textarea>
       <div class="ai-summary-actions">
-        <button type="button" data-ai-summary-submit class="mark-done">Get AI feedback</button>
+        <button type="button" data-ai-summary-submit class="mark-done">Submit for AI review</button>
         <span class="ai-summary-status" data-ai-summary-status></span>
       </div>
       <div class="ai-summary-feedback" data-ai-summary-feedback></div>

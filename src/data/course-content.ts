@@ -767,6 +767,10 @@ const modules: Module[] = [
           "<h3>Reflection</h3>" +
           "<p>Write a short response (150–200 words) applying this unit to one real or hypothetical " +
           "micro-farm.</p>",
+        aiSummaryPrompt:
+          "Summarize the five-step decision cycle from this lesson (Measure, Understand, Act, Evaluate, " +
+          "Communicate), and briefly describe how you'd apply it to one real decision on a small farm — e.g. " +
+          "irrigation, fertilising, or planning a visitor route.",
       },
       {
         id: "m4-l3",
@@ -820,6 +824,9 @@ const modules: Module[] = [
           "<h3>Reflection</h3>" +
           "<p>Write a short response (150–200 words) applying this unit to one real or hypothetical " +
           "micro-farm.</p>",
+        aiSummaryPrompt:
+          "Summarize the key points about water and smart irrigation from this lesson, and briefly explain " +
+          "when you would — and wouldn't — irrigate a small farm, based on evidence rather than guesswork.",
       },
       {
         id: "m4-l4",
@@ -871,6 +878,9 @@ const modules: Module[] = [
           "<h3>Reflection</h3>" +
           "<p>Write a short response (150–200 words) applying this unit to one real or hypothetical " +
           "micro-farm.</p>",
+        aiSummaryPrompt:
+          "Summarize what drones can — and cannot — tell a farmer about their fields, and describe one way " +
+          "drone imagery could be used both for farm management and for a visitor tour.",
       },
       {
         id: "m4-l5",
@@ -923,6 +933,10 @@ const modules: Module[] = [
           "<h3>Reflection</h3>" +
           "<p>Write a short response (150–200 words) applying this unit to one real or hypothetical " +
           "micro-farm.</p>",
+        aiSummaryPrompt:
+          "Summarize the step-by-step model (problem – tool – test – benefit – story) and the main risks of " +
+          "adopting new technology on a micro-farm, then describe how you'd introduce one precision-agriculture " +
+          "tool without losing the farm's authenticity.",
       },
       {
         id: "m4-l6",

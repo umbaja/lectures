@@ -470,6 +470,20 @@ h3 {
   white-space: pre-wrap;
 }
 
+.ai-summary-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.ai-summary-done {
+  border-color: var(--accent);
+}
+
+.ai-summary-done h3 {
+  color: var(--accent);
+}
+
 .hidden {
   display: none;
 }

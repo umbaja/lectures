@@ -3,11 +3,32 @@ import cors from "cors";
 import { pool, migrate } from "./db.js";
 
 const SYSTEM_PROMPT =
-  "You are a supportive tutor for the AGRI-TOUR agritourism MOOC. A learner wrote a short summary of a " +
-  "lesson. Give brief, encouraging, specific feedback (120-180 words): confirm what they got right, gently " +
-  "correct anything inaccurate or missing relative to the lesson's topic, and suggest one way to deepen " +
-  "their understanding. Do not grade with a score or a letter grade. Write directly to the learner, in " +
-  "plain English.";
+  "You are grading a short learner summary for the AGRI-TOUR agritourism MOOC, to decide whether the lesson " +
+  "can be marked complete — the learner cannot mark it complete themselves, only you can. Call the " +
+  "evaluate_summary tool with your judgment. Set passed=true only if the summary shows genuine understanding " +
+  "of the lesson's key ideas in the learner's own words — not a near-empty response, a copy of the prompt, or " +
+  "something clearly off-topic. Be a fair but real check: vague or generic summaries should not pass. Write " +
+  "feedback directly to the learner (120-180 words, plain English): confirm what they got right, note " +
+  "anything inaccurate or missing, and if it didn't pass, say plainly what to add or fix to pass next time.";
+
+const EVALUATE_SUMMARY_TOOL = {
+  name: "evaluate_summary",
+  description: "Record the grading decision for a learner's lesson summary.",
+  input_schema: {
+    type: "object",
+    properties: {
+      passed: {
+        type: "boolean",
+        description: "True only if the summary demonstrates real understanding of the lesson's key ideas.",
+      },
+      feedback: {
+        type: "string",
+        description: "Brief, encouraging, specific feedback for the learner (120-180 words).",
+      },
+    },
+    required: ["passed", "feedback"],
+  },
+};
 
 const app = express();
 // Writes are tied to whatever email the client sends (no further auth layer),
@@ -114,6 +135,7 @@ app.post("/api/evaluate-summary", async (req, res) => {
     `Learner's summary:\n"""\n${summary}\n"""`;
 
   let feedback;
+  let passed;
   try {
     const aiRes = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -124,8 +146,10 @@ app.post("/api/evaluate-summary", async (req, res) => {
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 400,
+        max_tokens: 500,
         system: SYSTEM_PROMPT,
+        tools: [EVALUATE_SUMMARY_TOOL],
+        tool_choice: { type: "tool", name: "evaluate_summary" },
         messages: [{ role: "user", content: userPrompt }],
       }),
     });
@@ -136,8 +160,13 @@ app.post("/api/evaluate-summary", async (req, res) => {
     }
 
     const aiData = await aiRes.json();
-    feedback = aiData.content?.[0]?.text ?? "";
-    if (!feedback) return res.status(502).json({ error: "AI feedback service returned no content." });
+    const toolUse = aiData.content?.find((block) => block.type === "tool_use");
+    if (!toolUse || typeof toolUse.input?.feedback !== "string" || typeof toolUse.input?.passed !== "boolean") {
+      console.error("evaluate-summary: unexpected Anthropic response shape:", JSON.stringify(aiData));
+      return res.status(502).json({ error: "AI feedback service returned an unexpected result." });
+    }
+    feedback = toolUse.input.feedback;
+    passed = toolUse.input.passed;
   } catch (err) {
     console.error("evaluate-summary: Anthropic call threw:", err);
     return res.status(502).json({ error: "AI feedback service is unavailable right now." });
@@ -146,15 +175,15 @@ app.post("/api/evaluate-summary", async (req, res) => {
   if (email && lessonId) {
     try {
       await pool.query(
-        `insert into summary_reviews (participant_email, lesson_id, summary_text, ai_feedback) values ($1, $2, $3, $4)`,
-        [email, lessonId, summary, feedback],
+        `insert into summary_reviews (participant_email, lesson_id, summary_text, ai_feedback, passed) values ($1, $2, $3, $4, $5)`,
+        [email, lessonId, summary, feedback, passed],
       );
     } catch (err) {
       console.error("summary_reviews insert failed:", err);
     }
   }
 
-  res.json({ feedback });
+  res.json({ feedback, passed });
 });
 
 const port = process.env.PORT || 3000;

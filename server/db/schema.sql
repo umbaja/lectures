@@ -49,5 +49,10 @@ create table if not exists summary_reviews (
   lesson_id text not null,
   summary_text text not null,
   ai_feedback text not null,
+  passed boolean,
   created_at timestamptz not null default now()
 );
+
+-- Safe to re-run: adds the column if an earlier version of this file already
+-- created the table without it.
+alter table summary_reviews add column if not exists passed boolean;
