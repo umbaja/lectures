@@ -71,56 +71,468 @@ const modules: Module[] = [
       "psychology of consumer behaviour, the principles of eco-gastronomy, and how to support sustainable and " +
       "healthy consumption. The module includes behaviour-change exercises that help participants design their " +
       "own food-related experiential activity for agritourism visitors, illustrated with case studies from " +
-      "real agritourism businesses in the Pacific and in Europe.",
+      "real agritourism businesses in the Pacific and in Europe. The five text lessons below are grounded in " +
+      "two AGRI-TOUR capacity-building presentations by Dr. Igor Vitale (Igor Vitale International srl, IVI) " +
+      "— see the module references for the original presentations.",
     lessons: [
       {
         id: "m1-l1",
         title: "1.1 How the brain decides about food",
         content:
-          "<p>Content for this lesson will be provided by partner IVI.</p>" +
-          "<p><em>The video below is only a DEMO of the mechanism (video + in-video quiz checkpoints) — " +
-          "replace the <code>youtubeId</code> and the questions in <code>course-content.ts</code> with the " +
-          "real video for lesson 1.1 from the AGRI-TOUR YouTube channel.</em></p>",
-        video: {
-          youtubeId: "aqz-KE-bpKQ",
-          checkpoints: [
-            {
-              id: "m1-l1-cp1",
-              atSeconds: 10,
-              question: draftQuestion("m1-l1-cp1-q", "DEMO question #1 (replace with a real question about the video content at 0:10)"),
-            },
-            {
-              id: "m1-l1-cp2",
-              atSeconds: 25,
-              question: draftQuestion("m1-l1-cp2-q", "DEMO question #2 (replace with a real question about the video content at 0:25)"),
-            },
-          ],
-        },
+          "<p><em>The official recorded lecture video for this lesson from partner IVI is still pending. In " +
+          "the meantime this unit covers the same material as text, closing with an AI-assessed written " +
+          "summary.</em></p>" +
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>explain why the brain's \"reward circuit\" biases food choice towards taste, fat, sugar and low cost;</li>" +
+          "<li>describe the alternative direction of attention — food meaning, food culture, healthiness " +
+          "expectations and values — that educational marketing can cultivate instead;</li>" +
+          "<li>list the factors EU citizens say they actually use to decide what to eat, in order of importance;</li>" +
+          "<li>relate limited human rationality (Kahneman) to why clear, simple food communication matters.</li>" +
+          "</ul>" +
+          "<h3>The reward circuit: why \"taste, fat, sugar, cost\" wins by default</h3>" +
+          "<p>Specific brain regions process the pleasure of eating — the reward circuit. High-calorie " +
+          "combinations of fat and sugar activate it strongly, and research shows even food-related words can " +
+          "trigger it (Pinel, 2000; Papies et al., 2013). Left alone, this is where attention naturally goes: " +
+          "taste, fat, sugar, and the lowest price. It is not a very optimistic starting point for promoting " +
+          "healthy, sustainable food.</p>" +
+          "<h3>The direction we can move attention towards</h3>" +
+          "<p>A growing body of research shows the same attention can be redirected towards food meaning and " +
+          "food culture: healthiness expectations, taste expectations built through education, and the " +
+          "visitor's own values. An agritourism host who tells the story behind a product — its origin, the " +
+          "people who made it, the tradition it belongs to — is not competing with the reward circuit; they " +
+          "are giving it a second, more meaningful target.</p>" +
+          "<h3>Limited rationality in food decisions</h3>" +
+          "<p>Daniel Kahneman (Nobel Prize in Economics, 2002) showed that human decision-making is only " +
+          "boundedly rational: people have limited memory, limited attention and limited capacity to " +
+          "calculate, so they rely on mental shortcuts rather than a full analysis of every option. Applied " +
+          "to food, this means that even well-intentioned visitors will not weigh all available information " +
+          "carefully — which is exactly why the way information is presented (simple, short, well-timed) " +
+          "matters as much as the information itself.</p>" +
+          "<h3>What EU citizens actually say drives their food choices</h3>" +
+          "<p>Eurobarometer's \"Food Safety in the EU\" survey asked EU citizens what factor most influences " +
+          "their food decisions. The ranking: cost (54%), taste (51%), geographical origin (46%), food safety " +
+          "(45%), nutritional facts (41%), environmental impact (16%), ethics and beliefs (15%). Cost and " +
+          "taste dominate — consistent with the reward-circuit bias above — while environmental impact and " +
+          "ethics trail far behind, even though they are often the message agritourism hosts most want to " +
+          "communicate.</p>" +
+          "<p>The same survey also found that EU citizens' self-reported knowledge about food safety " +
+          "<em>decreased</em> between 2019 and 2022 — alongside a broader decline in basic literacy, science " +
+          "and mathematics skills among EU students. An unexperienced, uninformed customer tends to favour " +
+          "whichever producer talks loudest, which structurally disadvantages small, high-quality producers. " +
+          "This is precisely the gap educational marketing is meant to close: explaining the value behind a " +
+          "product to a public that, on average, is less equipped than before to work it out for itself.</p>" +
+          "<h3>Key takeaways</h3>" +
+          "<ul>" +
+          "<li>Without guidance, attention defaults to taste, fat, sugar and low cost.</li>" +
+          "<li>Food meaning, culture, values and education are a second, learnable direction for attention.</li>" +
+          "<li>Human decision-making is boundedly rational — simple, well-timed communication beats more information.</li>" +
+          "<li>EU citizens rank cost and taste far above environmental impact and ethics when deciding what to eat.</li>" +
+          "</ul>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can name the four cues that most strongly activate the reward circuit.</li>" +
+          "<li>I can explain Kahneman's idea of bounded rationality in my own words.</li>" +
+          "<li>I can list the top three factors EU citizens use to decide what to eat.</li>" +
+          "</ul>" +
+          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<p>In your own words (120–200 words), summarise how the brain's reward circuit and limited " +
+          "rationality together shape food choices, and name one way an agritourism host could redirect a " +
+          "visitor's attention towards food meaning and culture instead.</p>",
+        aiSummaryPrompt:
+          "Summarize, in your own words, how the brain's reward circuit (taste, fat, sugar, cost) and limited " +
+          "human rationality (Kahneman) together shape food choices, and describe one concrete way an " +
+          "agritourism host could redirect a visitor's attention towards food meaning and food culture instead.",
       },
-      { id: "m1-l2", title: "1.2 Sensory perception and experiential activities in agritourism", content: "<p>Content for this lesson will be provided by partner IVI.</p>" },
-      { id: "m1-l3", title: "1.3 Applied social psychology of consumer behaviour", content: "<p>Content for this lesson will be provided by partner IVI.</p>" },
-      { id: "m1-l4", title: "1.4 Supporting sustainable and healthy consumption", content: "<p>Content for this lesson will be provided by partner IVI.</p>" },
-      { id: "m1-l5", title: "1.5 Case studies from experiential agritourism", content: "<p>Content for this lesson will be provided by partner IVI.</p>" },
+      {
+        id: "m1-l2",
+        title: "1.2 Sensory perception and experiential activities in agritourism",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>explain what \"educational marketing\" means in an agritourism tasting context;</li>" +
+          "<li>describe how narrative and context can change the perceived taste of food and drink;</li>" +
+          "<li>design a short, simple narrative to use immediately before a tasting activity.</li>" +
+          "</ul>" +
+          "<h3>Educational marketing as a sensory tool</h3>" +
+          "<p>Educational marketing means teaching customers the value of an offer before or during the " +
+          "experience itself, instead of relying on the product to \"speak for itself\". In agritourism, the " +
+          "most natural place to apply this is around a tasting: a short, well-placed narrative shapes what a " +
+          "guest actually perceives.</p>" +
+          "<h3>Perception is not fixed — two classic demonstrations</h3>" +
+          "<p>A wine-tasting experiment coloured a white wine with a flavourless red colorant. Expert tasters, " +
+          "relying on sight, began describing the wine using typical red-wine vocabulary — red fruit, mature, " +
+          "cherry, tobacco, leather — even though the underlying wine had not changed. In a separate " +
+          "experiment, the same wine served in a heavier glass was rated as higher quality than when served in " +
+          "an equivalent lighter glass. Expectation, set before the first sip, measurably changes the " +
+          "experience.</p>" +
+          "<h3>Teaching through contrast: the \"five ages\" idea</h3>" +
+          "<p>One technique is to serve the same product at different stages or textures side by side — for " +
+          "example, Parmigiano Reggiano aged to five different lengths, tasted at different temperatures. " +
+          "Contrast makes an otherwise abstract idea (\"ageing changes flavour\") concrete and memorable " +
+          "without needing a single word of explanation.</p>" +
+          "<h3>Practical suggestions for an educational tasting</h3>" +
+          "<ul>" +
+          "<li>Bring the narrative <strong>right before</strong> the tasting — expectation has to be set in advance, not after.</li>" +
+          "<li>Keep it to simple words; a short story beats a technical lecture.</li>" +
+          "<li>Mind the environment: loud or fast background music measurably reduces guests' ability to " +
+          "discriminate good from bad flavours, so keep the room calm during the tasting itself.</li>" +
+          "<li>Use simple pairings with variation to teach a point — for example, the same fish paired with " +
+          "four or five different wild herbs can teach how different taste notes interact, without any formal " +
+          "lecture.</li>" +
+          "</ul>" +
+          "<h3>Applied learning activity</h3>" +
+          "<p>Pick one product from your own region. Write a narrative of no more than four sentences that you " +
+          "would say to a guest in the thirty seconds before they taste it, and describe one simple " +
+          "pairing or contrast (different ages, temperatures, or accompaniments) you could serve alongside it.</p>" +
+          "<h3>Key takeaways</h3>" +
+          "<ul>" +
+          "<li>Narrative set before tasting changes what guests perceive, not just what they say about it.</li>" +
+          "<li>Visual and tactile cues (colour, glass weight) bias taste perception on their own.</li>" +
+          "<li>Contrast (different ages, temperatures, pairings) teaches without lecturing.</li>" +
+          "<li>Background conditions like music volume affect guests' ability to taste accurately.</li>" +
+          "</ul>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can explain why timing (narrative before, not after, the tasting) matters.</li>" +
+          "<li>I can describe at least one experiment showing perception is not fixed.</li>" +
+          "<li>I can design a short tasting narrative of my own.</li>" +
+          "</ul>" +
+          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<p>Describe your own short tasting narrative and the contrast or pairing you designed, and explain " +
+          "why you expect it to work on a real visitor.</p>",
+        aiSummaryPrompt:
+          "Describe a short tasting narrative (max 4 sentences) you would say to a guest right before a " +
+          "tasting, plus one simple contrast or pairing idea (different ages, temperatures or accompaniments) " +
+          "you would serve alongside it, and explain briefly why you expect it to shape the guest's perception.",
+      },
+      {
+        id: "m1-l3",
+        title: "1.3 Applied social psychology of consumer behaviour",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>explain the Roseto, Pennsylvania case and what it shows about food and social cohesion;</li>" +
+          "<li>use the usefulness × novelty idea to identify what is worth telling a visitor;</li>" +
+          "<li>list the main motivations behind food choice beyond taste and price.</li>" +
+          "</ul>" +
+          "<h3>The Roseto, Pennsylvania case</h3>" +
+          "<p>From the late 19th century, many Italians from Roseto Valfortore (Province of Foggia) emigrated " +
+          "to a town they named Roseto, Pennsylvania. Physician Stewart Wolf studied the town and found " +
+          "cardiovascular disease incidence roughly 50% lower than neighbouring towns in people over 65, and " +
+          "close to zero in people under 64 — a gap medicine at the time could not explain through diet, " +
+          "profession or alcohol consumption alone. The one consistent difference Wolf identified was social " +
+          "and family cohesion around the table. The case is a reminder that food behaviour is not only " +
+          "nutrition and economics: it is embedded in social relationships, and an agritourism offer built " +
+          "around shared, sociable meals is drawing on a real, studied effect, not just a marketing idea.</p>" +
+          "<h3>Finding what is worth telling a visitor: usefulness × novelty</h3>" +
+          "<p>Not every fact about a product is worth communicating. A simple way to filter is to ask two " +
+          "questions at once: is this useful to the visitor, and is it something they do not already know? " +
+          "The most valuable material for educational marketing sits at the intersection — useful information " +
+          "the visitor does not yet have. Before writing any narrative, it is worth explicitly asking: what " +
+          "makes this product unique, why this product and not another, and what is the guest's real " +
+          "underlying motivation?</p>" +
+          "<h3>What actually motivates food choice</h3>" +
+          "<p>Beyond taste and cost, the recurring motivations behind food decisions include: wanting " +
+          "something healthier, wanting better flavour, wanting something unique or exclusive, wanting lower " +
+          "food risk, and wanting something more sustainable and ethical. These map directly onto the EU " +
+          "decision-factor ranking from lesson 1.1 (cost and taste dominate, ethics and environmental impact " +
+          "trail) — which tells a host where visitors start from, and which motivations still need to be " +
+          "actively cultivated rather than assumed.</p>" +
+          "<h3>Applied learning activity</h3>" +
+          "<p>For one of your own products or activities, write down one fact that is useful but probably " +
+          "unknown to a typical visitor, and identify which of the five motivations above (healthier, better " +
+          "flavour, unique/exclusive, less food risk, more sustainable/ethical) your narrative around it " +
+          "should appeal to.</p>" +
+          "<h3>Key takeaways</h3>" +
+          "<ul>" +
+          "<li>The Roseto case shows social cohesion around food can have measurable health effects.</li>" +
+          "<li>The best material for a narrative is useful AND not already known to the visitor.</li>" +
+          "<li>Five recurring motivations drive food choice beyond taste and price.</li>" +
+          "</ul>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can summarise the Roseto, Pennsylvania case and its key finding.</li>" +
+          "<li>I can apply the usefulness × novelty filter to a product of my own.</li>" +
+          "<li>I can name the five motivations behind food choice described in this lesson.</li>" +
+          "</ul>" +
+          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<p>Summarise the Roseto, Pennsylvania case and explain, using the usefulness × novelty idea, one " +
+          "fact about a real or hypothetical agritourism product that would be worth telling visitors.</p>",
+        aiSummaryPrompt:
+          "Summarize the Roseto, Pennsylvania case (the social-cohesion finding) in your own words, and " +
+          "explain — using the usefulness × novelty idea from this lesson — one fact about a real or " +
+          "hypothetical agritourism product that would be genuinely worth telling visitors, and which of the " +
+          "five motivations (healthier, better flavour, unique/exclusive, less food risk, more " +
+          "sustainable/ethical) it appeals to.",
+      },
+      {
+        id: "m1-l4",
+        title: "1.4 Supporting sustainable and healthy consumption",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>describe evidence that food labels can measurably change healthy choices;</li>" +
+          "<li>explain how organic and fair-trade labelling can change the subjective experience of food, not just its sales;</li>" +
+          "<li>list practical, low-friction ways an agritourism host can nudge visitors towards healthier, more sustainable choices.</li>" +
+          "</ul>" +
+          "<h3>Labels can change behaviour, not just inform it</h3>" +
+          "<p>Comparing traffic-light nutrition labels with classic nutrition labels, research found the " +
+          "traffic-light format had a greater impact on healthiness-related decisions (Jones and Richardson, " +
+          "2007), a result confirmed in later work showing traffic-light labels and logos are consistently " +
+          "effective at encouraging healthier choices (Van Herpen and Van Trijp, 2011). A label is not neutral " +
+          "information — its format itself can shift what people choose.</p>" +
+          "<h3>What labels do inside the brain</h3>" +
+          "<p>Neuroscience research has gone further than behaviour. Organic food labels were shown to " +
+          "increase activity in the ventral striatum, including the nucleus accumbens and dorsolateral " +
+          "prefrontal cortex, specifically in people who already buy organic daily (Linder et al., 2010, " +
+          "NeuroImage) — i.e. the label itself engages reward-related brain regions. Separately, fair-trade " +
+          "labels were shown to affect the ventral striatum and ventromedial prefrontal cortex (regions tied " +
+          "to emotion regulation and decision-making), and to improve people's subjective sense of taste and " +
+          "their willingness to pay (Plassmann et al., 2015) — a genuine \"marketing placebo effect\", where " +
+          "the label changes the experience of the product itself, not only the decision to buy it.</p>" +
+          "<h3>Practical, low-friction nudges for agritourism hosts</h3>" +
+          "<ul>" +
+          "<li>Make ethical or sustainable combinations the easy default choice, not an optional extra.</li>" +
+          "<li>Offer high-quality non-alcoholic beverages as a genuine, well-presented option, not an afterthought.</li>" +
+          "<li>Open a visit or a meal with a small, carefully chosen \"welcome\" item — it sets an orientation " +
+          "(healthy, sustainable, local) for everything that follows, the same way a label primes expectation.</li>" +
+          "</ul>" +
+          "<h3>The wider policy context</h3>" +
+          "<p>This matters beyond any single farm visit: the EU has active strategies against childhood " +
+          "obesity, yet the latest Eurostat data (2023) still shows obesity trending upward (+1.4%), and the " +
+          "EU's Green Deal sustainability agenda has met open protest from farmers. Agritourism sits in the " +
+          "middle of this tension — it cannot resolve EU-level policy debates, but every small, well-designed " +
+          "nudge a host makes is a real, if small, contribution in the same direction these strategies are " +
+          "aiming for.</p>" +
+          "<h3>Key takeaways</h3>" +
+          "<ul>" +
+          "<li>Label format alone (e.g. traffic lights) measurably changes healthy-choice behaviour.</li>" +
+          "<li>Organic and fair-trade labels activate reward- and emotion-related brain regions, changing the subjective experience of the product.</li>" +
+          "<li>Small defaults (what's offered first, what's the easy choice) shape visitor behaviour more than explanations do.</li>" +
+          "</ul>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can cite one study showing labels change healthy-choice behaviour.</li>" +
+          "<li>I can explain the \"marketing placebo effect\" of fair-trade labelling.</li>" +
+          "<li>I can list at least two low-friction nudges I could use on a real visit.</li>" +
+          "</ul>" +
+          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<p>Explain, in your own words, how label-based nudges (traffic-light, organic, fair-trade) change " +
+          "behaviour and brain response, and describe one low-friction nudge you would introduce in a real or " +
+          "hypothetical agritourism setting.</p>",
+        aiSummaryPrompt:
+          "Explain, in your own words, how label-based nudges (traffic-light nutrition labels, organic labels, " +
+          "fair-trade labels) change consumer behaviour and even brain response — not just purchase decisions " +
+          "— and describe one low-friction nudge you would introduce in a real or hypothetical agritourism " +
+          "setting to support healthier or more sustainable consumption.",
+      },
+      {
+        id: "m1-l5",
+        title: "1.5 Case studies from experiential agritourism",
+        content:
+          "<p>Three short case studies drawn from this module, showing the same psychological principles " +
+          "applied in practice.</p>" +
+          "<h3>Case study: the Apulian sashimi pairing</h3>" +
+          "<p>A simple pairing — the same raw fish served with four or five different wild herbs — lets a " +
+          "guest taste, in a single sitting, how different herb notes change the perceived flavour of an " +
+          "identical base ingredient. No lecture is needed: the contrast itself teaches the point, and the " +
+          "\"wild herb\" framing also opens a second narrative about foraging and local biodiversity.</p>" +
+          "<h3>Case study: the five ages of Parmigiano Reggiano</h3>" +
+          "<p>Serving the same cheese aged to five different lengths, at different textures and temperatures, " +
+          "turns an abstract claim (\"ageing changes a cheese\") into something a guest experiences directly. " +
+          "The same format — same product, staged variation — can be reused for wine vintages, cured meats, " +
+          "or any product with a meaningful ageing or production-stage story.</p>" +
+          "<h3>Case study: Roseto, Pennsylvania as a hospitality model</h3>" +
+          "<p>The Roseto case (lesson 1.3) is usually read as an epidemiology story, but it is also a direct " +
+          "model for agritourism hosting: the health effect came from <em>how</em> people ate together, not " +
+          "<em>what</em> they ate. A host who designs a shared, unhurried, sociable meal — rather than a fast, " +
+          "individually-plated one — is not just creating a nicer visit; they are recreating the one variable " +
+          "the Roseto study actually identified.</p>" +
+          "<h3>What the three cases have in common</h3>" +
+          "<p>None of them relies on telling the guest more facts. Each works by changing the <em>experience</em> " +
+          "itself — through contrast, pairing, or social format — and lets the guest draw their own " +
+          "conclusion. This is the practical core of educational marketing as presented across this module.</p>",
+      },
       {
         id: "m1-l6",
         title: "1.6 Module summary and proficiency test",
-        content: "<p>The module summary will be prepared by partner IVI.</p>",
+        content:
+          "<p>Module 1 summary: the brain's reward circuit biases attention towards taste, fat, sugar and low " +
+          "cost, while educational marketing offers a learnable alternative direction — food meaning, food " +
+          "culture and values. Perception of taste is not fixed: narrative, colour, glass weight and ambient " +
+          "conditions all measurably change it. Food choice is also social (the Roseto, Pennsylvania case), " +
+          "and labels (traffic-light, organic, fair-trade) can change both behaviour and brain response, not " +
+          "just purchase decisions. EU citizens themselves report cost and taste as by far their strongest " +
+          "decision factors, well ahead of environmental impact and ethics — the gap educational marketing in " +
+          "agritourism is meant to help close.</p>",
         quiz: {
           questions: [
-            draftQuestion("m1-q1", "Which factor most strongly influences sensory perception of food in an agritourism experience?"),
-            draftQuestion("m1-q2", "What is the goal of applied social psychology in the context of food consumption?"),
-            draftQuestion("m1-q3", "Which approach supports sustainable consumer behaviour?"),
+            {
+              id: "m1-q1",
+              question: "What is the main goal of \"educational marketing\", as presented in this module?",
+              options: [
+                "To educate customers about the value and technical background behind an offer",
+                "To lower the price of the product as much as possible",
+                "To replace factual information with advertising slogans",
+                "To avoid giving customers any information about food safety",
+              ],
+              correctIndex: 0,
+            },
+            {
+              id: "m1-q2",
+              question: "According to the Eurobarometer data cited in this module, how did EU citizens' self-reported knowledge about food safety change between 2019 and 2022?",
+              options: ["It increased sharply", "It decreased", "It stayed exactly the same", "It was not measured"],
+              correctIndex: 1,
+            },
+            {
+              id: "m1-q3",
+              question: "Using the usefulness × novelty idea from lesson 1.3, what should a host prioritise telling a visitor?",
+              options: [
+                "Facts the visitor already knows well",
+                "The cheapest ingredients available",
+                "Information that is both useful and not already known to the visitor",
+                "The host's personal opinions about competitors",
+              ],
+              correctIndex: 2,
+            },
+            {
+              id: "m1-q4",
+              question: "Which combination of cues most strongly activates the brain's reward circuit around food?",
+              options: ["Fibre and water", "Fat, sugar and low cost", "Only alcoholic beverages", "Only artificially coloured food"],
+              correctIndex: 1,
+            },
+            {
+              id: "m1-q5",
+              question: "In the wine-colouring experiment described in lesson 1.2, what happened when a white wine was tinted with flavourless red colorant?",
+              options: [
+                "Experts immediately detected the trick and ignored the colour",
+                "Experts described it using typical red-wine language (red fruit, tobacco, leather)",
+                "The experiment found no effect on tasting notes",
+                "The wine was rated as objectively sweeter",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m1-q6",
+              question: "In the Roseto, Pennsylvania case (lesson 1.3), what single variable did Dr. Stewart Wolf identify as explaining the unusually low cardiovascular disease rate?",
+              options: ["A stricter diet than neighbouring towns", "Higher average income", "Social and family cohesion at the table", "Lower alcohol consumption"],
+              correctIndex: 2,
+            },
+            {
+              id: "m1-q7",
+              question: "According to the Eurobarometer data cited in this module, which two factors do EU citizens rank highest when deciding what to eat?",
+              options: [
+                "Cost and taste",
+                "Environmental impact and ethics",
+                "Nutritional facts and geographical origin",
+                "Food safety and ethics",
+              ],
+              correctIndex: 0,
+            },
+            {
+              id: "m1-q8",
+              question: "What did the study comparing traffic-light and classic nutrition labels (Jones and Richardson, 2007) find?",
+              options: [
+                "Traffic-light labels had no measurable effect",
+                "Traffic-light labels impacted healthiness decisions more than classic labels",
+                "Traffic-light labels confused consumers more than classic labels",
+                "Traffic-light labels were found to be illegal in the EU",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m1-q9",
+              question: "According to the neuroscience research cited in lesson 1.4 (Linder et al., 2010), which brain regions showed increased activity in daily organic-food consumers viewing organic labels?",
+              options: ["Only the visual cortex", "Ventral striatum, including the nucleus accumbens", "Only the cerebellum", "The regions were not specified"],
+              correctIndex: 1,
+            },
+            {
+              id: "m1-q10",
+              question: "Which practical suggestion does this module give for designing an educational tasting experience?",
+              options: [
+                "Use long, technical explanations so guests fully understand the science",
+                "Play loud, fast music to energise the room during the tasting",
+                "Bring a short narrative about origin and values right before the tasting, using simple words",
+                "Avoid any storytelling and let the food speak entirely for itself",
+              ],
+              correctIndex: 2,
+            },
           ],
         },
       },
     ],
     supplementaryMaterials: [
-      draftMaterial("m1-mat1", "case-study", "Case study: an experiential tasting on an agritourism farm", "TBD from IVI"),
-      draftMaterial("m1-mat2", "worksheet", "Worksheet: design a consumer behaviour-change exercise", "TBD from IVI"),
-      draftMaterial("m1-mat3", "infographic", "Infographic: how the brain decides about food (a 5-step process)", "TBD from IVI"),
-      draftMaterial("m1-mat4", "recommended-links", "Recommended resources on the applied psychology of food", "TBD from IVI"),
+      {
+        id: "m1-mat1",
+        type: "case-study",
+        title: "Source presentation: \"The culture of haute cuisine\" (Dr. Igor Vitale, Samoa, Oct 2025)",
+        note: "AGRI-TOUR capacity-building presentation — Igor Vitale International srl (IVI). Lessons 1.1 and 1.2 are informed by this presentation.",
+        body:
+          "<p>A capacity-building presentation on educational marketing in agritourism: how the brain's reward " +
+          "circuit biases attention towards taste, fat, sugar and cost; how narrative, colour and context " +
+          "measurably change perceived taste (the wine-colouring and glass-weight experiments); and practical " +
+          "suggestions for designing an educational tasting (simple narrative before the tasting, contrast " +
+          "and pairing, mindful use of background music). Presented by Dr. Igor Vitale with Dr. Mariella " +
+          "Segreti and Dr. Agnese Federica Gobbi.</p>",
+      },
+      {
+        id: "m1-mat2",
+        type: "case-study",
+        title: "Source presentation: \"Eco-gastronomy in action\" (Dr. Igor Vitale, Fiji, Sept 2025)",
+        note: "AGRI-TOUR capacity-building presentation — Igor Vitale International srl (IVI). Lessons 1.1, 1.3 and 1.4 are informed by this presentation.",
+        body:
+          "<p>A capacity-building presentation combining the Roseto, Pennsylvania case study with Eurobarometer " +
+          "data on EU food-decision factors, Kahneman's work on bounded rationality, and neuroscience research " +
+          "on how traffic-light, organic and fair-trade labels change both behaviour and brain response. " +
+          "Presented by Dr. Igor Vitale with Dr. Mariella Segreti and Dr. Agnese Federica Gobbi.</p>",
+      },
+      {
+        id: "m1-mat3",
+        type: "fact-sheet",
+        title: "Fact sheet: what EU citizens say drives their food choices",
+        note: "Eurobarometer, \"Food Safety in the EU\" — cited in lessons 1.1 and 1.6",
+        body:
+          "<p>Share of EU citizens naming each factor as a top influence on their food decisions:</p>" +
+          "<ul>" +
+          "<li>Cost — 54%</li>" +
+          "<li>Taste — 51%</li>" +
+          "<li>Geographical origin — 46%</li>" +
+          "<li>Food safety — 45%</li>" +
+          "<li>Nutritional facts — 41%</li>" +
+          "<li>Environmental impact — 16%</li>" +
+          "<li>Ethics and beliefs — 15%</li>" +
+          "</ul>" +
+          "<p>Cost and taste dominate; environmental impact and ethics trail far behind — a useful baseline " +
+          "when deciding which narrative angle an agritourism offer actually needs to work hardest on.</p>",
+      },
+      {
+        id: "m1-mat4",
+        type: "worksheet",
+        title: "Worksheet: design an educational tasting narrative",
+        note: "Applies the practical suggestions from lessons 1.2–1.4",
+        worksheetFields: [
+          "Product or activity you are designing the narrative for",
+          "One fact that is useful but probably unknown to a typical visitor (usefulness × novelty)",
+          "Your short tasting narrative (max 4 sentences) to say right before the tasting",
+          "Contrast or pairing you will use (different ages, temperatures, or accompaniments)",
+          "Which motivation this appeals to (healthier / better flavour / unique-exclusive / less food risk / more sustainable-ethical)",
+          "Reflection — what would make a visitor remember this narrative a week later?",
+        ],
+      },
     ],
-    references: ["TBD — reference list to be provided by partner IVI"],
+    references: [
+      "Dr. Igor Vitale, Dr. Mariella Segreti, Dr. Agnese Federica Gobbi — \"The culture of haute cuisine\", AGRI-TOUR Capacity Building presentation, Samoa, October 2025 (Igor Vitale International srl)",
+      "Dr. Igor Vitale, Dr. Mariella Segreti, Dr. Agnese Federica Gobbi — \"Eco-gastronomy in action\", AGRI-TOUR Capacity Building presentation, Fiji, September 2025 (Igor Vitale International srl)",
+      "Eurobarometer — \"Food Safety in the EU\" (2019, 2022)",
+      "Kahneman, D. (2002 Nobel Prize in Economic Sciences) — on bounded rationality in human decision-making",
+      "Wolf, S. & Bruhn, J.G. — the Roseto, Pennsylvania studies on social cohesion and cardiovascular health",
+      "Pinel, J.P.J. (2000); Papies, E.K. et al. (2013) — on reward-circuit activation by food and food-related cues",
+      "Jones, A. & Richardson, R. (2007); Van Herpen, E. & Van Trijp, H.C.M. (2011) — on traffic-light nutrition labelling and healthy choice",
+      "Linder, N.S., Uhl, G., Fliessbach, K., Trautner, P., Elger, C.E. & Weber, B. (2010). \"Organic labeling influences food valuation and choice.\" NeuroImage 53(1): 215–220",
+      "Plassmann, H. et al. (2015). \"Individual Differences in Marketing Placebo Effects: Evidence from Brain Imaging and Behavioral Experiments\"",
+      "Eurostat (2023) — obesity trend data",
+    ],
   },
   {
     id: "m2",
