@@ -349,7 +349,7 @@ function renderAiSummarySection(lesson: Lesson): string {
   if (!isRegistered()) {
     return renderRegistrationGate(
       "Write a short summary",
-      "Registered participants write a short summary of this lesson; an AI checks it and marks the lesson " +
+      "Registered participants write a short summary of this lesson; it is checked and the lesson is marked " +
         "complete once it shows real understanding — you don't mark it yourself.",
       "Register to try it",
     );
@@ -360,7 +360,7 @@ function renderAiSummarySection(lesson: Lesson): string {
     return `
       <section class="ai-summary ai-summary-done" data-ai-summary data-ai-summary-lesson-id="${escapeAttr(lesson.id)}">
         <h3>✓ Lesson completed</h3>
-        <p class="ai-summary-prompt">The AI reviewed your summary and marked this lesson complete — nice work.</p>
+        <p class="ai-summary-prompt">Your summary was reviewed and this lesson was marked complete — nice work.</p>
         ${feedback ? `<div class="ai-summary-feedback">${escapeHtml(feedback)}</div>` : ""}
       </section>
     `;
@@ -371,11 +371,11 @@ function renderAiSummarySection(lesson: Lesson): string {
     <section class="ai-summary" data-ai-summary data-ai-summary-lesson-id="${escapeAttr(lesson.id)}">
       <h3>Write a short summary</h3>
       <p class="ai-summary-prompt">${escapeHtml(lesson.aiSummaryPrompt!)}</p>
-      <p class="ai-summary-note">An AI reviews your summary and marks this lesson complete once it shows real
+      <p class="ai-summary-note">Your summary is reviewed and this lesson is marked complete once it shows real
       understanding — there's no "mark as completed" button here.</p>
       <textarea data-ai-summary-input rows="6" placeholder="Write your summary here…">${escapeHtml(saved)}</textarea>
       <div class="ai-summary-actions">
-        <button type="button" data-ai-summary-submit class="mark-done">Submit for AI review</button>
+        <button type="button" data-ai-summary-submit class="mark-done">Submit for review</button>
         <span class="ai-summary-status" data-ai-summary-status></span>
       </div>
       <div class="ai-summary-feedback" data-ai-summary-feedback></div>

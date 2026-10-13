@@ -80,8 +80,8 @@ const modules: Module[] = [
         title: "1.1 How the brain decides about food",
         content:
           "<p><em>The official recorded lecture video for this lesson from partner IVI is still pending. In " +
-          "the meantime this unit covers the same material as text, closing with an AI-assessed written " +
-          "summary.</em></p>" +
+          "the meantime this unit covers the same material as text, closing with a written summary that is " +
+          "reviewed.</em></p>" +
           "<h3>Learning objectives</h3>" +
           "<ul>" +
           "<li>explain why the brain's \"reward circuit\" biases food choice towards taste, fat, sugar and low cost;</li>" +
@@ -135,7 +135,7 @@ const modules: Module[] = [
           "<li>I can explain Kahneman's idea of bounded rationality in my own words.</li>" +
           "<li>I can list the top three factors EU citizens use to decide what to eat.</li>" +
           "</ul>" +
-          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<h3>Reflection</h3>" +
           "<p>In your own words (120–200 words), summarise how the brain's reward circuit and limited " +
           "rationality together shape food choices, and name one way an agritourism host could redirect a " +
           "visitor's attention towards food meaning and culture instead.</p>",
@@ -198,7 +198,7 @@ const modules: Module[] = [
           "<li>I can describe at least one experiment showing perception is not fixed.</li>" +
           "<li>I can design a short tasting narrative of my own.</li>" +
           "</ul>" +
-          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<h3>Reflection</h3>" +
           "<p>Describe your own short tasting narrative and the contrast or pairing you designed, and explain " +
           "why you expect it to work on a real visitor.</p>",
         aiSummaryPrompt:
@@ -256,7 +256,7 @@ const modules: Module[] = [
           "<li>I can apply the usefulness × novelty filter to a product of my own.</li>" +
           "<li>I can name the five motivations behind food choice described in this lesson.</li>" +
           "</ul>" +
-          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<h3>Reflection</h3>" +
           "<p>Summarise the Roseto, Pennsylvania case and explain, using the usefulness × novelty idea, one " +
           "fact about a real or hypothetical agritourism product that would be worth telling visitors.</p>",
         aiSummaryPrompt:
@@ -317,7 +317,7 @@ const modules: Module[] = [
           "<li>I can explain the \"marketing placebo effect\" of fair-trade labelling.</li>" +
           "<li>I can list at least two low-friction nudges I could use on a real visit.</li>" +
           "</ul>" +
-          "<h3>Reflection / AI-assessed summary</h3>" +
+          "<h3>Reflection</h3>" +
           "<p>Explain, in your own words, how label-based nudges (traffic-light, organic, fair-trade) change " +
           "behaviour and brain response, and describe one low-friction nudge you would introduce in a real or " +
           "hypothetical agritourism setting.</p>",
