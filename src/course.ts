@@ -38,10 +38,17 @@ export interface Lesson {
   quiz?: Quiz;
   /**
    * If set, shows a "write a short summary" box (registered participants only)
-   * that gets AI feedback via a Supabase Edge Function. This is the task/prompt
-   * shown to the learner and sent to the AI as the lesson's topic context.
+   * that gets feedback via a server-side evaluator. This is the task/prompt
+   * shown to the learner and sent along as the lesson's topic context.
    */
   aiSummaryPrompt?: string;
+  /**
+   * Short ungated "quick check" questions shown inline while reading — open to
+   * everyone, not part of the graded module test. Each question's `id` must
+   * also appear as a placeholder in `content`:
+   * `<div class="micro-quiz-slot" data-micro-quiz-id="THE_ID"></div>`
+   */
+  microQuizzes?: QuizQuestion[];
 }
 
 /**
@@ -72,6 +79,8 @@ export interface SupplementaryMaterial {
   worksheetFields?: string[];
   /** For a "checklist" material: one trackable step per item. */
   checklistItems?: string[];
+  /** For a glossary/fact-sheet: term–definition pairs playable as a matching game. */
+  glossaryGame?: Array<{ term: string; definition: string }>;
 }
 
 export interface Module {

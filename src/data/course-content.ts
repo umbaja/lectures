@@ -60,6 +60,27 @@ function worksheetMaterial(id: string, title: string, fields: string[]): Supplem
   };
 }
 
+/** D3.2 Module 4 Scripts & Annexes, Section 2 — reused for both the glossary list and the matching game. */
+const MODULE4_GLOSSARY: Array<{ term: string; definition: string }> = [
+  { term: "Precision agriculture", definition: "Use of observation, data and technology to support better farm decisions. In the module, the focus is on practical, affordable and locally relevant use on micro-farms." },
+  { term: "Micro-farm", definition: "A small farm with limited land, labour and financial resources, often closely connected with local customers, visitors and community life." },
+  { term: "Farm monitoring", definition: "The regular observation or measurement of conditions on a farm, such as soil moisture, weather, crop condition or production activities." },
+  { term: "Farm data", definition: "Information collected from observations, sensors, weather stations, digital records, maps or other farm-management tools and used to support decisions." },
+  { term: "Data-driven decision-making", definition: "Making a farm-management decision on the basis of relevant observations and data instead of relying only on routine or assumptions." },
+  { term: "Decision cycle", definition: "A five-step process used in the module: Measure, Understand, Act, Evaluate and Communicate." },
+  { term: "Soil moisture sensor", definition: "A tool that helps farmers understand whether water is available in the soil and whether irrigation may be needed." },
+  { term: "Weather station", definition: "A device or set of sensors that records local weather conditions such as temperature, rainfall, wind, humidity or solar radiation." },
+  { term: "Soil and water management", definition: "Farm practices aimed at monitoring and managing soil and water resources efficiently, including decisions about when and how much to irrigate." },
+  { term: "Smart irrigation", definition: "Irrigation supported by observation, sensors, rainfall information, schedules or timers so that water is used only when and where it is needed." },
+  { term: "Digital farm diary", definition: "A simple digital record of planting, irrigation, fertilisation, pests, harvest, quality, weather and visitor feedback." },
+  { term: "Drone imagery", definition: "Images or video taken from above to observe the farm, identify visible patterns and support communication or promotion." },
+  { term: "QR code", definition: "A scannable code that connects a physical product or farm location with digital information, for example product origin, production methods or the farm story." },
+  { term: "Smart agritourism", definition: "Agritourism that uses real farming practices and simple technologies as learning points for visitors." },
+  { term: "Authenticity", definition: "The quality of keeping the farmer, land, product, culture and human story at the centre, while using technology only as support." },
+  { term: "Climate resilience", definition: "The capacity of a farm to respond and adapt to conditions such as drought, heat, irregular rainfall and changing pest pressures." },
+  { term: "Sustainability", definition: "In this module, the responsible management of resources and farming practices that can reduce water use, protect soil, improve input efficiency, reduce losses and strengthen resilience." },
+];
+
 const modules: Module[] = [
   {
     id: "m1",
@@ -96,6 +117,7 @@ const modules: Module[] = [
           "trigger it (Pinel, 2000; Papies et al., 2013). Left alone, this is where attention naturally goes: " +
           "taste, fat, sugar, and the lowest price. It is not a very optimistic starting point for promoting " +
           "healthy, sustainable food.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m1-l1-mq1\"></div>" +
           "<h3>The direction we can move attention towards</h3>" +
           "<p>A growing body of research shows the same attention can be redirected towards food meaning and " +
           "food culture: healthiness expectations, taste expectations built through education, and the " +
@@ -109,6 +131,7 @@ const modules: Module[] = [
           "to food, this means that even well-intentioned visitors will not weigh all available information " +
           "carefully — which is exactly why the way information is presented (simple, short, well-timed) " +
           "matters as much as the information itself.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m1-l1-mq2\"></div>" +
           "<h3>What EU citizens actually say drives their food choices</h3>" +
           "<p>Eurobarometer's \"Food Safety in the EU\" survey asked EU citizens what factor most influences " +
           "their food decisions. The ranking: cost (54%), taste (51%), geographical origin (46%), food safety " +
@@ -143,6 +166,25 @@ const modules: Module[] = [
           "Summarize, in your own words, how the brain's reward circuit (taste, fat, sugar, cost) and limited " +
           "human rationality (Kahneman) together shape food choices, and describe one concrete way an " +
           "agritourism host could redirect a visitor's attention towards food meaning and food culture instead.",
+        microQuizzes: [
+          {
+            id: "m1-l1-mq1",
+            question: "According to research cited in this lesson (Papies et al., 2013), what can activate the brain's reward circuit even without any food actually being present?",
+            options: ["Food-related words alone", "Only direct skin contact with food", "Only looking at an empty plate", "Nothing except eating itself"],
+            correctIndex: 0,
+          },
+          {
+            id: "m1-l1-mq2",
+            question: "According to Kahneman's idea of bounded rationality described in this lesson, why do people rely on mental shortcuts when deciding what to eat?",
+            options: [
+              "Because memory, attention and calculation capacity are all limited",
+              "Because they are lazy and do not care about food",
+              "Because EU regulations require simplified decisions",
+              "Because shortcuts are always more accurate than careful analysis",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m1-l2",
@@ -171,6 +213,7 @@ const modules: Module[] = [
           "example, Parmigiano Reggiano aged to five different lengths, tasted at different temperatures. " +
           "Contrast makes an otherwise abstract idea (\"ageing changes flavour\") concrete and memorable " +
           "without needing a single word of explanation.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m1-l2-mq1\"></div>" +
           "<h3>Practical suggestions for an educational tasting</h3>" +
           "<ul>" +
           "<li>Bring the narrative <strong>right before</strong> the tasting — expectation has to be set in advance, not after.</li>" +
@@ -205,6 +248,19 @@ const modules: Module[] = [
           "Describe a short tasting narrative (max 4 sentences) you would say to a guest right before a " +
           "tasting, plus one simple contrast or pairing idea (different ages, temperatures or accompaniments) " +
           "you would serve alongside it, and explain briefly why you expect it to shape the guest's perception.",
+        microQuizzes: [
+          {
+            id: "m1-l2-mq1",
+            question: "What is the point of the \"five ages of Parmigiano Reggiano\" idea described in this lesson?",
+            options: [
+              "Serving the same product at different stages or temperatures teaches a point through contrast, without lecturing",
+              "It is a technique for making cheese taste sweeter",
+              "It replaces the need for any narrative at all",
+              "It only works for wine, not for cheese",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m1-l3",
@@ -239,6 +295,7 @@ const modules: Module[] = [
           "decision-factor ranking from lesson 1.1 (cost and taste dominate, ethics and environmental impact " +
           "trail) — which tells a host where visitors start from, and which motivations still need to be " +
           "actively cultivated rather than assumed.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m1-l3-mq1\"></div>" +
           "<h3>Applied learning activity</h3>" +
           "<p>For one of your own products or activities, write down one fact that is useful but probably " +
           "unknown to a typical visitor, and identify which of the five motivations above (healthier, better " +
@@ -265,6 +322,19 @@ const modules: Module[] = [
           "hypothetical agritourism product that would be genuinely worth telling visitors, and which of the " +
           "five motivations (healthier, better flavour, unique/exclusive, less food risk, more " +
           "sustainable/ethical) it appeals to.",
+        microQuizzes: [
+          {
+            id: "m1-l3-mq1",
+            question: "Which of these is one of the five recurring motivations behind food choice described in this lesson?",
+            options: [
+              "Wanting something more sustainable and ethical",
+              "Wanting the highest possible calorie count",
+              "Wanting to avoid all information about a product",
+              "Wanting the longest possible ingredient list",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m1-l4",
@@ -298,6 +368,7 @@ const modules: Module[] = [
           "<li>Open a visit or a meal with a small, carefully chosen \"welcome\" item — it sets an orientation " +
           "(healthy, sustainable, local) for everything that follows, the same way a label primes expectation.</li>" +
           "</ul>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m1-l4-mq1\"></div>" +
           "<h3>The wider policy context</h3>" +
           "<p>This matters beyond any single farm visit: the EU has active strategies against childhood " +
           "obesity, yet the latest Eurostat data (2023) still shows obesity trending upward (+1.4%), and the " +
@@ -326,6 +397,19 @@ const modules: Module[] = [
           "fair-trade labels) change consumer behaviour and even brain response — not just purchase decisions " +
           "— and describe one low-friction nudge you would introduce in a real or hypothetical agritourism " +
           "setting to support healthier or more sustainable consumption.",
+        microQuizzes: [
+          {
+            id: "m1-l4-mq1",
+            question: "Which practical, low-friction nudge does this lesson suggest for agritourism hosts?",
+            options: [
+              "Make an ethical or sustainable option the easy default choice",
+              "Only ever offer alcoholic beverages",
+              "Avoid offering any welcome item to guests",
+              "Hide sustainable options at the end of the menu",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m1-l5",
@@ -1151,10 +1235,12 @@ const modules: Module[] = [
           "<p>After action, the farmer checks whether the decision worked. Did the plants recover? Was water " +
           "saved? Did visitors understand the demonstration? Evaluation turns one decision into learning for " +
           "the next season.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m4-l2-mq1\"></div>" +
           "<h3>5. Communicate</h3>" +
           "<p>For agritourism, communication is part of the system. The same information that supports farm " +
           "management can also become a story for visitors: how the farm saves water, protects soil, monitors " +
           "crops or learns from previous seasons.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m4-l2-mq2\"></div>" +
           "<h3>Digital farm diaries</h3>" +
           "<p>A digital diary can record planting, irrigation, fertilisation, pests, harvest dates, yield, " +
           "quality, weather notes and visitor feedback. It may be a mobile app, spreadsheet, calendar or shared " +
@@ -1183,6 +1269,30 @@ const modules: Module[] = [
           "Summarize the five-step decision cycle from this lesson (Measure, Understand, Act, Evaluate, " +
           "Communicate), and briefly describe how you'd apply it to one real decision on a small farm — e.g. " +
           "irrigation, fertilising, or planning a visitor route.",
+        microQuizzes: [
+          {
+            id: "m4-l2-mq1",
+            question: "According to the decision cycle in this lesson, what is the purpose of the \"Evaluate\" step?",
+            options: [
+              "To check whether the action actually worked, turning the decision into learning for next season",
+              "To collect the first round of raw data from the field",
+              "To decide what action to take before any data is collected",
+              "To replace the need for communication with visitors",
+            ],
+            correctIndex: 0,
+          },
+          {
+            id: "m4-l2-mq2",
+            question: "In the decision cycle, what does the \"Communicate\" step specifically add, according to this lesson?",
+            options: [
+              "It turns farm information into a story that visitors can also learn from",
+              "It is only used internally and never shared with visitors",
+              "It happens before any data is measured",
+              "It replaces the need to evaluate whether an action worked",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m4-l3",
@@ -1207,6 +1317,7 @@ const modules: Module[] = [
           "<p>The soil surface may look dry while deeper layers still contain water. A sensor or careful " +
           "monitoring can prevent unnecessary watering, or help apply water before serious crop stress " +
           "occurs.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m4-l3-mq1\"></div>" +
           "<h3>Case study: the CODECS Living Lab</h3>" +
           "<p>The presentation uses the Slovak Living Lab from the CODECS project as a practical example — " +
           "soil moisture sensors, weather stations and IoT devices support irrigation decisions and can also " +
@@ -1239,6 +1350,19 @@ const modules: Module[] = [
         aiSummaryPrompt:
           "Summarize the key points about water and smart irrigation from this lesson, and briefly explain " +
           "when you would — and wouldn't — irrigate a small farm, based on evidence rather than guesswork.",
+        microQuizzes: [
+          {
+            id: "m4-l3-mq1",
+            question: "Why can the soil surface be misleading when deciding whether to irrigate, according to this lesson?",
+            options: [
+              "The surface may look dry while deeper soil layers still hold water",
+              "Soil colour always indicates its nutrient level",
+              "Surface appearance has no connection to irrigation decisions at all",
+              "A dry-looking surface always means the crop needs no water whatsoever",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m4-l4",
@@ -1266,6 +1390,7 @@ const modules: Module[] = [
           "<p>For agritourism, drone images can show the beauty of the farm, crop diversity, landscape, water " +
           "sources and visitor routes — useful at the beginning of a tour or on the website to explain the " +
           "farm layout.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m4-l4-mq1\"></div>" +
           "<h3>Responsible use</h3>" +
           "<p>Drones can be attractive, but they also require attention to safety, privacy, visitors, " +
           "neighbouring properties and legal rules. Technology should support the farm story and not replace " +
@@ -1293,6 +1418,19 @@ const modules: Module[] = [
         aiSummaryPrompt:
           "Summarize what drones can — and cannot — tell a farmer about their fields, and describe one way " +
           "drone imagery could be used both for farm management and for a visitor tour.",
+        microQuizzes: [
+          {
+            id: "m4-l4-mq1",
+            question: "Besides farm monitoring, what else does this lesson say drone imagery can support?",
+            options: [
+              "Visitor storytelling — showing the farm's beauty, layout and routes",
+              "Automatically eliminating pests",
+              "Replacing the farmer's relationship with visitors",
+              "Avoiding all safety and privacy rules",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m4-l5",
@@ -1318,6 +1456,7 @@ const modules: Module[] = [
           "<p>The presentation highlights several risks: high investment costs, lack of digital skills, weak " +
           "internet connection, device maintenance, incorrect data interpretation, technology without a clear " +
           "purpose, drone safety and privacy rules, and loss of authenticity in agritourism.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m4-l5-mq1\"></div>" +
           "<h3>Step-by-step model</h3>" +
           "<p>Micro-farms can start by identifying one problem, choosing one simple tool, testing it on a " +
           "small scale, measuring the benefit, and turning the practice into a story. This <em>problem – tool " +
@@ -1349,6 +1488,19 @@ const modules: Module[] = [
           "Summarize the step-by-step model (problem – tool – test – benefit – story) and the main risks of " +
           "adopting new technology on a micro-farm, then describe how you'd introduce one precision-agriculture " +
           "tool without losing the farm's authenticity.",
+        microQuizzes: [
+          {
+            id: "m4-l5-mq1",
+            question: "Which of these is listed in this lesson as a real risk of adopting new farm technology?",
+            options: [
+              "Adopting technology without a clear purpose",
+              "Having too much authenticity",
+              "Too much interaction between farmers and visitors",
+              "Owning too few digital tools",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
       {
         id: "m4-l6",
@@ -1528,28 +1680,9 @@ const modules: Module[] = [
         note: "Real content — D3.2 Module 4 Scripts & Annexes, Section 2",
         body:
           "<dl>" +
-          [
-            ["Precision agriculture", "Use of observation, data and technology to support better farm decisions. In the module, the focus is on practical, affordable and locally relevant use on micro-farms."],
-            ["Micro-farm", "A small farm with limited land, labour and financial resources, often closely connected with local customers, visitors and community life."],
-            ["Farm monitoring", "The regular observation or measurement of conditions on a farm, such as soil moisture, weather, crop condition or production activities."],
-            ["Farm data", "Information collected from observations, sensors, weather stations, digital records, maps or other farm-management tools and used to support decisions."],
-            ["Data-driven decision-making", "Making a farm-management decision on the basis of relevant observations and data instead of relying only on routine or assumptions."],
-            ["Decision cycle", "A five-step process used in the module: Measure, Understand, Act, Evaluate and Communicate."],
-            ["Soil moisture sensor", "A tool that helps farmers understand whether water is available in the soil and whether irrigation may be needed."],
-            ["Weather station", "A device or set of sensors that records local weather conditions such as temperature, rainfall, wind, humidity or solar radiation."],
-            ["Soil and water management", "Farm practices aimed at monitoring and managing soil and water resources efficiently, including decisions about when and how much to irrigate."],
-            ["Smart irrigation", "Irrigation supported by observation, sensors, rainfall information, schedules or timers so that water is used only when and where it is needed."],
-            ["Digital farm diary", "A simple digital record of planting, irrigation, fertilisation, pests, harvest, quality, weather and visitor feedback."],
-            ["Drone imagery", "Images or video taken from above to observe the farm, identify visible patterns and support communication or promotion."],
-            ["QR code", "A scannable code that connects a physical product or farm location with digital information, for example product origin, production methods or the farm story."],
-            ["Smart agritourism", "Agritourism that uses real farming practices and simple technologies as learning points for visitors."],
-            ["Authenticity", "The quality of keeping the farmer, land, product, culture and human story at the centre, while using technology only as support."],
-            ["Climate resilience", "The capacity of a farm to respond and adapt to conditions such as drought, heat, irregular rainfall and changing pest pressures."],
-            ["Sustainability", "In this module, the responsible management of resources and farming practices that can reduce water use, protect soil, improve input efficiency, reduce losses and strengthen resilience."],
-          ]
-            .map(([term, def]) => `<dt>${term}</dt><dd>${def}</dd>`)
-            .join("") +
+          MODULE4_GLOSSARY.map(({ term, definition }) => `<dt>${term}</dt><dd>${definition}</dd>`).join("") +
           "</dl>",
+        glossaryGame: MODULE4_GLOSSARY,
       },
       worksheetMaterial("m4-mat2", "Worksheet 1 – Micro-Farm Problem–Tool Match", [
         "Type of farm",

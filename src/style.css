@@ -488,6 +488,127 @@ h3 {
   display: none;
 }
 
+.micro-quiz {
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+  background: var(--sidebar-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+}
+
+.micro-quiz-label {
+  margin: 0 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.micro-quiz-question {
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+
+.micro-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.micro-quiz-option {
+  display: block;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+}
+
+.micro-quiz-option.correct {
+  background: rgba(22, 163, 74, 0.15);
+  font-weight: 600;
+}
+
+.micro-quiz-option.incorrect {
+  background: rgba(220, 38, 38, 0.15);
+}
+
+.micro-quiz-feedback {
+  margin: 0;
+  font-weight: 600;
+}
+
+.micro-quiz-feedback.correct {
+  color: #16a34a;
+}
+
+.micro-quiz-feedback.incorrect {
+  color: #dc2626;
+}
+
+.glossary-game {
+  margin-top: 0.75rem;
+}
+
+.glossary-game-intro {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.glossary-game-progress {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.glossary-game-term {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.glossary-game-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.glossary-game-option {
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.glossary-game-option:disabled {
+  cursor: default;
+}
+
+.glossary-game-option.correct {
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.15);
+  font-weight: 600;
+}
+
+.glossary-game-option.incorrect {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.15);
+}
+
+.glossary-game-feedback {
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+
+.glossary-game-result {
+  font-size: 0.95rem;
+}
+
 .quiz {
   margin-top: 2rem;
   padding: 1.25rem;

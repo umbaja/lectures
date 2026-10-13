@@ -4,6 +4,7 @@ import {
   findLesson,
   type Lesson,
   type Module,
+  type QuizQuestion,
   type SupplementaryMaterial,
   type SupplementaryMaterialType,
   type VideoCheckpoint,
@@ -23,6 +24,7 @@ import { syncParticipant, syncProgress, syncCheckpointAnswer, syncVideoWatch } f
 import { renderCertificateView } from "./certificate";
 import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
 import { logCheckpointAnswer, recordVideoWatch, markVideoWatched, isVideoWatched } from "./video-analytics";
+import { getMicroQuizAnswer, saveMicroQuizAnswer } from "./micro-quiz";
 import {
   getSummaryDraft,
   saveSummaryDraft,
@@ -189,6 +191,26 @@ function render() {
     void handleAiSummarySubmit();
   });
 
+  app.querySelectorAll<HTMLButtonElement>("[data-micro-quiz-submit]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const container = btn.closest<HTMLElement>("[data-micro-quiz]")!;
+      const selected = container.querySelector<HTMLInputElement>("input[type=radio]:checked");
+      if (!selected) return;
+      const mqId = container.dataset.mqId!;
+      saveMicroQuizAnswer(mqId, Number(selected.value));
+      const mq = findMicroQuiz(mqId);
+      if (mq) container.outerHTML = renderMicroQuiz(mq);
+    });
+  });
+
+  app.querySelectorAll<HTMLButtonElement>("[data-glossary-game-start]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const container = btn.closest<HTMLElement>("[data-glossary-game]")!;
+      const material = findMaterialById(container.dataset.gameId!);
+      if (material?.glossaryGame) startGlossaryGame(container, material.glossaryGame);
+    });
+  });
+
   if (currentLesson?.video) {
     void mountLessonVideo(currentLesson);
   }
@@ -310,7 +332,7 @@ function renderLesson(lesson: Lesson, module: Module): string {
           ? `<div class="video-embed"><div id="yt-player"></div></div><div class="video-status" data-video-status>${renderVideoStatus(lesson)}</div>`
           : ""
       }
-      <div class="lesson-content">${lesson.content}</div>
+      <div class="lesson-content">${injectMicroQuizzes(lesson.content, lesson.microQuizzes)}</div>
       ${
         needsGate
           ? renderRegistrationGate(
@@ -454,9 +476,28 @@ const MATERIAL_TYPE_LABELS: Record<SupplementaryMaterialType, string> = {
   "recommended-links": "Recommended links",
 };
 
+function findMaterialById(materialId: string): SupplementaryMaterial | undefined {
+  return course.modules.flatMap((m) => m.supplementaryMaterials).find((mat) => mat.id === materialId);
+}
+
 function renderMaterial(material: SupplementaryMaterial): string {
   const label = MATERIAL_TYPE_LABELS[material.type];
   const summary = `<span class="material-type">${escapeHtml(label)}</span> ${escapeHtml(material.title)}`;
+
+  if (material.glossaryGame) {
+    return `
+      <li>
+        <details class="material-expandable">
+          <summary>${summary}</summary>
+          ${material.body ? `<div class="material-body">${material.body}</div>` : ""}
+          <div class="glossary-game" data-glossary-game data-game-id="${escapeAttr(material.id)}">
+            <p class="glossary-game-intro">Test yourself: match each term to its definition.</p>
+            <button type="button" class="mark-done" data-glossary-game-start>Start the glossary game</button>
+          </div>
+        </details>
+      </li>
+    `;
+  }
 
   if (material.worksheetFields) {
     const answers = getWorksheetAnswers(material.id);
@@ -695,6 +736,136 @@ function showCheckpointOverlay(checkpoint: VideoCheckpoint, lessonId: string) {
     overlay.remove();
     onContinue();
   });
+}
+
+function shuffle<T>(items: T[]): T[] {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+/** Runs a self-contained multiple-choice matching game inside `container`, patching only its own markup. */
+function startGlossaryGame(container: HTMLElement, pairs: Array<{ term: string; definition: string }>) {
+  let order = shuffle(pairs.map((_, i) => i));
+  let step = 0;
+  let score = 0;
+
+  function renderResult() {
+    container.innerHTML = `
+      <div class="glossary-game-result">
+        <p>You scored <strong>${score} / ${order.length}</strong>.</p>
+        <button type="button" class="mark-done" data-glossary-game-replay>Play again</button>
+      </div>
+    `;
+    container.querySelector<HTMLButtonElement>("[data-glossary-game-replay]")!.addEventListener("click", () => {
+      order = shuffle(pairs.map((_, i) => i));
+      step = 0;
+      score = 0;
+      renderQuestion();
+    });
+  }
+
+  function renderQuestion() {
+    if (step >= order.length) {
+      renderResult();
+      return;
+    }
+    const correctIndex = order[step];
+    const distractors = shuffle(pairs.map((_, i) => i).filter((i) => i !== correctIndex)).slice(0, 3);
+    const optionIndexes = shuffle([correctIndex, ...distractors]);
+
+    container.innerHTML = `
+      <p class="glossary-game-progress">Term ${step + 1} / ${order.length} — Score: ${score}</p>
+      <p class="glossary-game-term">${escapeHtml(pairs[correctIndex].term)}</p>
+      <div class="glossary-game-options">
+        ${optionIndexes
+          .map((i) => `<button type="button" class="glossary-game-option" data-option-index="${i}">${escapeHtml(pairs[i].definition)}</button>`)
+          .join("")}
+      </div>
+      <p class="glossary-game-feedback" data-glossary-game-feedback></p>
+    `;
+
+    container.querySelectorAll<HTMLButtonElement>(".glossary-game-option").forEach((optionBtn) => {
+      optionBtn.addEventListener("click", () => {
+        container.querySelectorAll<HTMLButtonElement>(".glossary-game-option").forEach((b) => (b.disabled = true));
+        const chosen = Number(optionBtn.dataset.optionIndex);
+        const feedback = container.querySelector<HTMLElement>("[data-glossary-game-feedback]")!;
+        if (chosen === correctIndex) {
+          score++;
+          optionBtn.classList.add("correct");
+          feedback.textContent = "✓ Correct!";
+        } else {
+          optionBtn.classList.add("incorrect");
+          container.querySelector<HTMLButtonElement>(`[data-option-index="${correctIndex}"]`)?.classList.add("correct");
+          feedback.textContent = "✗ Not quite — correct answer highlighted.";
+        }
+        const nextBtn = document.createElement("button");
+        nextBtn.type = "button";
+        nextBtn.className = "mark-done";
+        nextBtn.textContent = step + 1 < order.length ? "Next term" : "See result";
+        nextBtn.addEventListener("click", () => {
+          step++;
+          renderQuestion();
+        });
+        container.appendChild(nextBtn);
+      });
+    });
+  }
+
+  renderQuestion();
+}
+
+function findMicroQuiz(microQuizId: string): QuizQuestion | undefined {
+  for (const lesson of lessons) {
+    const found = lesson.microQuizzes?.find((mq) => mq.id === microQuizId);
+    if (found) return found;
+  }
+  return undefined;
+}
+
+function renderMicroQuiz(mq: QuizQuestion): string {
+  const saved = getMicroQuizAnswer(mq.id);
+  const answered = saved !== undefined;
+  return `
+    <div class="micro-quiz" data-micro-quiz data-mq-id="${escapeAttr(mq.id)}">
+      <p class="micro-quiz-label">Quick check</p>
+      <p class="micro-quiz-question">${escapeHtml(mq.question)}</p>
+      <div class="micro-quiz-options">
+        ${mq.options
+          .map((opt, i) => {
+            const cls = answered ? (i === mq.correctIndex ? " correct" : i === saved ? " incorrect" : "") : "";
+            return `
+              <label class="micro-quiz-option${cls}">
+                <input type="radio" name="mq-${escapeAttr(mq.id)}" value="${i}" ${answered ? "disabled" : ""} ${saved === i ? "checked" : ""} />
+                ${escapeHtml(opt)}
+              </label>
+            `;
+          })
+          .join("")}
+      </div>
+      ${
+        answered
+          ? `<p class="micro-quiz-feedback ${saved === mq.correctIndex ? "correct" : "incorrect"}">${
+              saved === mq.correctIndex ? "✓ Correct!" : "✗ Not quite — the correct answer is highlighted above."
+            }</p>`
+          : `<button type="button" class="mark-done" data-micro-quiz-submit>Check answer</button>`
+      }
+    </div>
+  `;
+}
+
+/** Replaces each `<div data-micro-quiz-id="...">` placeholder in lesson HTML with the interactive quiz markup. */
+function injectMicroQuizzes(content: string, microQuizzes?: QuizQuestion[]): string {
+  if (!microQuizzes || microQuizzes.length === 0) return content;
+  let result = content;
+  for (const mq of microQuizzes) {
+    const placeholder = `<div class="micro-quiz-slot" data-micro-quiz-id="${mq.id}"></div>`;
+    result = result.replace(placeholder, renderMicroQuiz(mq));
+  }
+  return result;
 }
 
 function renderQuiz(lesson: Lesson): string {
