@@ -277,7 +277,43 @@ const modules: Module[] = [
           "<p>Which community relationships would strengthen an agritourism experience in your region, and " +
           "which local policy or economic factor most affects sustainable food choices there? Write a " +
           "150–200 word response applying the unit to one real or hypothetical setting.</p>",
-        video: { youtubeId: "vl6Gn6YODYw" },
+        video: {
+          youtubeId: "vl6Gn6YODYw",
+          checkpoints: [
+            {
+              id: "m1-l2-cp1",
+              atSeconds: 620,
+              rewindToSeconds: 522,
+              question: {
+                id: "m1-l2-cp1-q",
+                question: "What did Dr. Stewart Wolf conclude was the real protective factor in Roseto, Pennsylvania — after ruling out diet, profession and alcohol consumption?",
+                options: [
+                  "Social cohesion and community support at the table",
+                  "A unique local climate",
+                  "Higher average income",
+                  "Genetic differences between the two communities",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m1-l2-cp2",
+              atSeconds: 828,
+              rewindToSeconds: 711,
+              question: {
+                id: "m1-l2-cp2-q",
+                question: "According to the systemic approach presented in this video, which levels — beyond the individual — shape food and tourism behaviour?",
+                options: [
+                  "Community, local economy/policy, and the wider national or global system",
+                  "Only the weather and soil quality",
+                  "Only government military policy",
+                  "Only global stock markets",
+                ],
+                correctIndex: 0,
+              },
+            },
+          ],
+        },
         aiSummaryPrompt:
           "Answer: which community relationships (families, local hosts, producers, traditions) would " +
           "strengthen an agritourism experience in your region, and which local policy or economic factor most " +
