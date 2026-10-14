@@ -636,7 +636,7 @@ const modules: Module[] = [
           "label or certification used in your region needs more explanation for visitors? Write a 150–200 " +
           "word response applying the unit to one real or hypothetical setting.</p>",
         video: {
-          youtubeId: "jYoltS98cCo",
+          youtubeId: "5vL3Ef8jjZE",
           checkpoints: [
             {
               id: "m1-l5-cp1",
@@ -1014,6 +1014,29 @@ const modules: Module[] = [
           "<p><strong>Student task:</strong> map a visitor journey in three stages (before arrival, " +
           "arrival/service, tasting) and place the relevant expectations and cues in each; write a short, " +
           "accurate menu description for one dish following Di Iorio's principles.</p>",
+      },
+      {
+        id: "m1-mat14",
+        type: "case-study",
+        title: "Educational marketing in practice: the \"Five Ages of Parmigiano\" (chef Massimo Bottura)",
+        note: "Real content — D3.2 Module 1, \"The culture of haute cuisine 2\" — https://www.youtube.com/watch?v=jYoltS98cCo",
+        body:
+          "<p>Dr. Vitale uses three-Michelin-star chef Massimo Bottura's dish \"Five Ages of Parmigiano\" as a " +
+          "worked example of educational marketing: a single local ingredient (Parmigiano Reggiano) served at " +
+          "five different ages, textures and temperatures. The dish teaches almost without words — the " +
+          "contrast between a younger, firmer version and an older, creamier or crumblier one lets the " +
+          "diner discover how ageing changes flavour and texture directly, through comparison rather than " +
+          "explanation.</p>" +
+          "<p>The same lecture also recaps the <strong>usefulness × novelty matrix</strong> for educational " +
+          "marketing: telling a visitor something true but already obvious (\"fruit and vegetables are " +
+          "healthy\") loses attention fast, and something novel but irrelevant does too. The strongest " +
+          "material is specific to the business — the example given is a grain variety grown on the " +
+          "presenter's own farm, explained by what makes it nutritionally distinctive, then used as the " +
+          "signature ingredient of a local craft beer unavailable anywhere else.</p>" +
+          "<p><strong>Student task:</strong> pick one local ingredient you could serve in at least two visibly " +
+          "different forms (age, preparation, temperature) without needing to explain anything verbally; " +
+          "identify one fact about a product in your own context that is both useful and likely new to a " +
+          "visitor, and one that is obvious and should be skipped.</p>",
       },
     ],
     references: [
