@@ -195,7 +195,27 @@ const modules: Module[] = [
           "<p>Which local ingredient in your region could become the focus of an agritourism activity, and " +
           "where in the food chain could visitors learn something usually invisible to them? Write a " +
           "150–200 word response applying the unit to one real or hypothetical setting.</p>",
-        video: { youtubeId: "C_xXZOio-E0" },
+        video: {
+          youtubeId: "C_xXZOio-E0",
+          checkpoints: [
+            {
+              id: "m1-l1-cp1",
+              atSeconds: 710,
+              rewindToSeconds: 602,
+              question: {
+                id: "m1-l1-cp1-q",
+                question: "According to this video, who guides the ethnobotany (wild-herb recognition) workshop example from Foggia?",
+                options: [
+                  "A qualified botanist",
+                  "A professional chef only, with no botanist involved",
+                  "A random tourist guide",
+                  "A government food-safety inspector",
+                ],
+                correctIndex: 0,
+              },
+            },
+          ],
+        },
         aiSummaryPrompt:
           "Answer: which local ingredient in your region could become the focus of an agritourism activity, " +
           "and where in the food chain (production, processing, consumption, or waste prevention) could " +
