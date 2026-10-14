@@ -36,6 +36,8 @@ import {
 const app = document.getElementById("app")!;
 const lessons = allLessons(course);
 const videoController = new VideoController();
+/** Site is deployed under a sub-path (GitHub Pages project site) — base-relative URLs for static assets. */
+const BASE_URL = import.meta.env.BASE_URL;
 
 const CERTIFICATE_VIEW = "certificate";
 
@@ -67,7 +69,7 @@ function render() {
     <div class="layout">
       <aside class="sidebar">
         <div class="sidebar-brand">
-          <img src="/agritour-logo.jpg" alt="AGRI-TOUR" class="brand-logo" />
+          <img src="${BASE_URL}agritour-logo.jpg" alt="AGRI-TOUR" class="brand-logo" />
           <h1>${escapeHtml(course.title)}</h1>
         </div>
         <p class="description">${escapeHtml(course.description)}</p>
@@ -121,7 +123,7 @@ function render() {
             .join("")}
         </nav>
         <div class="sidebar-footer">
-          <img src="/eu-cofunded.webp" alt="Co-funded by the European Union" class="eu-badge" />
+          <img src="${BASE_URL}eu-cofunded.webp" alt="Co-funded by the European Union" class="eu-badge" />
         </div>
       </aside>
       <main class="content">
