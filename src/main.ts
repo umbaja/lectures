@@ -66,7 +66,10 @@ function render() {
   app.innerHTML = `
     <div class="layout">
       <aside class="sidebar">
-        <h1>${escapeHtml(course.title)}</h1>
+        <div class="sidebar-brand">
+          <img src="/agritour-logo.jpg" alt="AGRI-TOUR" class="brand-logo" />
+          <h1>${escapeHtml(course.title)}</h1>
+        </div>
         <p class="description">${escapeHtml(course.description)}</p>
         <div class="progress-bar">
           <div class="progress-bar-fill" style="width:${progressPercent()}%"></div>
@@ -117,6 +120,9 @@ function render() {
             )
             .join("")}
         </nav>
+        <div class="sidebar-footer">
+          <img src="/eu-cofunded.webp" alt="Co-funded by the European Union" class="eu-badge" />
+        </div>
       </aside>
       <main class="content">
         ${

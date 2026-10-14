@@ -126,9 +126,6 @@ const modules: Module[] = [
         id: "m1-l1",
         title: "1.1 Eco-gastronomy, agritourism and sustainable food systems",
         content:
-          "<p><em>This unit's video does not yet have interactive checkpoint questions inside it — those will " +
-          "be added once verified timestamps are available. For now it plays straight through, with a written " +
-          "summary at the end.</em></p>" +
           "<h3>Learning objectives</h3>" +
           "<ul>" +
           "<li>explain the relationship between agriculture, tourism and eco-gastronomy;</li>" +
@@ -239,8 +236,6 @@ const modules: Module[] = [
         id: "m1-l2",
         title: "1.2 Food, community and wellbeing: a systemic perspective",
         content:
-          "<p><em>This unit's video does not yet have interactive checkpoint questions inside it — those will " +
-          "be added once verified timestamps are available.</em></p>" +
           "<h3>Learning objectives</h3>" +
           "<ul>" +
           "<li>describe the Roseto example as it is used in the lecture;</li>" +
@@ -357,8 +352,6 @@ const modules: Module[] = [
         id: "m1-l3",
         title: "1.3 Local food, haute cuisine and educational marketing",
         content:
-          "<p><em>This unit's video does not yet have interactive checkpoint questions inside it — those will " +
-          "be added once verified timestamps are available.</em></p>" +
           "<h3>Learning objectives</h3>" +
           "<ul>" +
           "<li>explain the lecture's concept of local haute cuisine;</li>" +
@@ -478,8 +471,6 @@ const modules: Module[] = [
         id: "m1-l4",
         title: "1.4 Food choice, limited rationality and cognitive bias",
         content:
-          "<p><em>This unit's video does not yet have interactive checkpoint questions inside it — those will " +
-          "be added once verified timestamps are available.</em></p>" +
           "<h3>Learning objectives</h3>" +
           "<ul>" +
           "<li>explain limited rationality in food decision-making;</li>" +
@@ -597,8 +588,6 @@ const modules: Module[] = [
         id: "m1-l5",
         title: "1.5 Sensory experience, reward, expectations and food labels",
         content:
-          "<p><em>This unit's video does not yet have interactive checkpoint questions inside it — those will " +
-          "be added once verified timestamps are available.</em></p>" +
           "<h3>Learning objectives</h3>" +
           "<ul>" +
           "<li>describe the role of reward and sensory cues in the lecture's model of food choice;</li>" +
