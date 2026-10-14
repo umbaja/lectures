@@ -399,7 +399,43 @@ const modules: Module[] = [
           "<p>What local product in your region has qualities visitors may not immediately notice, and what " +
           "information about it is likely to be both new and useful to a traveller? Write a 150–200 word " +
           "response applying the unit to one real or hypothetical setting.</p>",
-        video: { youtubeId: "xBExtEmr6tY" },
+        video: {
+          youtubeId: "xBExtEmr6tY",
+          checkpoints: [
+            {
+              id: "m1-l3-cp1",
+              atSeconds: 1100,
+              rewindToSeconds: 1032,
+              question: {
+                id: "m1-l3-cp1-q",
+                question: "According to the ISMEA 2024 report cited in this video, what share of the value in Italian agriculture comes from secondary (non-production) activities like agritourism?",
+                options: [
+                  "About 19.6%",
+                  "About 2%",
+                  "About 90%",
+                  "None — all value comes from production",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m1-l3-cp2",
+              atSeconds: 1300,
+              rewindToSeconds: 1239,
+              question: {
+                id: "m1-l3-cp2-q",
+                question: "According to this video, approximately how many regional and national laws regulate multifunctional farming in Italy?",
+                options: [
+                  "116",
+                  "Around 10",
+                  "Exactly 1 (a single national law)",
+                  "Over 1,000",
+                ],
+                correctIndex: 0,
+              },
+            },
+          ],
+        },
         aiSummaryPrompt:
           "Answer: what local product in your region has qualities that visitors may not immediately notice, " +
           "and what information about that product is likely to be both new and useful to a traveller? Write " +
@@ -481,7 +517,43 @@ const modules: Module[] = [
           "<p>Which cue do customers in your context use first — price, taste, origin or brand — and which " +
           "sustainability information is currently too complex for visitors? Write a 150–200 word response " +
           "applying the unit to one real or hypothetical setting.</p>",
-        video: { youtubeId: "5vL3Ef8jjZE" },
+        video: {
+          youtubeId: "5vL3Ef8jjZE",
+          checkpoints: [
+            {
+              id: "m1-l4-cp1",
+              atSeconds: 130,
+              rewindToSeconds: 99,
+              question: {
+                id: "m1-l4-cp1-q",
+                question: "According to this video, is informed decision-making about food automatically free of limits?",
+                options: [
+                  "No — even when consumers are well informed, human decision-making still has many limits",
+                  "Yes, once informed, decisions become fully rational",
+                  "Information has no relationship to decision quality at all",
+                  "Only uninformed consumers have limited rationality",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m1-l4-cp2",
+              atSeconds: 740,
+              rewindToSeconds: 590,
+              question: {
+                id: "m1-l4-cp2-q",
+                question: "According to the Eurobarometer data presented in this video, which factor ranks third among EU citizens' food-decision drivers, right after cost and taste?",
+                options: [
+                  "Geographical origin",
+                  "Environmental impact",
+                  "Ethics and beliefs",
+                  "Nutritional factors",
+                ],
+                correctIndex: 0,
+              },
+            },
+          ],
+        },
         aiSummaryPrompt:
           "Answer: which cue do customers in your context use first when deciding what to eat (price, taste, " +
           "origin, brand, or something else), and which sustainability information is currently too complex " +
@@ -563,7 +635,43 @@ const modules: Module[] = [
           "<p>What sensory quality of a local product is difficult to communicate in text alone, and which " +
           "label or certification used in your region needs more explanation for visitors? Write a 150–200 " +
           "word response applying the unit to one real or hypothetical setting.</p>",
-        video: { youtubeId: "jYoltS98cCo" },
+        video: {
+          youtubeId: "jYoltS98cCo",
+          checkpoints: [
+            {
+              id: "m1-l5-cp1",
+              atSeconds: 1780,
+              rewindToSeconds: 1730,
+              question: {
+                id: "m1-l5-cp1-q",
+                question: "In the wine-tasting study described in this video, what happened when the same wine was served with background classical music?",
+                options: [
+                  "Its perceived value was overestimated by about 75%",
+                  "It was rated exactly the same as without music",
+                  "Participants refused to taste it",
+                  "It was rated as cheaper than without music",
+                ],
+                correctIndex: 0,
+              },
+            },
+            {
+              id: "m1-l5-cp2",
+              atSeconds: 2630,
+              rewindToSeconds: 2521,
+              question: {
+                id: "m1-l5-cp2-q",
+                question: "According to this video, in whom did the organic food label specifically increase activity in reward-related brain regions (ventral striatum, nucleus accumbens)?",
+                options: [
+                  "Only in people who already buy and understand the value of organic food — not all consumers equally",
+                  "In every consumer equally, regardless of their habits",
+                  "Only in young children",
+                  "The label had no measurable effect on brain activity in anyone",
+                ],
+                correctIndex: 0,
+              },
+            },
+          ],
+        },
         aiSummaryPrompt:
           "Answer: what sensory quality of a local product is difficult to communicate in text alone, and " +
           "which label or certification used in your region needs more explanation for visitors before it " +
