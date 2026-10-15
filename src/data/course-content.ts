@@ -107,6 +107,30 @@ function worksheetMaterialM1(id: string, title: string, fields: string[]): Suppl
   };
 }
 
+/** D3.2 Module 3 Scripts & Annexes, Glossary of terms — reused for the glossary list and the matching game. */
+const MODULE3_GLOSSARY: Array<{ term: string; definition: string }> = [
+  { term: "Agritourism 2.0", definition: "A presentation concept that connects agriculture, tourism and experience/education so that visitors move from only watching to actively doing, learning and sharing." },
+  { term: "Authentic experience", definition: "A visitor experience rooted in real local products, people, knowledge, traditions and everyday rural life." },
+  { term: "Kastom", definition: "The term used in the presentation for local customary knowledge, stories, practices and cultural traditions that can form part of an agritourism experience." },
+  { term: "Product – Culture – People", definition: "The three-pillar framework used in the presentation: a local product, the cultural story around it and the people who host and interpret the experience." },
+  { term: "Value-added product", definition: "A farm or local product that gains additional value through processing, presentation, experience, branding or direct sale." },
+  { term: "Living museum", definition: "A rural heritage concept where buildings, collections, activities and people are used to interpret culture as a living visitor experience." },
+  { term: "Social hub", definition: "A small community place where local people and visitors can meet, exchange information and connect with regional products or services." },
+  { term: "Digital footprint", definition: "The visible online presence of a place or business through maps, reviews, social media and tourism platforms." },
+  { term: "Pocket marketing", definition: "The presentation term for low-barrier marketing through mobile-first channels such as social media, reviews and online discovery platforms." },
+  { term: "Nambawan Experience Challenge", definition: "The workshop format in the presentation that asks learners to design a memorable island experience around a hook, a hands-on action, a Kastom element and a takeaway." },
+];
+
+function worksheetMaterialM3(id: string, title: string, fields: string[]): SupplementaryMaterial {
+  return {
+    id,
+    type: "worksheet",
+    title,
+    note: "Real, fillable worksheet — D3.2 Module 3 Worksheets",
+    worksheetFields: fields,
+  };
+}
+
 const modules: Module[] = [
   {
     id: "m1",
@@ -1382,24 +1406,66 @@ const modules: Module[] = [
   },
   {
     id: "m3",
-    title: "Module 3: Rural culture & agritourism planning (NewEdu)",
+    title: "Module 3: Promoting Rural Culture in Islands (NewEdu)",
     owner: "NewEdu",
     intro:
-      "This module introduces the European model of agritourism and shows how to transfer it to the conditions " +
-      "of Pacific islands. Students will learn about planning a small agritourism offer, building local value " +
-      "chains, and telling the story of a rural community as part of the visitor experience. The emphasis is " +
-      "on practical steps — from the first idea to a working offer — illustrated with case studies from island " +
-      "settings where the transfer of European know-how is most relevant.",
+      "This module introduces \"Agritourism 2.0\" — the idea that a farm, market, family recipe or everyday " +
+      "rural routine can become a meaningful visitor experience, not just a beach stay. Based on a presentation " +
+      "New Edu prepared for the AGRI-TOUR Vanuatu Capacity Building, it uses the Product – Culture – People " +
+      "framework and two Slovak case studies — Madonan Farm Park and Lišov Museum — to show how rural " +
+      "traditions can be modernised without losing their identity. The module closes with pocket marketing for " +
+      "a basic digital footprint and a hands-on workshop in which learners design and pitch their own island " +
+      "agritourism experience.",
     lessons: [
       {
         id: "m3-l1",
-        title: "3.1 The agritourism model and its transfer to Pacific islands",
+        title: "3.1 Beyond the Beach: Agritourism 2.0 and the Value of the Everyday",
         content:
-          "<p>New Edu's presentation from the Vanuatu Capacity Building: agritourism as \"opening the gate to " +
-          "what we already have\" (not building something new), parallels between Slovakia and Vanuatu, the " +
-          "shift in post-COVID-19 travel preferences towards open spaces and meaningful experiences, " +
-          "processing raw produce instead of selling it raw (e.g. milk → ice cream), restoring an old building " +
-          "into a café/information centre, and Facebook as the main marketing tool for farmers in Vanuatu.</p>",
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>explain why everyday rural practices can become tourism assets when they are interpreted for " +
+          "visitors;</li>" +
+          "<li>describe the Agritourism 2.0 model used in the New Edu presentation;</li>" +
+          "<li>identify how health, sustainability, small-group travel and meaningful local impact are linked " +
+          "to rural tourism demand;</li>" +
+          "<li>distinguish between a raw rural resource and a designed visitor experience.</li>" +
+          "</ul>" +
+          "<h3>Beyond the beach</h3>" +
+          "<p>The presentation opens with a simple question: why can a local backyard be part of the future of " +
+          "tourism? A farm, a village garden, a market, a food-processing routine or a family story can become " +
+          "part of the tourism offer once visitors are given a clear reason to engage with it. This is the " +
+          "\"boring routine\" paradox: a task repeated every day by a local family may be a once-in-a-lifetime " +
+          "experience for a visitor. The task is not to invent artificial attractions, but to identify which " +
+          "real practices are safe, meaningful and understandable to outsiders.</p>" +
+          "<h3>Agritourism 2.0</h3>" +
+          "<p>Agritourism 2.0 is presented as the overlap of agriculture, tourism and experience/education. " +
+          "Agriculture provides the real production setting, tourism brings the visitor, and " +
+          "experience/education turns the visit into participation, learning and sharing — the value lies in " +
+          "the overlap of all three. For a learner, this means an agritourism product should answer three " +
+          "questions: What is real here? What can a visitor understand or do? What value is created for the " +
+          "host community and the visitor?</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m3-l1-mq1\"></div>" +
+          "<h3>Why now?</h3>" +
+          "<p>The presentation links the opportunity to a post-pandemic traveller seeking health, sustainability " +
+          "and smaller, more personal experiences, and stresses meaningful impact: visitors increasingly value " +
+          "experiences where their spending supports local people and places. A market-growth chart illustrates " +
+          "expanding interest in agritourism, but — as the module itself notes — its exact figures still need a " +
+          "verified source before publication; it is used here only as a discussion trigger.</p>" +
+          "<h3>Applied learning activity: Everyday-to-Experience Audit</h3>" +
+          "<p>Choose one activity, product or routine from your village or farm that local people consider " +
+          "normal. Describe why a visitor might find it unusual or memorable, what the visitor could safely do, " +
+          "and what story or learning point would make the experience meaningful. (Worksheet 1.)</p>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can explain Agritourism 2.0 in my own words.</li>" +
+          "<li>I can identify at least three everyday rural assets that could become visitor experiences.</li>" +
+          "<li>I can distinguish between simply showing something and designing participation or " +
+          "learning.</li>" +
+          "</ul>" +
+          "<h3>Reflection</h3>" +
+          "<p>Look at your own community as if you were visiting it for the first time. Which routine would be " +
+          "hardest for an outsider to understand without a local host? That is often where interpretation " +
+          "creates value.</p>",
         video: {
           youtubeId: "uSY-AGRo1bg",
           checkpoints: [
@@ -1430,36 +1496,552 @@ const modules: Module[] = [
             },
           ],
         },
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words) of this lesson: what Agritourism 2.0 means, and one everyday " +
+          "rural routine or product (real or imagined) that could become a visitor experience.",
+        microQuizzes: [
+          {
+            id: "m3-l1-mq1",
+            question: "According to the presentation, what does \"Agritourism 2.0\" mean?",
+            options: [
+              "The overlap of agriculture, tourism and experience/education, moving visitors from watching to doing",
+              "A certification scheme for organic farms",
+              "A mobile app for booking farm stays",
+              "A government subsidy programme for rural tourism",
+            ],
+            correctIndex: 0,
+          },
+        ],
       },
-      { id: "m3-l2", title: "3.2 Supporting rural culture and communities", content: "<p>Content for this lesson will be provided by partner NewEdu.</p>" },
-      { id: "m3-l3", title: "3.3 Planning an agritourism business", content: "<p>Content for this lesson will be provided by partner NewEdu.</p>" },
-      { id: "m3-l4", title: "3.4 Practical implementation — steps and tools", content: "<p>Content for this lesson will be provided by partner NewEdu.</p>" },
-      { id: "m3-l5", title: "3.5 EU case studies transferable to the Pacific", content: "<p>Content for this lesson will be provided by partner NewEdu.</p>" },
+      {
+        id: "m3-l2",
+        title: "3.2 Product, Culture and People: Turning Local Life into Authentic Experiences",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>use the Product – Culture – People framework to design an agritourism experience;</li>" +
+          "<li>identify how crops and foods such as kava, cocoa, coconut and coffee can become experience " +
+          "anchors;</li>" +
+          "<li>explain why a local story or practice adds value beyond the physical product;</li>" +
+          "<li>recognise the difference between authenticity as a lived practice and authenticity as a " +
+          "marketing claim.</li>" +
+          "</ul>" +
+          "<h3>The three pillars</h3>" +
+          "<p>The presentation organises an agritourism experience around three pillars. The <strong>product</strong> " +
+          "is tangible — kava, cocoa, coconut or coffee. <strong>Culture</strong> explains how the product is " +
+          "grown, prepared, used or remembered. <strong>People</strong> provide hospitality, knowledge and " +
+          "interpretation. A coconut is not only a product once the visitor also sees how it is harvested and " +
+          "understands its place in everyday life; a kava drink is not only consumed once the visitor learns " +
+          "about the ritual and the social meaning around it.</p>" +
+          "<h3>From product to experience</h3>" +
+          "<p>Instead of only selling or displaying a product, the host can create a safe hands-on moment: " +
+          "preparing, tasting, observing, making or learning. Participation makes the product easier to " +
+          "remember and gives the host an opportunity to explain local knowledge.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m3-l2-mq1\"></div>" +
+          "<h3>The idea of \"Organic by Default\"</h3>" +
+          "<p>The presentation uses the phrase \"Organic by Default\" to highlight the value of natural, " +
+          "traditional and low-input farming practices in Vanuatu, in contrast to the cost of formal organic " +
+          "certification in Europe. For educational use, the phrase should be understood as a communication " +
+          "concept, not as a formal organic certification — the learning point is that existing sustainable " +
+          "practices can be visible assets when explained accurately and responsibly.</p>" +
+          "<h3>Authenticity and visitor respect</h3>" +
+          "<p>The host should not turn culture into a performance that loses its meaning. The practical " +
+          "challenge is to decide what can be shared, what requires explanation, what is private or sacred, and " +
+          "how the community remains in control of the story.</p>" +
+          "<h3>Applied learning activity: Product – Culture – People Canvas</h3>" +
+          "<p>Select one local product. Complete three fields — Product: what the visitor sees or tastes; " +
+          "Culture: what story, skill or tradition gives it meaning; People: who hosts, demonstrates or " +
+          "explains it. Then add one safe visitor action and one takeaway or memory. (Worksheet 2.)</p>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can design an experience around product, culture and people.</li>" +
+          "<li>I can explain why the same product can create different visitor experiences depending on the " +
+          "story and participation.</li>" +
+          "<li>I can identify at least one cultural element that should be shared carefully or only with " +
+          "community permission.</li>" +
+          "</ul>" +
+          "<h3>Reflection</h3>" +
+          "<p>Use the workshop examples from the presentation — Kava Ritual, Cacao/Chocolate Journey, Tree of " +
+          "Life (Coconut), Seafood, Coffee and Sugarcane. Which of these feels closest to a product already " +
+          "present in your own community?</p>",
+        aiSummaryPrompt:
+          "Summarize the Product – Culture – People framework from this lesson, and apply it to one local " +
+          "product (real or imagined): what is the product, the cultural story and who are the people?",
+        microQuizzes: [
+          {
+            id: "m3-l2-mq1",
+            question: "Which three pillars does the presentation use to structure an authentic agritourism experience?",
+            options: [
+              "Product, Culture and People",
+              "Price, Promotion and Place",
+              "Food, Hotel and Transport",
+              "Farm, City and Beach",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
+      {
+        id: "m3-l3",
+        title: "3.3 Making Traditions Modern: Madonan Farm Park",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>analyse how a rural attraction can combine agriculture, entertainment and education;</li>" +
+          "<li>identify different forms of visitor participation used in the Madonan Farm Park case;</li>" +
+          "<li>explain how events, education and value-added products diversify rural income opportunities;</li>" +
+          "<li>adapt one lesson from the case to a Pacific or island context without copying the business model " +
+          "directly.</li>" +
+          "</ul>" +
+          "<h3>The Farmpark concept</h3>" +
+          "<p>Madonan Farm Park, in the Slovak village of Kľačany, is presented under the motto " +
+          "\"Nature, Tradition, and Family Fun.\" Instead of relying on a single attraction, the farm is " +
+          "organised into different visitor touchpoints where agriculture meets entertainment.</p>" +
+          "<h3>Learning by playing</h3>" +
+          "<p>The presentation lists a milking simulator, feeding animals, archery, a digging simulator and a " +
+          "tractor-train. Some activities simulate farm work for safety or accessibility, while others use the " +
+          "farm itself as the learning environment — the principle is that the visitor does something rather " +
+          "than only receives information.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m3-l3-mq1\"></div>" +
+          "<h3>Business diversification</h3>" +
+          "<p>The case extends beyond casual visits: school programmes use the farm as a living classroom, " +
+          "while birthday parties and summer camps create additional reasons to visit. The same rural place can " +
+          "serve different target groups if activities are designed around their needs.</p>" +
+          "<h3>Value-added products</h3>" +
+          "<p>The presentation contrasts selling a raw farm product with selling a processed or branded one — " +
+          "\"don't sell raw milk, sell ice cream\" — with examples like nut cream, vouchers and branded " +
+          "merchandise. The learning point is not the exact price shown, which may change, but the principle of " +
+          "increasing value through processing, experience and direct customer connection.</p>" +
+          "<h3>Applied learning activity: Attraction and Diversification Design</h3>" +
+          "<p>Choose a real rural site. Design one learning-by-doing attraction, one educational programme or " +
+          "event, and one value-added product. For each, explain the target visitor, the practical action, the " +
+          "safety consideration and the value for the local host. (Worksheet 3.)</p>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can identify at least three types of visitor participation in the Madonan case.</li>" +
+          "<li>I can explain how one rural site can serve families, schools and other visitor groups.</li>" +
+          "<li>I can distinguish between a raw product and a value-added product or experience.</li>" +
+          "</ul>" +
+          "<h3>Reflection</h3>" +
+          "<p>When adapting a case study, transfer the principle rather than copying the exact activity. A safe " +
+          "local food demonstration may be more appropriate than a farm simulator, depending on context.</p>",
+        aiSummaryPrompt:
+          "Summarize how Madonan Farm Park combines learning-by-playing, business diversification and " +
+          "value-added products, then describe one principle from the case (not the exact activity) you'd " +
+          "adapt to a rural or island site you know.",
+        microQuizzes: [
+          {
+            id: "m3-l3-mq1",
+            question: "In the Madonan Farm Park case, \"learning by playing\" is illustrated mainly by:",
+            options: [
+              "Simulated and hands-on activities such as milking, animal feeding and a tractor-train",
+              "Only selling raw agricultural products",
+              "Replacing farm activities with online videos",
+              "Limiting visitors to guided observation only",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
+      {
+        id: "m3-l4",
+        title: "3.4 Living Heritage and Community Hubs: The Lišov Museum Case",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>explain how rural cultural heritage can function as a living visitor experience;</li>" +
+          "<li>identify how local heritage can be connected with global exchange without losing local " +
+          "identity;</li>" +
+          "<li>describe how natural building, education and a small café can support rural revitalisation;</li>" +
+          "<li>assess which heritage elements in a Pacific community could become respectful learning " +
+          "experiences.</li>" +
+          "</ul>" +
+          "<h3>The Living Museum</h3>" +
+          "<p>Lišov Museum, in a Slovak village of about 200 inhabitants, is presented as a \"Living Museum\" " +
+          "built around cultural heritage, international exchange and natural building. The core idea is that " +
+          "heritage is not only displayed — it is used to create activity, education and reasons for people to " +
+          "meet.</p>" +
+          "<h3>Local meets global</h3>" +
+          "<p>The Gallery of Masks is a collection of more than 400 masks from Africa, Asia and Europe. The " +
+          "collection attracts visitors to a small village and creates a conversation between local and global " +
+          "culture — a rural place can host international content while still keeping a strong local " +
+          "identity.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m3-l4-mq1\"></div>" +
+          "<h3>Natural building and adaptive use</h3>" +
+          "<p>The presentation highlights clay, stone and wood, a Celtic-style dwelling built with no nails, " +
+          "and the adaptation of a historic building into an information centre and café — architecture itself " +
+          "becomes part of the story, and old structures can receive a new visitor function.</p>" +
+          "<h3>Education, exchange and social hub</h3>" +
+          "<p>Erasmus+ mobility and adult education — bringing students from Germany, Romania and the United " +
+          "Kingdom — are presented as drivers that bring people and skills into the village. The small café is " +
+          "a meeting point for locals and tourists, served with local coffee and connected to a wider network " +
+          "of information points (Dudince – Krupina – Lišov). A small service can have a social function larger " +
+          "than its commercial role.</p>" +
+          "<h3>Applied learning activity: Living Heritage and Social Hub Canvas</h3>" +
+          "<p>Identify one cultural asset, building, craft, collection or community practice. Describe how it " +
+          "could become a living experience, what educational activity could be connected to it, and what " +
+          "small social-hub function could help locals and visitors meet. (Worksheet 4.)</p>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can explain the difference between displaying heritage and activating heritage.</li>" +
+          "<li>I can identify one way education or exchange can support a rural attraction.</li>" +
+          "<li>I can describe how a small café, information point or shared space can strengthen a visitor " +
+          "network.</li>" +
+          "</ul>" +
+          "<h3>Reflection</h3>" +
+          "<p>Ask whether the community is comfortable with the proposed interpretation. Cultural heritage " +
+          "should be shared with local ownership and clear boundaries.</p>",
+        aiSummaryPrompt:
+          "Summarize how Lišov Museum combines heritage, international exchange and a small café/social hub, " +
+          "then describe one heritage asset (real or imagined) in a Pacific community that could become a " +
+          "respectful learning experience for visitors.",
+        microQuizzes: [
+          {
+            id: "m3-l4-mq1",
+            question: "What is the role of the \"small café\" in the Lišov Museum case?",
+            options: [
+              "It acts as a social hub where locals and visitors can meet and connect with the region",
+              "It replaces the museum entirely",
+              "It is used only to sell imported products",
+              "It functions only as staff facilities",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
+      {
+        id: "m3-l5",
+        title: "3.5 Pocket Marketing and the Digital Footprint",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>identify the role of social media, reviews and online maps in rural tourism visibility;</li>" +
+          "<li>distinguish between discovery, visual storytelling, community connection and reputation " +
+          "channels;</li>" +
+          "<li>create a minimal digital-footprint plan for a small agritourism operator;</li>" +
+          "<li>explain why accurate basic information can be more important than complex marketing tools.</li>" +
+          "</ul>" +
+          "<h3>Pocket marketing</h3>" +
+          "<p>The presentation calls mobile-first promotion \"Pocket Marketing.\" It names TikTok as a " +
+          "discovery engine, Instagram as a visual catalogue, Facebook as a community connector, influencers as " +
+          "storytellers, and TripAdvisor / Google Reviews as reputation and discovery channels. Not every " +
+          "operator needs every platform — but a small rural offer needs to be discoverable and understandable " +
+          "online.</p>" +
+          "<h3>The digital footprint</h3>" +
+          "<p>Tourism listings and a map of attractions in Vanuatu illustrate a practical problem: if a farm or " +
+          "rural experience does not appear where visitors search, it may remain invisible even when the " +
+          "experience itself is strong. A basic digital footprint can include a correct location, opening " +
+          "information, contact details, photos, a short description and recent reviews.</p>" +
+          "<div class=\"micro-quiz-slot\" data-micro-quiz-id=\"m3-l5-mq1\"></div>" +
+          "<h3>Choosing channels strategically</h3>" +
+          "<p>A visual platform can inspire a visit, a map helps the visitor find the place, reviews reduce " +
+          "uncertainty, and a community page can announce events or maintain relationships. Learners should " +
+          "choose channels according to their capacity rather than opening accounts that will not be " +
+          "maintained.</p>" +
+          "<h3>Trust and accuracy</h3>" +
+          "<p>A wrong location, outdated opening time or unanswered message can damage the visitor experience " +
+          "before arrival. Digital marketing therefore starts with reliable basic information.</p>" +
+          "<h3>Applied learning activity: Digital Footprint Starter Plan</h3>" +
+          "<p>Prepare a one-page starter plan for a small rural attraction: name, short description, map " +
+          "location, contact method, five essential photos, one social channel, one review/map channel and a " +
+          "simple monthly update routine. (Worksheet 5.)</p>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can explain what a digital footprint is.</li>" +
+          "<li>I can match at least three digital channels with different visitor needs.</li>" +
+          "<li>I can design a basic online presence that is realistic for a small rural operator.</li>" +
+          "</ul>" +
+          "<h3>Reflection</h3>" +
+          "<p>Review an existing rural attraction online. What information can a visitor find in two minutes? " +
+          "What is missing?</p>",
+        aiSummaryPrompt:
+          "Summarize what a \"digital footprint\" means in this lesson and which digital channels play which " +
+          "role, then sketch a minimal digital-footprint plan for one small rural operator (real or imagined).",
+        microQuizzes: [
+          {
+            id: "m3-l5-mq1",
+            question: "According to the module, what does a \"digital footprint\" mean for a small rural operator?",
+            options: [
+              "The online visibility of a place through maps, reviews, social media and basic visitor information",
+              "A legal registration required to run a tourism business",
+              "The number of visitors who physically walk through a farm",
+              "A type of soil-moisture sensor",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
       {
         id: "m3-l6",
-        title: "3.6 Module summary and proficiency test",
-        content: "<p>The module summary will be prepared by partner NewEdu.</p>",
+        title: "3.6 Design Your Island Experience: From Idea to One-Minute Pitch",
+        content:
+          "<h3>Learning objectives</h3>" +
+          "<ul>" +
+          "<li>use a before – during – after journey to structure a visitor experience;</li>" +
+          "<li>apply the Hook – Action – Kastom – Takeaway framework from the Nambawan Experience Challenge;</li>" +
+          "<li>create a simple one-minute pitch for an island agritourism concept;</li>" +
+          "<li>reflect on how younger rural actors can connect digital tools with local roots and " +
+          "traditions.</li>" +
+          "</ul>" +
+          "<h3>Before, during and after</h3>" +
+          "<p>The workshop visualises the visitor journey in three stages. Before the visit, the experience " +
+          "must be discoverable and understandable. During the visit, the visitor needs a hands-on farm or " +
+          "cultural activity. After the visit, the visitor should leave with a memory, story, product or " +
+          "connection that extends the experience.</p>" +
+          "<h3>The \"Nambawan Experience\" Challenge</h3>" +
+          "<p>Learners design an experience around four elements: the <strong>Hook</strong> — the memorable " +
+          "name or idea; the <strong>Action</strong> — the one thing the tourist will do with their own hands; " +
+          "the <strong>Kastom</strong> — the traditional story, knowledge or secret that gives meaning; and the " +
+          "<strong>Takeaway</strong> — the physical or memorable element the visitor carries home.</p>" +
+          "<h3>Product themes for the workshop</h3>" +
+          "<p>The presentation suggests six group themes — Kava Ritual, Cacao/Chocolate Journey, Tree of Life " +
+          "(Coconut), Seafood, Coffee and Sugarcane — examples that can be replaced by locally relevant products " +
+          "or practices in other island or rural contexts.</p>" +
+          "<h3>Pitch time</h3>" +
+          "<p>The workshop ends with a one-minute pitch: \"you have 1 minute to sell the dream.\" The goal is " +
+          "not a long business plan but to communicate the experience clearly — what is it, what will the " +
+          "visitor do, why is it special, and what local value does it create?</p>" +
+          "<h3>The bridge generation</h3>" +
+          "<p>The presentation closes with the idea of a \"Bridge Generation\": people who understand the " +
+          "digital world but still have roots in village life. How can digital skills make rural culture more " +
+          "visible without replacing the people, practices and values that make the place distinctive?</p>" +
+          "<h3>Applied learning activity: Nambawan Experience Design and 1-Minute Pitch</h3>" +
+          "<p>Design one island agritourism concept. Complete: name/hook, target visitor, one hands-on action, " +
+          "one Kastom story or knowledge element, one takeaway, the before–during–after journey and a " +
+          "60-second spoken pitch. (Worksheet 6.)</p>" +
+          "<h3>Self-check</h3>" +
+          "<ul>" +
+          "<li>I can structure an experience across before, during and after stages.</li>" +
+          "<li>I can complete the Hook – Action – Kastom – Takeaway framework.</li>" +
+          "<li>I can explain my concept in one minute without losing the local value proposition.</li>" +
+          "</ul>" +
+          "<h3>Module summary and proficiency test</h3>" +
+          "<p>A 10-question test follows to check understanding of the module. Suggested scoring: 8–10 correct " +
+          "= strong understanding; 6–7 = acceptable, review the units linked to incorrect answers; 0–5 = review " +
+          "the module before retaking the test.</p>",
         quiz: {
           questions: [
-            draftQuestion("m3-q1", "Which elements of the European agritourism model are transferable to Pacific islands?"),
-            draftQuestion("m3-q2", "What is the first step in planning an agritourism business?"),
-            draftQuestion("m3-q3", "How does agritourism support rural culture?"),
+            {
+              id: "m3-q1",
+              question: "Which statement best describes Agritourism 2.0 in this module?",
+              options: [
+                "A tourism model based only on accommodation near farms",
+                "A combination of agriculture, tourism and experience/education that moves visitors from watching to doing",
+                "A certification system for organic farms",
+                "A digital marketing strategy for rural hotels",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q2",
+              question: "What is the main idea behind the presentation's \"boring routine\" paradox?",
+              options: [
+                "Routine farm work should be hidden from visitors",
+                "Everyday local practices can be memorable for visitors when they are interpreted and experienced safely",
+                "Visitors are interested only in unusual technology",
+                "Farmers should replace daily work with staged entertainment",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q3",
+              question: "Which three pillars are used to structure an authentic agritourism experience?",
+              options: ["Price – Promotion – Place", "Product – Culture – People", "Food – Hotel – Transport", "Farm – City – Beach"],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q4",
+              question: "In the Madonan Farm Park case, \"learning by playing\" is illustrated by:",
+              options: [
+                "Only selling raw agricultural products",
+                "Simulated and hands-on activities such as milking, animal feeding and a tractor-train",
+                "Replacing farm activities with online videos",
+                "Limiting visitors to guided observation only",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q5",
+              question: "Which is an example of business diversification shown in the Madonan case?",
+              options: [
+                "School programmes, birthday events and summer camps",
+                "Closing the farm outside harvest season",
+                "Selling only one raw product",
+                "Removing educational activities",
+              ],
+              correctIndex: 0,
+            },
+            {
+              id: "m3-q6",
+              question: "What is the key idea of the Lišov Museum case?",
+              options: [
+                "Rural heritage should remain closed to outsiders",
+                "A living museum can connect cultural heritage, education, exchange and community functions",
+                "Only large museums can attract international visitors",
+                "Natural buildings should not be reused for visitor services",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q7",
+              question: "What is the role of the \"small café\" in the Lišov case?",
+              options: [
+                "Only to sell imported products",
+                "To act as a social hub where locals and visitors can meet and connect with the region",
+                "To replace the museum",
+                "To function only as staff facilities",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q8",
+              question: "What does the module mean by a digital footprint?",
+              options: [
+                "The number of steps a visitor walks on a farm",
+                "The online visibility of a place through maps, reviews, social media and basic visitor information",
+                "A legal registration for tourism businesses",
+                "A type of agricultural sensor",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m3-q9",
+              question: "In the Design Your Island Experience workshop, which sequence describes the visitor journey?",
+              options: ["Before – During – After", "Price – Product – Promotion", "Map – Review – Booking", "Farm – Hotel – Airport"],
+              correctIndex: 0,
+            },
+            {
+              id: "m3-q10",
+              question: "Which four elements form the Nambawan Experience Challenge?",
+              options: [
+                "Hook – Action – Kastom – Takeaway",
+                "Price – Ticket – Hotel – Transport",
+                "Product – Patent – Platform – Payment",
+                "Farm – Food – Flight – Feedback",
+              ],
+              correctIndex: 0,
+            },
           ],
         },
       },
     ],
     supplementaryMaterials: [
-      draftMaterial("m3-mat1", "checklist", "Checklist: steps to launch a small agritourism offer", "TBD from NewEdu"),
-      draftMaterial("m3-mat2", "case-study", "Visit to Teouma Valley Farm (owner Michelle Prendergast, Vanuatu)", "Real video — https://www.youtube.com/watch?v=VEl-GhijywA"),
-      draftMaterial("m3-mat3", "worksheet", "Worksheet: mapping the visitor experience", "TBD from NewEdu"),
-      draftMaterial("m3-mat4", "photo-story", "Making traditional LapLap at Api Farm (Vanuatu)", "Real video — https://www.youtube.com/watch?v=QBAcjsRyPPE"),
-      draftMaterial("m3-mat5", "case-study", "Visit to Api Farm (Vanuatu)", "Real video — https://www.youtube.com/watch?v=LW6aKTMrj2E"),
-      draftMaterial("m3-mat6", "case-study", "Visit to 83 Islands Distillery (Vanuatu)", "Real video — https://www.youtube.com/watch?v=ArKrksl_gpM"),
-      draftMaterial("m3-mat7", "case-study", "Visit to Gaston Chocolat factory (owner Olivier, Vanuatu)", "Real video — https://www.youtube.com/watch?v=5elGIW1SzuY"),
-      draftMaterial("m3-mat8", "case-study", "Visit to Tanna Coffee (Vanuatu)", "Real video, no transcript — https://www.youtube.com/watch?v=YGhmIqbmyWY"),
-      draftMaterial("m3-mat9", "interview-video", "Interview: Million Dollar Point Restaurant and Bar (Vanuatu)", "Real video — https://www.youtube.com/watch?v=rzYGbEQi1u4"),
+      {
+        id: "m3-mat1",
+        type: "fact-sheet",
+        title: "Module glossary",
+        note: "Real content — D3.2 Module 3 Scripts & Annexes, Section 2",
+        body:
+          "<dl>" +
+          MODULE3_GLOSSARY.map(({ term, definition }) => `<dt>${term}</dt><dd>${definition}</dd>`).join("") +
+          "</dl>",
+        glossaryGame: MODULE3_GLOSSARY,
+      },
+      worksheetMaterialM3("m3-mat2", "Worksheet 1 – Everyday-to-Experience Audit", [
+        "Local activity / product / routine",
+        "Why locals consider it ordinary",
+        "Why a visitor may find it interesting",
+        "What the visitor could safely do",
+        "What the visitor learns",
+        "Who explains or hosts it",
+        "Possible takeaway or memory",
+        "Reflection — what part of the experience is genuinely local?",
+        "Reflection — what would need to be simplified or explained to a first-time visitor?",
+        "Reflection — what could make the activity unsafe, disrespectful or difficult to deliver?",
+      ]),
+      worksheetMaterialM3("m3-mat3", "Worksheet 2 – Product – Culture – People Canvas", [
+        "Product",
+        "Culture / story / practice",
+        "People / host",
+        "Hands-on visitor action",
+        "Key learning point",
+        "What should not be shared publicly",
+        "Takeaway / memory",
+        "Reflection — does the experience depend on all three pillars?",
+        "Reflection — what would be lost if the cultural story was removed?",
+        "Reflection — how will the local community remain in control of the story?",
+      ]),
+      worksheetMaterialM3("m3-mat4", "Worksheet 3 – Attraction and Diversification Design", [
+        "Rural site / farm",
+        "Learning-by-doing attraction",
+        "Target visitor",
+        "Educational programme or event",
+        "Value-added product",
+        "Safety / accessibility consideration",
+        "Local benefit",
+        "Reflection — which element creates the strongest reason to visit?",
+        "Reflection — which element creates income beyond the basic visit?",
+        "Reflection — which idea can realistically be delivered with existing resources?",
+      ]),
+      worksheetMaterialM3("m3-mat5", "Worksheet 4 – Living Heritage and Social Hub Canvas", [
+        "Heritage asset / building / practice",
+        "What visitors can see or learn",
+        "Interactive or educational element",
+        "Community role",
+        "Possible small social-hub function",
+        "Local product / service connection",
+        "Permission / sensitivity check",
+        "Reflection — how does the idea keep heritage active rather than static?",
+        "Reflection — how can local people benefit even when they are not tourists?",
+        "Reflection — what cultural boundary must be respected?",
+      ]),
+      worksheetMaterialM3("m3-mat6", "Worksheet 5 – Digital Footprint Starter Plan", [
+        "Experience / business name",
+        "One-sentence description",
+        "Map / location information",
+        "Contact method",
+        "Five essential photos",
+        "Primary social channel",
+        "Review / map channel",
+        "Monthly update routine",
+        "Reflection — can a visitor understand what you offer in two minutes?",
+        "Reflection — can they find you easily?",
+        "Reflection — which information will become outdated fastest?",
+      ]),
+      worksheetMaterialM3("m3-mat7", "Worksheet 6 – Nambawan Experience and 1-Minute Pitch", [
+        "Experience name / Hook",
+        "Target visitor",
+        "Hands-on Action",
+        "Kastom / cultural story or knowledge",
+        "Takeaway",
+        "Before the visit",
+        "During the visit",
+        "After the visit",
+        "Three main barriers in your context",
+        "One practical response to each barrier",
+        "Reflection — can you explain the experience in 60 seconds?",
+        "Reflection — is the visitor doing something, not only watching?",
+        "Reflection — is the local cultural value clear and respectfully presented?",
+      ]),
+      {
+        id: "m3-mat8",
+        type: "checklist",
+        title: "How island communities can start",
+        note: "Real content — D3.2 Module 3 Learning Content, \"How Island Communities Can Start\"",
+        checklistItems: [
+          "Start with what already exists — one product, activity, story, landscape feature, traditional skill or routine that is real and available",
+          "Add the cultural meaning — how ancestors used it, what story is connected with it, what should visitors understand",
+          "Identify the people — decide who can explain, demonstrate or host the activity",
+          "Create one hands-on action — something safe and realistic the visitor can do",
+          "Define the takeaway — a product, skill, recipe, story, photograph, souvenir or new understanding",
+          "Make it discoverable — a basic digital footprint with accurate information, location, photos and contact details",
+          "Test and improve — try the experience with a small group, collect feedback and improve before expanding it",
+        ],
+      },
+      draftMaterial("m3-mat9", "case-study", "Visit to Teouma Valley Farm (owner Michelle Prendergast, Vanuatu)", "Real video — https://www.youtube.com/watch?v=VEl-GhijywA"),
+      draftMaterial("m3-mat10", "photo-story", "Making traditional LapLap at Api Farm (Vanuatu)", "Real video — https://www.youtube.com/watch?v=QBAcjsRyPPE"),
+      draftMaterial("m3-mat11", "case-study", "Visit to Api Farm (Vanuatu)", "Real video — https://www.youtube.com/watch?v=LW6aKTMrj2E"),
+      draftMaterial("m3-mat12", "case-study", "Visit to 83 Islands Distillery (Vanuatu)", "Real video — https://www.youtube.com/watch?v=ArKrksl_gpM"),
+      draftMaterial("m3-mat13", "case-study", "Visit to Gaston Chocolat factory (owner Olivier, Vanuatu)", "Real video — https://www.youtube.com/watch?v=5elGIW1SzuY"),
+      draftMaterial("m3-mat14", "case-study", "Visit to Tanna Coffee (Vanuatu)", "Real video, no transcript — https://www.youtube.com/watch?v=YGhmIqbmyWY"),
+      draftMaterial("m3-mat15", "interview-video", "Interview: Million Dollar Point Restaurant and Bar (Vanuatu)", "Real video — https://www.youtube.com/watch?v=rzYGbEQi1u4"),
     ],
-    references: ["TBD — reference list to be provided by partner NewEdu"],
+    references: [
+      "AGRI-TOUR New Edu presentation: Promoting Rural Culture in Islands — How to Import the Agritourism Model in the Pacific Islands? (New Edu, n.o., prepared for the AGRI-TOUR Vanuatu Capacity Building)",
+      "Case study: Madonan Farm Park, Kľačany, Slovakia",
+      "Case study: Lišov Museum, Lišov, Slovakia — Gallery of Masks and living-heritage village initiative",
+      "AGRI-TOUR Vanuatu farm and producer visits: Teouma Valley Farm, Api Farm, 83 Islands Distillery, Gaston Chocolat, Tanna Coffee, Million Dollar Point Restaurant and Bar (where available on the project platform)",
+    ],
   },
   {
     id: "m4",
