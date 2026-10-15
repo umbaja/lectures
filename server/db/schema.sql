@@ -9,6 +9,15 @@ create table if not exists participants (
   consent_at timestamptz not null default now()
 );
 
+-- Email confirmation (so a certificate can't be claimed under an email the
+-- registrant doesn't actually control) and a short public id used to build a
+-- shareable certificate link (LinkedIn "Add to Profile", Facebook, etc.)
+-- without exposing the participant's email in the URL.
+alter table participants add column if not exists email_verified boolean not null default false;
+alter table participants add column if not exists verification_token text;
+alter table participants add column if not exists verification_token_expires timestamptz;
+alter table participants add column if not exists certificate_id text unique;
+
 create table if not exists progress (
   participant_email text not null references participants(email),
   lesson_id text not null,

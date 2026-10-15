@@ -853,6 +853,55 @@ h3 {
   border-bottom: 1px solid var(--border);
 }
 
+.certificate-share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9rem;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.share-btn.linkedin {
+  background: #0a66c2;
+}
+
+.share-btn.facebook {
+  background: #1877f2;
+}
+
+.share-btn.download {
+  background: var(--leaf);
+}
+
+.verification-notice {
+  background: rgba(120, 171, 70, 0.15);
+  border: 1px solid var(--leaf);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.registration-error {
+  color: #dc2626;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+}
+
 @media print {
   .sidebar,
   .mark-done {

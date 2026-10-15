@@ -19,9 +19,25 @@ import {
   PASS_SCORE,
 } from "./progress";
 import { VideoController } from "./video-player";
-import { getParticipant, isRegistered, registerParticipant, clearParticipant } from "./participant";
-import { syncParticipant, syncProgress, syncCheckpointAnswer, syncVideoWatch } from "./backend";
-import { renderCertificateView } from "./certificate";
+import {
+  getParticipant,
+  isRegistered,
+  isFullyVerified,
+  registerParticipant,
+  clearParticipant,
+  markEmailVerified,
+  setCertificateId,
+} from "./participant";
+import {
+  syncParticipant,
+  syncProgress,
+  syncCheckpointAnswer,
+  syncVideoWatch,
+  verifyEmail,
+  isBackendConfigured,
+  getPublicCertificate,
+} from "./backend";
+import { renderCertificateView, renderPublicCertificateView } from "./certificate";
 import { getWorksheetAnswers, getCheckedItems, saveWorksheetAnswer, setChecklistItem } from "./worksheets";
 import { logCheckpointAnswer, recordVideoWatch, markVideoWatched, isVideoWatched } from "./video-analytics";
 import { getMicroQuizAnswer, saveMicroQuizAnswer } from "./micro-quiz";
@@ -44,6 +60,7 @@ const CERTIFICATE_VIEW = "certificate";
 let currentLessonId: string = lessons[0]?.id ?? "";
 let lastQuizResult: { lessonId: string; text: string } | null = null;
 let mountedVideoLessonId: string | null = null;
+let pendingVerificationNotice: string | null = null;
 const checkpointAttempts = new Map<string, number>();
 
 /** Persist (and sync, if registered) watch stats for whatever video is currently mounted. */
@@ -65,6 +82,10 @@ function render() {
   videoController.destroy();
   const participant = getParticipant();
   const currentLesson = currentLessonId === CERTIFICATE_VIEW ? undefined : findLesson(course, currentLessonId);
+  const verificationNoticeHtml = pendingVerificationNotice
+    ? `<p class="verification-notice">${escapeHtml(pendingVerificationNotice)}</p>`
+    : "";
+  pendingVerificationNotice = null;
   app.innerHTML = `
     <div class="layout">
       <aside class="sidebar">
@@ -77,6 +98,7 @@ function render() {
           <div class="progress-bar-fill" style="width:${progressPercent()}%"></div>
         </div>
         <p class="progress-label">${completionCount()} / ${lessons.length} lessons completed</p>
+        ${verificationNoticeHtml}
         <div class="account-status">
           ${
             participant
@@ -154,6 +176,10 @@ function render() {
 
   app.querySelector<HTMLButtonElement>("[data-print-certificate]")?.addEventListener("click", () => {
     window.print();
+  });
+
+  app.querySelector<HTMLButtonElement>("[data-download-certificate-image]")?.addEventListener("click", () => {
+    if (participant) downloadCertificateImage(course.title, participant.name);
   });
 
   const markDoneBtn = app.querySelector<HTMLButtonElement>("[data-mark-done]");
@@ -310,6 +336,89 @@ function downloadWorksheet(worksheetId: string, title: string) {
   URL.revokeObjectURL(url);
 }
 
+function downloadCertificateImage(courseTitle: string, participantName: string) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1600;
+  canvas.height = 1131;
+  const ctx = canvas.getContext("2d")!;
+
+  ctx.fillStyle = "#faf7f0";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = "#005bac";
+  ctx.lineWidth = 10;
+  ctx.strokeRect(40, 40, canvas.width - 80, canvas.height - 80);
+  ctx.strokeStyle = "#78ab46";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(62, 62, canvas.width - 124, canvas.height - 124);
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#78ab46";
+  ctx.font = "italic 32px Georgia, serif";
+  ctx.fillText("Certificate of Completion", canvas.width / 2, 240);
+
+  ctx.fillStyle = "#1a1a1a";
+  ctx.font = "700 46px Georgia, serif";
+  wrapCenteredText(ctx, courseTitle, canvas.width / 2, 320, canvas.width - 320, 56);
+
+  ctx.font = "28px Georgia, serif";
+  ctx.fillStyle = "#444444";
+  ctx.fillText("is awarded to", canvas.width / 2, 540);
+
+  ctx.font = "700 60px Georgia, serif";
+  ctx.fillStyle = "#005bac";
+  ctx.fillText(participantName, canvas.width / 2, 630);
+
+  ctx.font = "24px Georgia, serif";
+  ctx.fillStyle = "#444444";
+  wrapCenteredText(
+    ctx,
+    `for completing all 8 modules of the AGRI-TOUR MOOC, passing every module proficiency test with a score of ${PASS_SCORE}% or higher.`,
+    canvas.width / 2,
+    720,
+    canvas.width - 420,
+    34,
+  );
+
+  const today = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  ctx.font = "22px Georgia, serif";
+  ctx.fillStyle = "#1a1a1a";
+  ctx.fillText(today, canvas.width / 2, 900);
+
+  ctx.font = "16px sans-serif";
+  ctx.fillStyle = "#78ab46";
+  ctx.fillText("AGRI-TOUR — Erasmus+ CBHE — Co-funded by the European Union", canvas.width / 2, 1040);
+
+  const url = canvas.toDataURL("image/png");
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${participantName.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}-agritour-certificate.png`;
+  a.click();
+}
+
+function wrapCenteredText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  centerX: number,
+  startY: number,
+  maxWidth: number,
+  lineHeight: number,
+) {
+  const words = text.split(" ");
+  let line = "";
+  let y = startY;
+  for (const word of words) {
+    const testLine = line ? `${line} ${word}` : word;
+    if (ctx.measureText(testLine).width > maxWidth && line) {
+      ctx.fillText(line, centerX, y);
+      line = word;
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  if (line) ctx.fillText(line, centerX, y);
+}
+
 function completeLesson(lessonId: string) {
   markLessonComplete(lessonId);
   const participant = getParticipant();
@@ -327,10 +436,10 @@ function findModule(lesson: Lesson): Module {
 function renderLesson(lesson: Lesson, module: Module): string {
   const isFirst = module.lessons[0]?.id === lesson.id;
   const isLast = module.lessons[module.lessons.length - 1]?.id === lesson.id;
-  const needsGate = Boolean(lesson.quiz) && !isRegistered();
-  // For a registered participant, a lesson with an AI summary prompt (and no quiz) is
-  // completed only by the AI's verdict — no self-service "Mark as completed" button.
-  const aiControlsCompletion = Boolean(lesson.aiSummaryPrompt) && !lesson.quiz && isRegistered();
+  const needsGate = Boolean(lesson.quiz) && !isFullyVerified();
+  // For a registered, email-confirmed participant, a lesson with an AI summary prompt
+  // (and no quiz) is completed only by the AI's verdict — no self-service "Mark as completed" button.
+  const aiControlsCompletion = Boolean(lesson.aiSummaryPrompt) && !lesson.quiz && isFullyVerified();
   return `
     <article>
       ${isFirst ? renderModuleIntro(module) : ""}
@@ -376,7 +485,7 @@ function renderRegistrationGate(heading: string, body: string, buttonLabel: stri
 }
 
 function renderAiSummarySection(lesson: Lesson): string {
-  if (!isRegistered()) {
+  if (!isFullyVerified()) {
     return renderRegistrationGate(
       "Write a short summary",
       "Registered participants write a short summary of this lesson; it is checked and the lesson is marked " +
@@ -448,20 +557,108 @@ function showRegistrationModal(onDone: () => void) {
   const form = overlay.querySelector<HTMLFormElement>("[data-registration-form]")!;
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const data = new FormData(form);
-    const participant = registerParticipant({
-      name: String(data.get("name") ?? ""),
-      email: String(data.get("email") ?? ""),
-      wantsCertificate: data.get("wantsCertificate") !== null,
-    });
-    void syncParticipant(participant);
-    overlay.remove();
-    onDone();
+    void handleRegistrationSubmit(form, overlay, onDone);
   });
 
   overlay.querySelector<HTMLButtonElement>("[data-cancel-registration]")?.addEventListener("click", () => {
     overlay.remove();
   });
+}
+
+async function handleRegistrationSubmit(form: HTMLFormElement, overlay: HTMLElement, onDone: () => void) {
+  const data = new FormData(form);
+  const participant = registerParticipant({
+    name: String(data.get("name") ?? ""),
+    email: String(data.get("email") ?? ""),
+    wantsCertificate: data.get("wantsCertificate") !== null,
+  });
+
+  if (!isBackendConfigured()) {
+    // No backend to confirm the email against — don't block local-only use (e.g. local dev).
+    console.warn("[AGRI-TOUR] No backend configured — skipping email confirmation requirement.");
+    markEmailVerified(participant.email);
+    overlay.remove();
+    onDone();
+    return;
+  }
+
+  const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Registering…";
+
+  const result = await syncParticipant(participant);
+
+  if (!result) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Register";
+    let errorEl = form.querySelector<HTMLElement>(".registration-error");
+    if (!errorEl) {
+      errorEl = document.createElement("p");
+      errorEl.className = "registration-error";
+      form.insertBefore(errorEl, form.querySelector(".checkpoint-actions"));
+    }
+    errorEl.textContent = "Couldn't reach the server — check your connection and try again.";
+    return;
+  }
+
+  if (result.emailVerified) {
+    markEmailVerified(participant.email, result.certificateId);
+    overlay.remove();
+    onDone();
+    return;
+  }
+
+  setCertificateId(result.certificateId);
+  const modal = overlay.querySelector<HTMLElement>(".checkpoint-modal")!;
+  modal.innerHTML = `
+    <h3>Check your email</h3>
+    <p>We sent a confirmation link to <strong>${escapeHtml(participant.email)}</strong>. Click it to unlock the
+    module tests${participant.wantsCertificate ? " and your certificate" : ""} — browsing lessons and materials
+    stays free either way.</p>
+    ${result.emailSent ? "" : `<p class="registration-error">We couldn't confirm the email was actually sent — try "Resend" below if it doesn't arrive.</p>`}
+    <div class="checkpoint-actions">
+      <button type="button" data-resend-verification class="secondary">Resend email</button>
+      <button type="button" data-close-registration>Close</button>
+    </div>
+  `;
+  modal.querySelector<HTMLButtonElement>("[data-close-registration]")?.addEventListener("click", () => {
+    overlay.remove();
+    onDone();
+  });
+  modal.querySelector<HTMLButtonElement>("[data-resend-verification]")?.addEventListener("click", async (ev) => {
+    const btn = ev.currentTarget as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    await syncParticipant(participant);
+    btn.textContent = "Email sent";
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = "Resend email";
+    }, 4000);
+  });
+}
+
+/** Handles a `?verify=TOKEN&email=...` link from the confirmation email, then cleans the URL. */
+async function handleEmailVerificationLink() {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("verify");
+  const email = params.get("email");
+  if (!token || !email) return;
+
+  history.replaceState(null, "", window.location.pathname);
+
+  const result = await verifyEmail(token, email);
+  const participant = getParticipant();
+  if (result.ok && participant?.email === email.trim().toLowerCase()) {
+    markEmailVerified(email, result.certificateId);
+    pendingVerificationNotice = "✓ Email confirmed! Module tests are now unlocked.";
+  } else if (result.ok) {
+    // Confirmed on the server, but this browser doesn't have that participant registered locally
+    // (e.g. link opened in a different browser than the one used to register).
+    pendingVerificationNotice = "✓ Email confirmed. Register again in this browser to unlock the tests here.";
+  } else {
+    pendingVerificationNotice = "That confirmation link is invalid or has expired — request a new one by registering again.";
+  }
 }
 
 function renderModuleIntro(module: Module): string {
@@ -943,4 +1140,29 @@ function escapeAttr(str: string): string {
   return escapeHtml(str).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
-render();
+/**
+ * A `?cert=ID` link (shared on LinkedIn/Facebook/Instagram) opens a public, read-only certificate
+ * view instead of the normal app — no login, no local participant state involved.
+ */
+async function renderPublicCertificatePage(certificateId: string) {
+  const data = await getPublicCertificate(certificateId);
+  app.innerHTML = `
+    <div class="layout layout-public-certificate">
+      <main class="content">
+        ${renderPublicCertificateView(data)}
+      </main>
+    </div>
+  `;
+}
+
+async function boot() {
+  const certificateId = new URLSearchParams(window.location.search).get("cert");
+  if (certificateId) {
+    await renderPublicCertificatePage(certificateId);
+    return;
+  }
+  await handleEmailVerificationLink();
+  render();
+}
+
+void boot();
