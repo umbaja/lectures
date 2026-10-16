@@ -1105,7 +1105,17 @@ const modules: Module[] = [
           "difference between the \"marketing\" front of pack and the \"legal\" back of pack, the mandatory " +
           "highlighting of the 14 major allergens, the standardised nutrition table per 100 g/100 ml, the " +
           "difference between \"best before\" and \"use by\", the rules for claims such as \"low fat\", and the " +
-          "ban on greenwashing.</p>",
+          "ban on greenwashing.</p>" +
+          "<p>Two further rules close the gap between marketing and fact. The <strong>QUID rule</strong> " +
+          "(Quantitative Ingredient Declaration) means that if an ingredient is highlighted on the packaging — " +
+          "e.g. a picture of strawberries — its exact percentage must be stated, so a product cannot imply it " +
+          "is fruit-rich from 1% real fruit. Voluntary nutrition and health claims (e.g. \"low fat\", \"high in " +
+          "protein\") are only allowed when they meet strict, legally defined numerical thresholds, and any " +
+          "claim linking a food to a health benefit must be scientifically vetted and pre-authorised by the " +
+          "<strong>European Food Safety Authority (EFSA)</strong> before it can appear on a label. The law also " +
+          "bans claiming a \"special characteristic\" that is actually standard for the whole category — " +
+          "marketing plain apples as \"Fat-Free\" is misleading, because it implies other apples might contain " +
+          "fat.</p>",
         video: {
           youtubeId: "cdZjNwPuvNA",
           checkpoints: [
@@ -1194,7 +1204,11 @@ const modules: Module[] = [
           "strictest — the whole process from raw materials to final ageing must take place within the " +
           "region) and PGI, the difference between a geographical indication as a public good and a trademark " +
           "as private property, and the link to tourism — a geographical indication as \"the best marketing " +
-          "brochure\" a rural area can have.</p>",
+          "brochure\" a rural area can have.</p>" +
+          "<p>A third, less common scheme is <strong>TSG (Traditional Speciality Guaranteed)</strong>, which " +
+          "protects a traditional recipe or production method rather than a place — a TSG pizza or TSG " +
+          "mozzarella can be made in a different city, as long as it follows the traditional technique. PDO and " +
+          "PGI protect the link to the land; TSG protects the know-how itself.</p>",
         video: {
           youtubeId: "t9lKXrs3Ew4",
           checkpoints: [
@@ -1238,7 +1252,12 @@ const modules: Module[] = [
           "<p>This lecture presents the principle of transparency as a legal obligation (not just an ethical " +
           "choice), its historical context (the BSE crisis in the 1990s and the emergence of the traceability " +
           "principle), the key FIC regulation (EU No. 1169/2011), and the ban on misleading claims including " +
-          "greenwashing.</p>",
+          "greenwashing.</p>" +
+          "<p>The lecture also explains the <strong>\"Brussels Effect\"</strong>: because the EU is one of the " +
+          "world's largest consumer markets, multinational food companies often find it easier to align their " +
+          "entire global production with strict EU transparency standards than to maintain different labels " +
+          "for different regions — so EU rules on scientific validation of claims and clear definitions (like " +
+          "\"organic\") become a de facto blueprint well beyond Europe's borders.</p>",
         video: {
           youtubeId: "eyr5AMNnoP0",
           checkpoints: [
@@ -1301,93 +1320,113 @@ const modules: Module[] = [
           questions: [
             {
               id: "m2-q1",
-              question: "Which two main EU \"stamps\" for geographical indications does the GI lecture mention?",
-              options: ["PDO and PGI", "ISO and CE", "Organic and Fairtrade", "GMP and HACCP"],
-              correctIndex: 0,
+              question: "Under Regulation (EU) No 1169/2011 (FIC Regulation), how must ingredients be listed on an EU food package?",
+              options: [
+                "Alphabetically by technical and chemical name",
+                "In descending order of weight as recorded at the time of their use",
+                "Grouped strictly by caloric contribution and fat density",
+                "In ascending order of cost and market availability",
+              ],
+              correctIndex: 1,
             },
             {
               id: "m2-q2",
-              question: "According to the lecture, what is the main difference between a geographical indication (GI) and a trademark?",
+              question: "Which European authority is legally tasked with scientifically vetting and authorizing health claims before they can appear on commercial food packaging?",
               options: [
-                "A GI is a public good; a trademark is private commercial property",
-                "A GI only applies outside the EU",
-                "A trademark is always more expensive",
-                "There is no difference between them",
+                "European Medicines Agency (EMA)",
+                "European Commission Directorate-General for Trade (DG TRADE)",
+                "European Food Safety Authority (EFSA)",
+                "European Environmental Agency (EEA)",
               ],
-              correctIndex: 0,
+              correctIndex: 2,
             },
             {
               id: "m2-q3",
-              question: "What must be bolded or capitalised on a food label?",
-              options: ["The 14 major allergens", "The distributor's name", "The time of manufacture", "The certifying agency's logo"],
+              question: "What is the core regulatory and practical difference between \"Use by\" and \"Best before\" date markings on European food products?",
+              options: [
+                "\"Use by\" relates to microbial safety (a hard cutoff), whereas \"Best before\" refers to organoleptic quality and texture",
+                "\"Use by\" is mandatory exclusively for canned foods, while \"Best before\" is applied solely to fresh meats",
+                "\"Use by\" indicates when a product can be sold at a discount, whereas \"Best before\" defines disposal requirements for retailers",
+                "Both terms are legally interchangeable and serve as advisory quality suggestions for consumers",
+              ],
               correctIndex: 0,
             },
             {
               id: "m2-q4",
-              question: "In what unit must the mandatory nutrition table be presented?",
-              options: ["Per 100 g or 100 ml", "Per serving, as defined by the manufacturer", "Per whole package", "Per day"],
-              correctIndex: 0,
+              question: "Under EU Geographical Indication (GI) law, which scheme requires that all stages of production, processing, and preparation take place exclusively within a defined geographical area?",
+              options: [
+                "Protected Geographical Indication (PGI)",
+                "Traditional Speciality Guaranteed (TSG)",
+                "Protected Designation of Origin (PDO)",
+                "Recognized Territorial Brand (RTB)",
+              ],
+              correctIndex: 2,
             },
             {
               id: "m2-q5",
-              question: "What is the difference between \"use by\" and \"best before\"?",
+              question: "What is the main function of the Quantitative Ingredient Declaration (QUID) rule?",
               options: [
-                "\"Use by\" is about safety; \"best before\" is about quality and food waste",
-                "They are the same date in a different language",
-                "\"Best before\" only applies to beverages",
-                "\"Use by\" is just a recommendation with no legal meaning",
+                "Mandating that all 14 major allergens constitute less than 5% of the total net volume",
+                "Stating the percentage of an ingredient on the label when it is highlighted in text, pictorial representations, or the product's legal name",
+                "Certifying that packaging material is composed of at least 80% recycled fibers",
+                "Calculating the exact transport emissions generated along the product supply chain",
               ],
-              correctIndex: 0,
+              correctIndex: 1,
             },
             {
               id: "m2-q6",
-              question: "Which EU regulation does the lecture call the cornerstone of food information transparency?",
+              question: "How does the \"Brussels Effect\" influence commercial food labeling and transparency outside the borders of the European Union?",
               options: [
-                "Regulation (EU) No 1169/2011 (FIC)",
-                "The GDPR",
-                "The VAT directive",
-                "The REACH regulation",
+                "It mandates that third countries sign treaties adopting European criminal codes for food fraud",
+                "It forces non-EU nations to print labels exclusively in English and French",
+                "Multinational producers align global production with stringent EU standards to avoid fragmenting manufacturing operations",
+                "It bans the import of any food item that contains non-European native agricultural crops",
               ],
-              correctIndex: 0,
+              correctIndex: 2,
             },
             {
               id: "m2-q7",
-              question: "Which historical event does the lecture link to the EU's strict food traceability rules?",
+              question: "Why is marketing a package of standard, fresh apples as \"Fat-Free\" considered deceptive under Article 7 of the FIC Regulation?",
               options: [
-                "The BSE (\"mad cow disease\") crisis in the 1990s",
-                "The 2008 financial crisis",
-                "The COVID-19 pandemic",
-                "Slovakia's accession to the EU",
+                "Fresh produce cannot display nutritional claims under any circumstance",
+                "It suggests the food possesses unique characteristics when, in fact, all comparable foods naturally share that same attribute",
+                "Fresh fruit contains trace lipids that legally classify it as a moderate-fat item",
+                "The claim must always be accompanied by an EFSA clinical trial authorization",
               ],
-              correctIndex: 0,
+              correctIndex: 1,
             },
             {
               id: "m2-q8",
-              question: "What is misleading advertising claiming \"100% eco-friendly\" without independent certification called?",
-              options: ["Greenwashing", "Rebranding", "Upcycling", "Downgrading"],
+              question: "How does the \"Traditional Speciality Guaranteed\" (TSG) designation differ from Protected Designation of Origin (PDO) and Protected Geographical Indication (PGI)?",
+              options: [
+                "TSG protects the traditional method, recipe, or know-how regardless of where the food is physically produced",
+                "TSG applies exclusively to wine, spirits, and alcoholic beverages",
+                "TSG allows multinational companies to trademark agricultural recipes as private intellectual property",
+                "TSG is granted by municipal authorities rather than European institutions",
+              ],
               correctIndex: 0,
             },
             {
               id: "m2-q9",
-              question: "How does the GI lecture describe a geographical indication in relation to rural tourism?",
+              question: "Why does the mandatory nutrition declaration on EU food labels require standardized values per 100 grams or 100 milliliters?",
               options: [
-                "As the best marketing brochure a rural area can have",
-                "As an administrative obstacle for small producers",
-                "As a tool meant exclusively for large-scale production",
-                "The lecture says GI is unrelated to tourism",
+                "Because European food portions are legally restricted to 100 grams",
+                "To prevent deceptive manufacturer-defined serving sizes and enable direct, objective comparisons across products",
+                "Because European laboratory instruments cannot measure quantities smaller than 100 grams",
+                "To discourage consumers from purchasing bulk and multi-pack items",
               ],
-              correctIndex: 0,
+              correctIndex: 1,
             },
             {
               id: "m2-q10",
-              question: "Which \"disciplinare\" (set of regional rules) must the new wine label from Cantina Sociale di Lù, mentioned in the case study, still respect?",
+              question: "According to the lecture, how do Geographical Indications (GIs) and transparent labeling support rural economies and rural tourism?",
               options: [
-                "The region's specification rules, which cannot be bypassed even with a new label design",
-                "Only internal company guidelines with no legal force",
-                "An EU packaging directive",
-                "None — label design is entirely free",
+                "They allow local producers to bypass regional environmental protection directives",
+                "They convert traditional names into public cultural assets that capture added value, combat depopulation, and stimulate gastronomic tourism",
+                "They subsidize urban food retailers who stock rural produce at low price points",
+                "They replace the requirement for transparent ingredient lists with national flags",
               ],
-              correctIndex: 0,
+              correctIndex: 1,
             },
           ],
         },
@@ -1401,6 +1440,8 @@ const modules: Module[] = [
     ],
     references: [
       "Regulation (EU) No 1169/2011 on the provision of food information to consumers (FIC)",
+      "Regulation (EC) No 1924/2006 on nutrition and health claims made on foods",
+      "Regulation (EU) No 1151/2012 on quality schemes for agricultural products and foodstuffs (PDO/PGI/TSG)",
       "AGRI-TOUR YouTube: \"The anatomy of a food label\", \"Decoding the EU food label\", \"Geographical indications in the European food sector\", \"The principle of transparency in agri food commercial communication\"",
     ],
   },
