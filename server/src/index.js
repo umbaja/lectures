@@ -341,7 +341,16 @@ const port = process.env.PORT || 3000;
 migrate()
   .then(() => {
     console.log("Database schema is up to date.");
-    app.listen(port, () => console.log(`AGRI-TOUR API listening on port ${port}`));
+    app.listen(port, () => {
+      console.log(`AGRI-TOUR API listening on port ${port}`);
+      const from = process.env.EMAIL_FROM || "";
+      if (!from || from.includes("@resend.dev")) {
+        console.warn(
+          "EMAIL_FROM is not set to an address on a Resend-verified domain — Resend will only deliver " +
+            "confirmation emails to the Resend account owner, not to participants. See docs/deploy-railway-backend.md.",
+        );
+      }
+    });
   })
   .catch((err) => {
     console.error("Migration failed — not starting the server:", err);

@@ -29,6 +29,27 @@ lesson 4.1. The backend's source is in `server/` in this repo.
 2. Add `ANTHROPIC_API_KEY` with your key from
    <https://console.anthropic.com/>.
 
+## 3b. Set up confirmation emails (Resend)
+
+Participants confirm their email through a link the backend sends via
+[Resend](https://resend.com). **Without a verified sending domain, Resend
+only delivers to the email address of the Resend account owner** — every
+other participant silently gets nothing (the Railway logs show a
+`Resend API error: 403` for them). To send to everyone:
+
+1. In Resend → **Domains** → **Add Domain**, add a domain you control
+   (e.g. `agritour-project.eu` or a subdomain like `mail.agritour-project.eu`).
+2. Add the DNS records Resend shows (SPF/DKIM, optionally DMARC) at your
+   domain's DNS provider and wait until Resend marks the domain **Verified**.
+3. In Railway → backend service → **Variables**, set:
+   - `RESEND_API_KEY` — an API key from Resend → **API Keys**.
+   - `EMAIL_FROM` — a sender on the verified domain, e.g.
+     `AGRI-TOUR MOOC <noreply@agritour-project.eu>`.
+   - `FRONTEND_URL` — the public course URL the link should open, e.g.
+     `https://umbaja.github.io/lectures` (no trailing slash).
+4. Railway redeploys automatically. Register on the site with an address
+   that is *not* the Resend account owner's and check the email arrives.
+
 ## 4. Deploy and get the public URL
 
 1. Railway deploys automatically on every push to `main` once connected.
