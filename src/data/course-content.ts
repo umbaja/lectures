@@ -13,10 +13,9 @@ import type { Course, Module, SupplementaryMaterial } from "../course";
  * list. Everything marked as a draft below is still awaiting the
  * module-owner partner's sign-off before Pilot Release v0.9.
  *
- * Note: the Application Form lists M2's owner as UNISG (University of
- * Gastronomic Sciences, Pollenzo); the D3.2 guidelines table instead says
- * "UNICATT" for the same module. Kept as UNISG here (grant is authoritative)
- * — worth double-checking with the project team which is correct.
+ * Note: M2's owner is UCSC (Università Cattolica del Sacro Cuore, also
+ * abbreviated "UNICATT" in the D3.2 guidelines table), confirmed by the
+ * project team. An earlier version wrongly listed it as UNISG.
  */
 
 function draftQuestion(id: string, question: string): {
@@ -1087,8 +1086,8 @@ const modules: Module[] = [
     ],
   },  {
     id: "m2",
-    title: "Module 2: Cultural sustainability of food (UNISG)",
-    owner: "UNISG",
+    title: "Module 2: Cultural sustainability of food (UCSC)",
+    owner: "UCSC",
     intro:
       "This module addresses the cultural sustainability of food and the role food labels and designations of " +
       "origin play in agritourism. Students will learn why transparency about the origin of food matters for " +
@@ -1435,8 +1434,8 @@ const modules: Module[] = [
     supplementaryMaterials: [
       draftMaterial("m2-mat1", "case-study", "Interview: Matteo Currò, cellarman at Cantina Sociale di Lù (Monferrato, IT)", "Real video, in Italian (no English subtitles) — https://www.youtube.com/watch?v=7YVOr0FCDuo"),
       draftMaterial("m2-mat2", "case-study", "Interview: Luca Gatti, president of Corilù (hazelnuts, Piedmont, IT)", "Real video, in Italian (no English subtitles) — https://www.youtube.com/watch?v=pOdY1ixwqtU"),
-      draftMaterial("m2-mat3", "infographic", "Infographic: types of food origin designations in the EU and the Pacific", "TBD from UNISG"),
-      draftMaterial("m2-mat4", "checklist", "Checklist: how to read a food label and verify origin", "TBD from UNISG"),
+      draftMaterial("m2-mat3", "infographic", "Infographic: types of food origin designations in the EU and the Pacific", "TBD from UCSC"),
+      draftMaterial("m2-mat4", "checklist", "Checklist: how to read a food label and verify origin", "TBD from UCSC"),
     ],
     references: [
       "Regulation (EU) No 1169/2011 on the provision of food information to consumers (FIC)",
