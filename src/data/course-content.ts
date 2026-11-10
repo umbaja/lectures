@@ -1086,7 +1086,7 @@ const modules: Module[] = [
     ],
   },  {
     id: "m2",
-    title: "Module 2: Cultural sustainability of food (UCSC)",
+    title: "Module 2: Cultural sustainability of food through Food Labels (UCSC)",
     owner: "UCSC",
     intro:
       "This module addresses the cultural sustainability of food and the role food labels and designations of " +

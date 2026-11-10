@@ -31,7 +31,7 @@ otherwise. Course content itself is in English.
 | # | Module | Owner |
 |---|---|---|
 | 1 | Neuroscience of Food | IVI |
-| 2 | Cultural sustainability of food | UCSC (Università Cattolica del Sacro Cuore; "UNICATT" in D3.2) — **not** UNISG |
+| 2 | Cultural sustainability of food through Food Labels | UCSC (Università Cattolica del Sacro Cuore; "UNICATT" in D3.2) — **not** UNISG |
 | 3 | Promoting Rural Culture in Islands | NewEdu |
 | 4 | Precision Agriculture for Micro-Farms | SUA |
 | 5 | Samoan Culture of Food | NUS |
