@@ -198,6 +198,23 @@ function worksheetMaterialM5(id: string, title: string, fields: string[]): Suppl
   };
 }
 
+/** Key terms from the UCSC Module 2 annex ("Key terminology & EU regulatory framework"). */
+const MODULE2_GLOSSARY: Array<{ term: string; definition: string }> = [
+  { term: "FIC Regulation (EU) No 1169/2011", definition: "The foundational EU act governing food labelling, legibility, allergens, origin declarations and consumer protection" },
+  { term: "Regulation (EC) No 1924/2006", definition: "Harmonises nutrition and health claims such as \"low fat\" or \"rich in vitamin C\"; claims need scientific substantiation evaluated by EFSA" },
+  { term: "Farm to Fork Strategy", definition: "A European Green Deal programme accelerating the transition to fair, healthy and environmentally friendly food systems" },
+  { term: "Brussels Effect", definition: "EU standards becoming de facto global standards because multinationals harmonise products to keep access to the EU market" },
+  { term: "Information asymmetry", definition: "An imbalance where producers know a product's composition, origin and safety, while consumers have limited access to this data" },
+  { term: "QUID", definition: "Quantitative Ingredients Declaration: the percentage of an ingredient must be stated if it is named, highlighted visually or characterises the food" },
+  { term: "Traceability", definition: "\"One step back, one step forward\": identifying the immediate supplier of an ingredient and the immediate business customer of the product" },
+  { term: "\"Use by\" date", definition: "A safety deadline for perishable products; eating food after it risks foodborne illness" },
+  { term: "\"Best before\" date", definition: "A quality indicator; food remains safe after it but may lose flavour, crispness or colour" },
+  { term: "Greenwashing", definition: "Marketing with vague, unsubstantiated or self-invented environmental claims or symbols without verified third-party criteria" },
+  { term: "PDO", definition: "Protected Designation of Origin: every production step takes place in the defined region" },
+  { term: "PGI", definition: "Protected Geographical Indication: at least one production, processing or preparation stage takes place in the defined area" },
+  { term: "TSG", definition: "Traditional Speciality Guaranteed: protects a traditional recipe or method, not a place" },
+];
+
 const modules: Module[] = [
   {
     id: "m1",
@@ -1157,32 +1174,116 @@ const modules: Module[] = [
     title: "Module 2: Cultural sustainability of food through Food Labels (UCSC)",
     owner: "UCSC",
     intro:
-      "This module addresses the cultural sustainability of food and the role food labels and designations of " +
-      "origin play in agritourism. Students will learn why transparency about the origin of food matters for " +
-      "visitor trust, how geographical indications and certifications of traditional products work, and how " +
-      "producer stories strengthen the value of a destination. The module draws on the principles of the Slow " +
-      "Food movement and shows how to combine tradition with innovation when communicating local food to " +
-      "visitors.",
+      "This module looks at food labels as a tool of cultural sustainability: a legally regulated channel through " +
+      "which producers tell consumers — and visitors — what a food is, where it comes from and how it was made. " +
+      "Based on UCSC lectures, it explains the principle of transparency in agri-food communication and the EU " +
+      "Food Information to Consumers (FIC) Regulation, takes a food label apart section by section, and shows " +
+      "what producers are forbidden from claiming, including greenwashing. It then introduces the EU quality " +
+      "schemes (PDO, PGI and TSG) that protect traditional products as collective rural heritage, and shows how " +
+      "transparent labels and geographical indications build visitor trust and drive gastronomic and rural " +
+      "tourism. Two producer stories from Monferrato (Italy) and a practical label audit bring the rules to " +
+      "life.",
     lessons: [
       {
         id: "m2-l1",
         title: "2.1 The anatomy of a food label",
-        content:
-          "<p>This lecture treats the food label as a legal document, not just a piece of packaging: the " +
-          "difference between the \"marketing\" front of pack and the \"legal\" back of pack, the mandatory " +
-          "highlighting of the 14 major allergens, the standardised nutrition table per 100 g/100 ml, the " +
-          "difference between \"best before\" and \"use by\", the rules for claims such as \"low fat\", and the " +
-          "ban on greenwashing.</p>" +
-          "<p>Two further rules close the gap between marketing and fact. The <strong>QUID rule</strong> " +
-          "(Quantitative Ingredient Declaration) means that if an ingredient is highlighted on the packaging — " +
-          "e.g. a picture of strawberries — its exact percentage must be stated, so a product cannot imply it " +
-          "is fruit-rich from 1% real fruit. Voluntary nutrition and health claims (e.g. \"low fat\", \"high in " +
-          "protein\") are only allowed when they meet strict, legally defined numerical thresholds, and any " +
-          "claim linking a food to a health benefit must be scientifically vetted and pre-authorised by the " +
-          "<strong>European Food Safety Authority (EFSA)</strong> before it can appear on a label. The law also " +
-          "bans claiming a \"special characteristic\" that is actually standard for the whole category — " +
-          "marketing plain apples as \"Fat-Free\" is misleading, because it implies other apples might contain " +
-          "fat.</p>",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>read a food label as a legal document, distinguishing the marketing "front of pack" from the regulated "back of pack";</li>
+<li>explain the rationale behind the ingredient order, allergen highlighting, the QUID rule, the per-100 g nutrition table and date marking;</li>
+<li>describe how origin labelling and certified logos guide sustainable choices;</li>
+<li>identify claims that are allowed, and those that are banned (medical claims, misleading imagery, "special characteristics", greenwashing).</li>
+</ul>
+
+<h3>The label as a battleground</h3>
+<p>In the European Union a label is not just packaging: it is a highly regulated legal document, where the
+producer's wish to market the product meets the regulator's duty to protect the consumer. Every word, number and
+image on it is the result of legislation.</p>
+
+<h3>Front of pack vs. back of pack</h3>
+<ul>
+<li><strong>Front of pack (FOP) — the "hook".</strong> Designed for quick scanning (1–3 seconds on a shelf): brand, the legal name of the food, appetising pictures and the main marketing claims. It must still be truthful.</li>
+<li><strong>Back of pack (BOP) — the "truth".</strong> The highly regulated, technical zone with the mandatory declarations: ingredients, nutrition, origin.</li>
+</ul>
+<p>The rule for reading a label is simple: <strong>whatever the front promises, the back must prove</strong>. If you
+only read the front, you are reading an advertisement; if you read the back, you are reading the legal reality.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m2-l1-mq1"></div>
+
+<h3>Unpacking the ingredients</h3>
+<table>
+<thead><tr><th>Rule</th><th>Rationale</th></tr></thead>
+<tbody>
+<tr><td>Ingredients are listed in <strong>descending order of weight</strong>.</td><td>Prevents "filler deception": if a "Hazelnut Cocoa Spread" lists sugar and palm oil first, or a "Premium Beef Stew" lists water and potatoes before beef, the consumer instantly sees the true composition.</td></tr>
+<tr><td>The <strong>14 major allergens</strong> are visually emphasised (bold, capitals) in the ingredient list.</td><td>Public health: someone with a severe peanut or gluten allergy needs an immediate visual cue, not scientific names.</td></tr>
+<tr><td><strong>QUID</strong> (Quantitative Ingredient Declaration): if an ingredient is highlighted in words or pictures (e.g. "With Real Strawberries"), its exact percentage must be stated.</td><td>Stops a product from implying it is fruit-rich when it contains 1% real fruit.</td></tr>
+</tbody>
+</table>
+
+<h3>Nutrition tables and dates</h3>
+<p>The mandatory nutrition declaration — energy, fat, saturates, carbohydrate, sugars, protein and salt — is always
+given <strong>per 100 g or 100 ml</strong>. If companies gave values only per "serving", they could make the serving
+unrealistically small; per-100 g values let a consumer compare a 250 g bag of chips directly with a 50 g snack bar.</p>
+<ul>
+<li><strong>"Use by"</strong> — a strict safety deadline for highly perishable foods such as raw meat.</li>
+<li><strong>"Best before"</strong> — a quality indicator: the food is safe after this date but may lose flavour or texture.</li>
+</ul>
+<p>Distinguishing safety from quality is a key EU strategy against household food waste: misunderstanding these
+dates causes millions of tonnes of safe food to be thrown away every year.</p>
+
+<h3>How labels power the green transition</h3>
+<p>Consumers who want to buy sustainably need verified data. <strong>Country of origin</strong> lets them choose
+local, seasonal food and reduce "food miles". The <strong>EU Organic logo</strong> (the green leaf made of stars)
+guarantees strict environmental rules — no synthetic pesticides, high animal welfare, biodiversity protection — and
+<strong>certified eco-labels</strong> such as MSC (sustainable fishing) or Fairtrade turn an invisible supply chain
+into a simple visual cue. The label acts as a trusted proxy for the consumer's values.</p>
+
+<h3>Authorised claims and voluntary transparency</h3>
+<ul>
+<li><strong>Nutrition claims</strong> (Regulation (EC) No 1924/2006) are allowed only above legally defined thresholds — e.g. "low fat" means less than 3 g of fat per 100 g.</li>
+<li><strong>Health claims</strong> must be pre-authorised by the European Food Safety Authority (EFSA), e.g. "Calcium is needed for the maintenance of normal bones".</li>
+<li><strong>Voluntary transparency</strong> is encouraged: QR codes showing the farmer's story, the exact farm or a verified carbon footprint — as long as the information is accurate and does not clutter the mandatory information.</li>
+</ul>
+
+<h3>The "don'ts": misleading messages and greenwashing</h3>
+<ul>
+<li><strong>Medical claims are banned</strong> — food is not medicine; a food may not claim to prevent, treat or cure a disease ("cures arthritis").</li>
+<li><strong>Misleading imagery is banned</strong> — no pictures of fresh peaches on an iced tea that contains only synthetic peach flavouring.</li>
+<li><strong>Suggesting unique characteristics is banned</strong> — labelling apples "Fat-Free" or plain water "Gluten-Free" implies other similar products differ when they do not.</li>
+<li><strong>Greenwashing is banned</strong> — vague, unsubstantiated terms such as "100% Eco" or "Climate Friendly", or a green-painted pack, without official, scientifically backed certification.</li>
+</ul>
+
+<h3>Key takeaways</h3>
+<ul>
+<li>The label is a legal contract between producer and consumer.</li>
+<li>Mandatory information exists to protect health and prevent economic deception.</li>
+<li>Strict rules against misleading claims and greenwashing let consumers trust the sustainability and nutrition data they pay for.</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>Why is the ingredient list ordered by weight?</li>
+<li>When does the QUID rule apply?</li>
+<li>What is the difference between "use by" and "best before"?</li>
+<li>Give two examples of banned claims.</li>
+</ul>
+`,
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words): explain the difference between the front and the back of a " +
+          "food pack, and describe two rules (e.g. ingredient order, allergens, QUID, per-100 g nutrition, date " +
+          "marking) with the reason the law requires each.",
+        microQuizzes: [
+          {
+            id: "m2-l1-mq1",
+            question: "According to the lecture, where on a food pack does \"the truth\" live?",
+            options: [
+              "On the back of pack, in the regulated mandatory declarations",
+              "On the front of pack, next to the brand name",
+              "In the product photograph",
+              "In the price label on the shelf",
+            ],
+            correctIndex: 0,
+          },
+        ],
         video: {
           youtubeId: "cdZjNwPuvNA",
           checkpoints: [
@@ -1222,11 +1323,93 @@ const modules: Module[] = [
       {
         id: "m2-l2",
         title: "2.2 Decoding the EU food label",
-        content:
-          "<p>This lecture covers the three goals of EU labelling legislation (safety, information, fair " +
-          "competition), the mandatory categories (the food's legal name, the nutrition declaration, the date, " +
-          "origin labelling for fresh products) and the link between clear origin labelling and visitor trust " +
-          "on a farm.</p>",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>state the three objectives of EU food labelling law under the FIC Regulation;</li>
+<li>list the mandatory particulars of an EU food label;</li>
+<li>explain how origin labelling, the EU Organic logo and regulated eco-labels support sustainable choices;</li>
+<li>explain how a transparent label becomes a storytelling and trust tool for rural producers and agritourism.</li>
+</ul>
+
+<h3>The foundation of consumer trust</h3>
+<p>EU food labelling is governed by <strong>Regulation (EU) No 1169/2011 on Food Information to Consumers
+(FIC)</strong>. It rests on the principle that consumers have a fundamental right to know what they are eating, and
+it has three objectives:</p>
+<ul>
+<li><strong>Safety</strong> — protecting health, e.g. through allergen information and safe consumption dates;</li>
+<li><strong>Transparency</strong> — preventing misleading practices or fraud about what a product is and where it comes from;</li>
+<li><strong>Informed choice</strong> — giving consumers the data to align purchases with dietary, ethical and environmental values.</li>
+</ul>
+<p>The information must be visible, legible (with strict minimum font sizes) and indelible — not hidden in
+microscopic text.</p>
+
+<h3>The non-negotiable core data</h3>
+<ul>
+<li><strong>Name of the food</strong> — the legal or customary name, not just a marketing brand: a "chocolate-flavoured vegetable fat spread" must say so.</li>
+<li><strong>List of ingredients</strong> — in descending order of weight, with specific rules for compound ingredients and additives.</li>
+<li><strong>Allergens</strong> — the 14 major allergens (e.g. nuts, gluten, dairy, soy) emphasised in bold, italics or capitals within the ingredient list.</li>
+<li><strong>Net quantity</strong> — the exact weight or volume.</li>
+<li><strong>Nutrition declaration</strong> — energy, fat, saturates, carbohydrate, sugars, protein and salt per 100 g/100 ml, so products can be compared side by side.</li>
+<li><strong>Date of minimum durability</strong> — "use by" (highly perishable, safety risk) or "best before" (quality indicator, safe after the date).</li>
+<li><strong>Country of origin / place of provenance</strong> — mandatory for fresh meat, olive oil, honey and fresh produce, and whenever its omission would mislead the consumer.</li>
+<li><strong>Conditions of use and storage</strong> — instructions for safe handling.</li>
+</ul>
+<div class="micro-quiz-slot" data-micro-quiz-id="m2-l2-mq1"></div>
+
+<h3>Labels as tools for sustainability</h3>
+<p>You cannot make a green choice if you are kept in the dark. If a consumer in Italy sees that garlic comes from a
+neighbouring region rather than from across the globe, they can choose the local option and reduce food miles and
+carbon emissions. The <strong>EU Organic logo</strong> guarantees strict environmental practices, animal welfare and
+restricted use of pesticides and fertilisers, and voluntary environmental labels (carbon footprint, Fairtrade,
+sustainable fishing) are guided by strict EU anti-greenwashing rules — so that when consumers pay a premium for a
+sustainable product, their money really supports sustainable agriculture.</p>
+
+<h3>Beyond the badge: the label as a rural storytelling tool</h3>
+<p>Geographical indications such as PDO and PGI (Lesson 2.3) are not the only tools a small rural producer has. The
+mandatory data on a standard label is not "red tape" — it is a <strong>verified résumé</strong> of the product:</p>
+<ul>
+<li>a short ingredient list highlights the purity and farm-to-table nature of a rural product;</li>
+<li>clear origin labelling, even without a PDO/PGI, links the product to a specific landscape the visitor can see;</li>
+<li>production methods such as "cold-pressed" or "stone-ground" validate the artisanal skills of the rural host.</li>
+</ul>
+
+<h3>Transparency and the farm visitor</h3>
+<p>The heart of rural tourism is trust. Labels let tourists cross-check what they see on the farm with the official
+product data; open labelling invites questions and dialogue between farmer and visitor; producers who go beyond the
+minimum practise an <strong>"open-book" policy</strong> that signals honesty and pride. If the label matches the
+reality of the farm visit, trust is solidified — and the visitor keeps buying the product online or in shops long
+after the holiday ends, becoming a lifelong "brand ambassador".</p>
+
+<h3>Key takeaways</h3>
+<ul>
+<li>EU labelling laws ensure safety, transparency and fairness.</li>
+<li>Clear information lets consumers drive demand towards sustainable and ethical food systems.</li>
+<li>Transparent labels and geographical indications protect rural heritage and are a catalyst for rural tourism.</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>What are the three objectives of the FIC Regulation?</li>
+<li>For which products is the country of origin mandatory?</li>
+<li>How can a standard label act as a "verified résumé" for a farm product?</li>
+</ul>
+`,
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words): name the three objectives of EU labelling law and explain how a " +
+          "transparent label can build trust between a rural producer and a farm visitor.",
+        microQuizzes: [
+          {
+            id: "m2-l2-mq1",
+            question: "When is the country of origin mandatory on an EU label, besides fresh meat, olive oil, honey and fresh produce?",
+            options: [
+              "Whenever its omission would mislead the consumer",
+              "Only when the product is exported outside the EU",
+              "Only for organic products",
+              "Never — it is always voluntary",
+            ],
+            correctIndex: 0,
+          },
+        ],
         video: {
           youtubeId: "AKSFlA7IE4Q",
           checkpoints: [
@@ -1266,16 +1449,95 @@ const modules: Module[] = [
       {
         id: "m2-l3",
         title: "2.3 Geographical indications (PDO/PGI) and rural tourism",
-        content:
-          "<p>This lecture explains how a product name can become legally protected property: PDO (the " +
-          "strictest — the whole process from raw materials to final ageing must take place within the " +
-          "region) and PGI, the difference between a geographical indication as a public good and a trademark " +
-          "as private property, and the link to tourism — a geographical indication as \"the best marketing " +
-          "brochure\" a rural area can have.</p>" +
-          "<p>A third, less common scheme is <strong>TSG (Traditional Speciality Guaranteed)</strong>, which " +
-          "protects a traditional recipe or production method rather than a place — a TSG pizza or TSG " +
-          "mozzarella can be made in a different city, as long as it follows the traditional technique. PDO and " +
-          "PGI protect the link to the land; TSG protects the know-how itself.</p>",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>explain how a geographical indication (GI) is registered and who owns it;</li>
+<li>distinguish PDO, PGI and TSG and give examples of each;</li>
+<li>explain the economic value of GIs for producers and rural communities;</li>
+<li>compare GIs with trademarks, certification marks and territorial brands;</li>
+<li>describe how GIs drive gastronomic and rural tourism.</li>
+</ul>
+
+<h3>Establishing authenticity</h3>
+<p>In Europe food is not just a commodity; it is cultural heritage. GIs turn a product's name into a legally
+protected asset. The legal basis is <strong>Regulation (EU) No 1151/2012</strong> (with the 2024 updates). A GI is
+born from the producers themselves:</p>
+<ol>
+<li><strong>Producer group</strong> — producers agree on a <em>product specification</em>, the rules detailing exactly how the product is made;</li>
+<li><strong>National phase</strong> — the Member State reviews the application;</li>
+<li><strong>European phase</strong> — the European Commission checks compliance and handles oppositions.</li>
+</ol>
+<p>Once registered, the name is protected across the EU and often globally through trade deals.
+<strong>Collective ownership</strong> is the crucial point: no single company owns "Prosciutto di Parma" — it is a
+right of every producer in the region who follows the code.</p>
+
+<h3>PDO, PGI and TSG</h3>
+<table>
+<thead><tr><th>Scheme</th><th>Core definition</th><th>Link to geography</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td><strong>PDO</strong> — Protected Designation of Origin</td><td>Food produced, processed and prepared in a specific area using recognised know-how</td><td>100% of the chain: raw materials and every production step take place in the defined region</td><td>Parmigiano Reggiano, Kalamata olive oil, Roquefort</td></tr>
+<tr><td><strong>PGI</strong> — Protected Geographical Indication</td><td>Food with a quality, reputation or other characteristic attributable to its origin</td><td>At least one stage of production, processing or preparation takes place in the area</td><td>Aceto Balsamico di Modena, Schwarzwälder Schinken, Bayerisches Bier, Scottish salmon</td></tr>
+<tr><td><strong>TSG</strong> — Traditional Speciality Guaranteed</td><td>Safeguards a traditional recipe, production method or craftsmanship</td><td>Method-based: not tied to a place</td><td>Pizza Napoletana, Mozzarella, Jamón Serrano</td></tr>
+</tbody>
+</table>
+<p>PDO and PGI protect the link to the land; TSG protects the know-how itself — a TSG pizza can be made in another
+city, as long as it follows the traditional technique.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m2-l3-mq1"></div>
+
+<h3>Why GIs matter for producers</h3>
+<ul>
+<li><strong>Premium pricing</strong> — consumers pay significantly more for a guaranteed origin; GIs prevent a "race to the bottom" in which producers must cut quality to cut prices.</li>
+<li><strong>Market protection</strong> — legal tools against "evocation", when a generic product uses a name that sounds like a protected one.</li>
+<li><strong>Local reinvestment</strong> — the added value stays in the area, supporting small farmers who could not compete on price alone, sustaining jobs and preventing depopulation.</li>
+<li><strong>Export power</strong> — GIs account for roughly 15% of total EU food and drink exports.</li>
+</ul>
+
+<h3>A global comparison</h3>
+<p>Many countries outside the EU, such as the USA and Australia, traditionally use <strong>collective trademarks or
+certification marks</strong> instead of GIs. A trademark is private property that must be renewed; a GI is a
+public, collective asset — "like a monument" — that lasts as long as the link to the land exists. Many regions also
+create <strong>territorial brands</strong> (e.g. "Made in Tuscany"): useful for marketing, but not the legal
+"fortress" against imitation that a PDO provides.</p>
+
+<h3>From the plate to the place</h3>
+<p>A GI is <strong>the best marketing brochure a rural area can have</strong>. It gives a region a face — Chianti,
+Champagne — and turns food into a cultural ambassador: a PDO cheese on a supermarket shelf in Berlin or Paris
+represents a small village in Greece or Italy. Consumers who trust and love a product travel to see where it is
+made, which creates agritourism synergies: direct sales at the farm gate, educational tours of wineries and dairies,
+tasting rooms, farm stays and festivals dedicated to protected products. The result is a <strong>virtuous
+cycle</strong>: label trust → product discovery → tourism → economic investment in rural areas that might
+otherwise face depopulation.</p>
+
+<h3>Key takeaways</h3>
+<ul>
+<li>GIs are more than labels: they are tools for economic resilience and cultural preservation.</li>
+<li>They allow traditional products to survive in a globalised market.</li>
+<li>The label is a consumer's shortcut to quality and ethics — "a promise of history, quality and place".</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>Who writes the product specification of a GI, and who owns the protected name?</li>
+<li>What is the difference between PDO and PGI? What does TSG protect?</li>
+<li>Why is a GI described as "the best marketing brochure a rural area can have"?</li>
+</ul>
+`,
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words): explain the difference between PDO, PGI and TSG with one example " +
+          "each, and describe how a geographical indication can attract tourists to a rural area.",
+        microQuizzes: [
+          {
+            id: "m2-l3-mq1",
+            question: "Which scheme protects a traditional recipe or method rather than a place?",
+            options: [
+              "TSG — Traditional Speciality Guaranteed",
+              "PDO — Protected Designation of Origin",
+              "PGI — Protected Geographical Indication",
+              "A territorial brand such as \"Made in Tuscany\"",
+            ],
+            correctIndex: 0,
+          },
+        ],
         video: {
           youtubeId: "t9lKXrs3Ew4",
           checkpoints: [
@@ -1315,16 +1577,95 @@ const modules: Module[] = [
       {
         id: "m2-l4",
         title: "2.4 The principle of transparency in food communication",
-        content:
-          "<p>This lecture presents the principle of transparency as a legal obligation (not just an ethical " +
-          "choice), its historical context (the BSE crisis in the 1990s and the emergence of the traceability " +
-          "principle), the key FIC regulation (EU No. 1169/2011), and the ban on misleading claims including " +
-          "greenwashing.</p>" +
-          "<p>The lecture also explains the <strong>\"Brussels Effect\"</strong>: because the EU is one of the " +
-          "world's largest consumer markets, multinational food companies often find it easier to align their " +
-          "entire global production with strict EU transparency standards than to maintain different labels " +
-          "for different regions — so EU rules on scientific validation of claims and clear definitions (like " +
-          "\"organic\") become a de facto blueprint well beyond Europe's borders.</p>",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>define transparency in agri-food commercial communication and explain the "trust deficit" it addresses;</li>
+<li>explain traceability and the EU's Farm to Fork vision;</li>
+<li>describe the core rules of the FIC Regulation, including Article 7;</li>
+<li>identify the EU rules that ban misleading and unfair practices, including greenwashing;</li>
+<li>explain the "Brussels Effect" and the future of digital transparency.</li>
+</ul>
+
+<h3>Why transparency matters</h3>
+<p>Historically, the producer–consumer relationship suffered from <strong>information asymmetry</strong>: the
+producer knew everything about the product and the consumer very little. Transparency means providing clear,
+accurate and accessible information about what a product is, where it comes from and how it was made. Because global
+supply chains separate consumers physically and psychologically from farms, a <strong>trust deficit</strong> arises —
+and transparency is the bridge. Its goal is to empower consumers to make health, ethical and environmental choices,
+not choices based on price alone. Today it is not just an ethical choice: it is a legal requirement.</p>
+
+<h3>The EU's vision for food transparency</h3>
+<p>EU citizens expect high standards of safety, quality and animal welfare, shaped by past crises such as the
+<strong>BSE ("mad cow") outbreak</strong> in the 1990s. This led to a foundational rule:
+<strong>traceability</strong> — every food business must be able to trace its ingredients <em>one step back</em> to
+the supplier and <em>one step forward</em> to the buyer. Today transparency is guided by the <strong>Farm to Fork
+Strategy</strong>, at the heart of the European Green Deal, which aims for fair, healthy and environmentally friendly
+food systems. The core philosophy: <strong>the consumer has a fundamental right to know</strong>.</p>
+
+<h3>Food Information to Consumers: the cornerstone law</h3>
+<p><strong>Regulation (EU) No 1169/2011 (FIC)</strong> consolidates EU food labelling rules. Its
+<strong>Article 7</strong> states that food information must not be misleading as to the characteristics, nature,
+identity, properties or composition of a food; its quantity, durability, country of origin or place of provenance;
+or its method of manufacture or production. A producer may not suggest special characteristics that all similar
+foods share. And it is not enough for information to exist: it must be accurate, clear and easy to understand —
+hiding it in microscopic text or masking simple ingredients with scientific jargon violates the principle.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m2-l4-mq1"></div>
+
+<h3>The label as the frontline of transparency</h3>
+<ul>
+<li>the exact list of ingredients in descending order of weight;</li>
+<li>clear highlighting of the 14 major allergens — a matter of life and death;</li>
+<li>a full nutrition declaration;</li>
+<li>country of origin for fresh meat, olive oil and honey, and whenever omitting it would mislead — a jar of tomato sauce with an Italian flag but non-EU tomatoes must state the origin of the primary ingredient;</li>
+<li>legibility rules — minimum font sizes (usually 1.2 mm) to end the "fine print" deception.</li>
+</ul>
+
+<h3>Misleading and unfair practices</h3>
+<ul>
+<li>The <strong>Unfair Commercial Practices Directive (2005/29/EC)</strong> bans deceptive advertising and aggressive marketing.</li>
+<li>Under the <strong>Nutrition and Health Claims Regulation (EC) No 1924/2006</strong>, food may not claim to prevent, treat or cure a disease, and health claims (e.g. "good for your heart") must be scientifically proven and authorised by EFSA.</li>
+<li><strong>Greenwashing</strong> — falsely claiming environmental benefits, e.g. a green leaf and "Eco-friendly" on a pack without verifiable data — is increasingly treated as a banned, deceptive practice.</li>
+</ul>
+
+<h3>The "Brussels Effect"</h3>
+<p>The EU is one of the world's largest consumer markets, so multinational food companies often find it easier to
+align their entire global production with strict EU standards than to keep different labels for different regions.
+EU principles — scientific validation over marketing claims, standardised terms such as the legal definition of
+"organic", and data-driven consumer empowerment — thus become a de facto blueprint well beyond Europe. Looking
+ahead, physical labels are being augmented by <strong>digital transparency</strong>: QR codes and blockchain
+traceability that let consumers trace a product back to the field where it was grown.</p>
+
+<h3>Final thoughts</h3>
+<ul>
+<li>Transparency is the antidote to information asymmetry.</li>
+<li>In the EU it is enforced through rigorous labelling rules and strict bans on misleading health and environmental claims.</li>
+<li>For modern agri-food producers, transparency is no longer just a compliance issue: it is the ultimate currency of consumer trust — and a competitive advantage.</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>What is information asymmetry, and how does transparency reduce it?</li>
+<li>What does "one step back, one step forward" mean?</li>
+<li>What does Article 7 of the FIC Regulation prohibit?</li>
+<li>Why do EU rules influence food labels outside Europe?</li>
+</ul>
+`,
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words): explain why transparency in food communication is both a legal " +
+          "obligation and a competitive advantage for producers, using at least one EU rule from this lesson.",
+        microQuizzes: [
+          {
+            id: "m2-l4-mq1",
+            question: "What does the traceability rule \"one step back, one step forward\" require?",
+            options: [
+              "Identifying the immediate supplier of an ingredient and the immediate business customer of the product",
+              "Listing every farm a product has ever passed through on the label",
+              "Recalling all products one week after their \"best before\" date",
+              "Printing the producer's address on the front of pack",
+            ],
+            correctIndex: 0,
+          },
+        ],
         video: {
           youtubeId: "eyr5AMNnoP0",
           checkpoints: [
@@ -1359,30 +1700,79 @@ const modules: Module[] = [
       {
         id: "m2-l5",
         title: "2.5 Producer stories: from winemaking to hazelnuts",
-        content:
-          "<p>This lesson presents two real producer stories from the Monferrato region in Italy (the " +
-          "interviews themselves are in Italian — see the video linked under supplementary materials below).</p>" +
-          "<p><strong>Cantina Sociale di Lù</strong> — Matteo Currò, cellarman at a cooperative winery founded " +
-          "in 1906 (120 years in operation), presents a new rosé wine made using the old \"salasso\" (saignée) " +
-          "method. The new label was created together with a comic-strip artist from Alessandria and must " +
-          "respect the rules of the region's \"disciplinare\" (specification).</p>" +
-          "<p><strong>Corilù</strong> — Luca Gatti, president of a company specialising in hazelnuts, founded " +
-          "about 30 years ago by his grandfather in Piedmont. The company makes 100% hazelnut products as well " +
-          "as processed spreads (including a recipe with 60% hazelnut content) and recently refreshed its " +
-          "visual identity and communication, closely tied to the region and its supply chain. The lecture " +
-          "also mentions the historical origin of the \"gianduia\" recipe — pairing cocoa with Piedmont " +
-          "hazelnuts.</p>" +
-          "<p>Both companies put the principles from the earlier lessons into practice: a label bound to a " +
-          "regional specification (disciplinare), an emphasis on origin and supply-chain transparency, and the " +
-          "combination of tradition with innovation (a new label design, new recipes).</p>",
+        content: `<p>This lesson presents two real producer stories from the Monferrato region in Italy (the
+interviews themselves are in Italian — see the videos under supplementary materials below) and closes with a
+practical label audit.</p>
+
+<h3>Cantina Sociale di Lù</h3>
+<p>Matteo Currò, cellarman at a cooperative winery founded in 1906, presents a new rosé wine made using the old
+"salasso" (saignée) method. The new label was created together with a comic-strip artist from Alessandria and must
+respect the rules of the region's <em>disciplinare</em> (product specification).</p>
+
+<h3>Corilù</h3>
+<p>Luca Gatti, president of a company specialising in hazelnuts, founded about 30 years ago by his grandfather in
+Piedmont. The company makes 100% hazelnut products as well as processed spreads (including a recipe with 60%
+hazelnut content) and recently refreshed its visual identity and communication, closely tied to the region and its
+supply chain. The interview also mentions the historical origin of the <em>gianduia</em> recipe — pairing cocoa
+with Piedmont hazelnuts.</p>
+
+<p>Both companies put the principles of this module into practice: a label bound to a regional specification
+(disciplinare), an emphasis on origin and supply-chain transparency, and the combination of tradition with
+innovation (a new label design, new recipes). Note how a stated hazelnut percentage is exactly what the QUID rule
+requires when an ingredient is highlighted.</p>
+
+<h3>Practical exercise: audit a misleading label</h3>
+<p>Read the package description below and answer the five questions (Worksheet: label audit exercise, in the
+supplementary materials). The step-by-step label audit checklist will guide you.</p>
+<table>
+<thead><tr><th>Front of pack</th><th>Back of pack</th></tr></thead>
+<tbody>
+<tr><td>
+<strong>"GRANDMA MARIA'S WILD MOUNTAIN BLUEBERRY ELIXIR"</strong><br>
+Illustration: fresh blueberries picked in alpine meadows<br>
+Graphic: Italian tricolour ribbon<br>
+Banner: "100% Eco-Pure! Natural Medicine that cures hypertension &amp; prevents cardiovascular disease!"<br>
+Claim: "Totally Cholesterol-Free!"
+</td><td>
+<strong>Ingredients:</strong> Water, High-Fructose Corn Syrup, Sugar, Apple Juice Concentrate, Artificial Blueberry Flavouring, Citric Acid, Wheat Starch (thickener), Preservative (Sodium Benzoate).<br>
+<strong>Nutrition (per 25 ml single shot):</strong> Energy 90 kcal, Sugars 22 g<br>
+<strong>Origin:</strong> Manufactured and bottled in Germany. Apple concentrate from non-EU agriculture.
+</td></tr>
+</tbody>
+</table>
+<ol>
+<li><strong>Misleading name and visuals (Article 7 and QUID):</strong> what is deceptive about the name and fruit graphics in relation to the ingredient list, and how should the producer fix it?</li>
+<li><strong>Medical and nutrition claims:</strong> identify two illegal claims on the front of pack and explain why they violate EU rules.</li>
+<li><strong>Nutrition reference:</strong> what is wrong with the nutrition table?</li>
+<li><strong>Allergen alert:</strong> which allergen is present, and how must it be formatted?</li>
+<li><strong>Origin and flags:</strong> why does the Italian ribbon violate Article 26 of the FIC Regulation?</li>
+</ol>
+<details>
+<summary><strong>Show model answers</strong></summary>
+<ol>
+<li>The pack shows fresh alpine blueberries and calls the drink a "blueberry elixir", yet it contains no blueberries — only artificial blueberry flavouring and apple concentrate. Under Article 7, words and pictures must not mislead about the nature or composition of the food. The producer must remove the fresh-fruit imagery and describe the product as an artificially flavoured beverage; if real blueberries are added and highlighted, their exact percentage must be declared (QUID).</li>
+<li>"Natural Medicine that cures hypertension &amp; prevents cardiovascular disease" is an illegal disease claim — food is not medicine (FIC Article 7(3) and Regulation (EC) No 1924/2006). "Totally Cholesterol-Free" suggests a special characteristic that all similar plant- and water-based drinks share (Article 7(1)(c)), and "100% Eco-Pure" is greenwashing without recognised certification.</li>
+<li>Values are given only per 25 ml shot. The mandatory declaration must be per 100 g or 100 ml; per-portion data may only be added as voluntary extra information, never instead of it.</li>
+<li>Wheat starch — a cereal containing gluten, one of the 14 major allergens. It must be visually emphasised in the ingredient list, e.g. in bold or capitals: "...Citric Acid, <strong>Wheat</strong> Starch (thickener)...".</li>
+<li>The tricolour implies Italian origin, but the drink is made in Germany from non-EU apple concentrate. Under Article 26, flags or symbols that deceive about provenance are prohibited; where the origin of the primary ingredient differs from the implied origin, it must be clearly stated.</li>
+</ol>
+</details>
+`,
       },
       {
         id: "m2-l6",
         title: "2.6 Module summary and proficiency test",
-        content:
-          "<p>Module 2 summary: the food label as a legal document, geographical indications (PDO/PGI) and " +
-          "their link to rural tourism, the principle of transparency (the FIC regulation), and producer " +
-          "stories showing these principles in practice.</p>",
+        content: `<h3>Module summary</h3>
+<ul>
+<li><strong>Transparency</strong> is the antidote to information asymmetry. In the EU it is a legal obligation built on traceability ("one step back, one step forward"), the Farm to Fork vision and the FIC Regulation (EU) No 1169/2011, whose Article 7 bans misleading food information.</li>
+<li><strong>The label is a legal contract</strong>: the front of pack is the hook, the back of pack is the truth. Ingredients by weight, highlighted allergens, QUID, per-100 g nutrition, "use by" vs. "best before" and origin rules all protect health and prevent deception.</li>
+<li><strong>Banned practices</strong> include disease claims, misleading imagery, claiming characteristics all similar foods share, and greenwashing; health claims need EFSA authorisation.</li>
+<li><strong>PDO, PGI and TSG</strong> protect traditional products as collective rural heritage, support premium prices and local reinvestment, and drive gastronomic and rural tourism.</li>
+<li><strong>Transparent labels build trust</strong> between producers and visitors — the ultimate currency for farms, cooperatives and rural destinations.</li>
+</ul>
+<h3>Proficiency test</h3>
+<p>The test has 10 multiple-choice questions with one correct answer each. Pass mark: 7 out of 10.</p>
+`,
         quiz: {
           questions: [
             {
@@ -1502,13 +1892,76 @@ const modules: Module[] = [
     supplementaryMaterials: [
       draftMaterial("m2-mat1", "case-study", "Interview: Matteo Currò, cellarman at Cantina Sociale di Lù (Monferrato, IT)", "Real video, in Italian (no English subtitles) — https://www.youtube.com/watch?v=7YVOr0FCDuo"),
       draftMaterial("m2-mat2", "case-study", "Interview: Luca Gatti, president of Corilù (hazelnuts, Piedmont, IT)", "Real video, in Italian (no English subtitles) — https://www.youtube.com/watch?v=pOdY1ixwqtU"),
-      draftMaterial("m2-mat3", "infographic", "Infographic: types of food origin designations in the EU and the Pacific", "TBD from UCSC"),
-      draftMaterial("m2-mat4", "checklist", "Checklist: how to read a food label and verify origin", "TBD from UCSC"),
+      {
+        id: "m2-mat3",
+        type: "fact-sheet",
+        title: "Comparison of EU quality schemes: PDO, PGI and TSG",
+        note: "Real content — UCSC Module annex",
+        body: `<table>
+<thead><tr><th>Scheme</th><th>Core definition</th><th>Link to geography</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td>PDO — Protected Designation of Origin</td><td>Food produced, processed and prepared in a specific geographical area using recognised know-how</td><td>100% of the chain: raw materials and every production step take place strictly in the defined region</td><td>Parmigiano Reggiano, Kalamata olive oil, Roquefort</td></tr>
+<tr><td>PGI — Protected Geographical Indication</td><td>Food with a specific quality, reputation or other characteristic attributable to its geographical origin</td><td>At least one of the production, processing or preparation stages takes place in the defined area</td><td>Aceto Balsamico di Modena, Schwarzwälder Schinken</td></tr>
+<tr><td>TSG — Traditional Speciality Guaranteed</td><td>Safeguards traditional recipes, methods of production or artisanal craftsmanship without linking to a specific place</td><td>Method-based: not tied to a physical location</td><td>Pizza Napoletana, Jamón Serrano</td></tr>
+</tbody>
+</table>`,
+      },
+      {
+        id: "m2-mat4",
+        type: "checklist",
+        title: "Step-by-step label audit workflow (FIC Regulation)",
+        note: "Real content — UCSC Module annex",
+        checklistItems: [
+          "Step 1 — Accurate legal name: the product states its official or descriptive legal name, not only a brand (e.g. \"chocolate-flavoured vegetable fat spread\")",
+          "Step 1 — Net quantity: the volume (l, cl, ml) or mass (g, kg) is clearly legible",
+          "Step 1 — Legibility: mandatory text meets the EU minimum x-height (≥ 1.2 mm, or ≥ 0.9 mm if the largest surface is < 80 cm²)",
+          "Step 2 — Descending order of weight: ingredients run from heaviest to lightest at the time of manufacture",
+          "Step 2 — QUID: any ingredient emphasised in words, pictures or graphics on the front of pack has its exact percentage stated",
+          "Step 3 — 14 major allergens flagged: cereals containing gluten, crustaceans, eggs, fish, peanuts, soybeans, milk, nuts, celery, mustard, sesame, sulphur dioxide/sulphites, lupin, molluscs",
+          "Step 3 — Format distinction: allergens are emphasised with distinct typography (bold, CAPITALS, colour, underline) within the ingredient list",
+          "Step 4 — Date marking: \"use by\" for highly perishable foods with a microbiological risk; \"best before\" for shelf-stable foods",
+          "Step 4 — Storage instructions: temperature conditions are stated where required (e.g. \"keep refrigerated below XX °C after opening\")",
+          "Step 5 — Nutrition table per 100 g or 100 ml: energy, fat, saturates, carbohydrate, sugars, protein, salt",
+          "Step 5 — Country of origin: stated for fresh meat, honey, olive oil and fresh produce, and wherever flags or landmarks hint at a different origin than the primary ingredient's",
+          "Step 6 — No medicinal claims: the product never claims to treat, cure or prevent disease",
+          "Step 6 — Only authorised health and nutrition claims, in EFSA wording and within nutritional thresholds",
+          "Step 6 — No \"special characteristic\" claims that all similar foods share (e.g. raw apples \"Fat-Free\")",
+          "Step 6 — Anti-greenwashing: sustainability claims are backed by accredited third-party certification (e.g. EU Organic logo), not vague buzzwords",
+        ],
+      },
+      {
+        id: "m2-mat5",
+        type: "fact-sheet",
+        title: "Glossary: key terms and EU regulatory framework",
+        note: "Real content — UCSC Module annex",
+        body:
+          "<dl>" +
+          MODULE2_GLOSSARY.map(({ term, definition }) => `<dt>${term}</dt><dd>${definition}</dd>`).join("") +
+          "</dl>",
+        glossaryGame: MODULE2_GLOSSARY,
+      },
+      {
+        id: "m2-mat6",
+        type: "worksheet",
+        title: "Worksheet: label audit exercise — \"Grandma Maria's Wild Mountain Blueberry Elixir\" (see Lesson 2.5)",
+        note: "Real content — UCSC Module annex, practical exercise",
+        worksheetFields: [
+          "1. Misleading name and visuals (Article 7 and QUID) — what is deceptive, and how should the producer fix it?",
+          "2. Medical and nutrition claims — identify two illegal claims and explain why",
+          "3. Nutrition reference — what is wrong with the nutrition table?",
+          "4. Allergen alert — which allergen is present, and how must it be formatted?",
+          "5. Origin and flags — why does the Italian ribbon violate Article 26 of the FIC Regulation?",
+        ],
+      },
     ],
     references: [
+      "UCSC (Università Cattolica del Sacro Cuore), AGRI-TOUR MOOC module slides: The Principle of Transparency in Agri-Food Commercial Communication; Decoding the EU Food Label; The Anatomy of a Food Label; Geographical Indications (GIs) in the European Food Sector (D3.2)",
+      "UCSC, D3.2 Food Labelling — lecture scripts and annex (label audit workflow, terminology, quality schemes, practical exercise)",
       "Regulation (EU) No 1169/2011 on the provision of food information to consumers (FIC)",
       "Regulation (EC) No 1924/2006 on nutrition and health claims made on foods",
-      "Regulation (EU) No 1151/2012 on quality schemes for agricultural products and foodstuffs (PDO/PGI/TSG)",
+      "Regulation (EU) No 1151/2012 on quality schemes for agricultural products and foodstuffs (PDO/PGI/TSG), as updated in 2024",
+      "Directive 2005/29/EC on unfair business-to-consumer commercial practices",
+      "European Commission, Farm to Fork Strategy (European Green Deal)",
       "AGRI-TOUR YouTube: \"The anatomy of a food label\", \"Decoding the EU food label\", \"Geographical indications in the European food sector\", \"The principle of transparency in agri food commercial communication\"",
     ],
   },
