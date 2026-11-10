@@ -130,6 +130,74 @@ function worksheetMaterialM3(id: string, title: string, fields: string[]): Suppl
   };
 }
 
+/** Glossary from the NUS Module 5 document ("Samoan Culture of Food — Farm to table", Glossary). */
+const MODULE5_GLOSSARY: Array<{ term: string; definition: string }> = [
+  { term: "Fa'a Samoa", definition: "The Samoan way of life" },
+  { term: "Aiga", definition: "Extended family" },
+  { term: "Matai", definition: "Chief or titleholder who represents and leads a family" },
+  { term: "Nu'u", definition: "Village" },
+  { term: "Fono", definition: "Village council" },
+  { term: "Lotu", definition: "Church or worship" },
+  { term: "Tulafale", definition: "Orator chief, who often speaks for a chief or host at formal events" },
+  { term: "Fa'aaloalo", definition: "Respect" },
+  { term: "Alofa", definition: "Love, care, compassion" },
+  { term: "Tautua", definition: "Service to family, village and church" },
+  { term: "To'ona'i", definition: "The Sunday feast after church" },
+  { term: "Umu", definition: "Traditional earth oven using heated stones and leaves" },
+  { term: "Talo", definition: "Taro" },
+  { term: "Ta'amu", definition: "Giant taro" },
+  { term: "Ulu", definition: "Breadfruit" },
+  { term: "Fa'i", definition: "Banana" },
+  { term: "Ufi", definition: "Yam" },
+  { term: "Niu", definition: "Coconut" },
+  { term: "Lu'au", definition: "Young taro leaves" },
+  { term: "Palusami", definition: "Taro leaves baked with coconut cream" },
+  { term: "Oka", definition: "Raw fish marinated in citrus juice, with coconut cream" },
+  { term: "Koko Samoa", definition: "Samoan cocoa drink made from roasted local cocoa" },
+  { term: "Panipopo", definition: "Sweet bread rolls baked in coconut cream" },
+  { term: "Pisupo", definition: "Tinned corned beef" },
+  { term: "Palolo", definition: "Marine worm that rises once a year and is eaten as a delicacy" },
+  { term: "'Ava", definition: "Kava; the ceremonial drink served in order of rank" },
+  { term: "'Ie toga", definition: "Fine mats exchanged at important family events" },
+  { term: "Fa'alavelave", definition: "Family event or obligation involving the exchange of food, fine mats and money" },
+  { term: "Fa'ato'aga", definition: "Plantation" },
+  { term: "Malaga", definition: "Journey or visiting party" },
+  { term: "Sa", definition: "Evening prayer time observed in villages" },
+  { term: "Umete", definition: "Wooden bowl" },
+  { term: "Alia", definition: "Large double-hulled canoe" },
+  { term: "Pasifika Whole of Life", definition: "A holistic cultural framework emphasising balance, respect and community" },
+  { term: "Agritourism", definition: "Tourism focused on farming, food and cultural experiences" },
+  { term: "Benefit-sharing", definition: "Agreed distribution of income, credit and decisions with the community" },
+  { term: "Climate change", definition: "Long-term changes in the Earth's climate that affect people, plants, animals and the environment" },
+  { term: "Climate-smart", definition: "Farming and using resources in ways that prepare for climate change, protect the environment and support future food production" },
+  { term: "Commensality", definition: "Eating together as a social act" },
+  { term: "Cultural appropriation", definition: "Using a culture's elements without credit, consent or fair benefit" },
+  { term: "Farm-to-table", definition: "A short, transparent chain from producer to plate" },
+  { term: "Farm to Fork", definition: "EU strategy for fairer, healthier and more sustainable food systems" },
+  { term: "Foodways", definition: "Practices around growing, preparing, sharing and remembering food" },
+  { term: "Gastronomy tourism", definition: "Tourism in which the experience is linked to food and related activities" },
+  { term: "Intangible cultural heritage", definition: "Living knowledge, skills and practices passed between generations" },
+  { term: "Leakage", definition: "Income that leaves the local economy" },
+  { term: "Non-communicable disease (NCD)", definition: "Long-term diseases that are not passed between people, such as type 2 diabetes and heart disease" },
+  { term: "Nutrition transition", definition: "Shift from traditional diets to diets with many processed foods" },
+  { term: "Sense of place (terroir)", definition: "The link between a food's qualities and its environment and tradition" },
+  { term: "Staged authenticity", definition: "A performance that looks like everyday life but is arranged for visitors" },
+  { term: "Staple foods", definition: "Main foods that provide energy and nutrients, such as taro, breadfruit and seafood" },
+  { term: "Sustainability", definition: "Taking care of our resources today so they will still be available tomorrow" },
+  { term: "Value added", definition: "Turning a basic product into a more valuable product that can earn more income" },
+  { term: "Value chain", definition: "The steps that turn a crop or catch into a product, and the people involved" },
+];
+
+function worksheetMaterialM5(id: string, title: string, fields: string[]): SupplementaryMaterial {
+  return {
+    id,
+    type: "worksheet",
+    title,
+    note: "Real, fillable worksheet — NUS Module, Supplementary material S3",
+    worksheetFields: fields,
+  };
+}
+
 const modules: Module[] = [
   {
     id: "m1",
@@ -2866,22 +2934,120 @@ const modules: Module[] = [
     title: "Module 5: Samoan Culture of Food (NUS)",
     owner: "NUS",
     intro:
-      "This module introduces Samoan food culture, traditional crops such as taro and coconut, and their role " +
-      "in healthy nutrition and in a farm-to-table model. Students will learn how to connect culinary heritage " +
-      "with an agritourism offer, and how farms and plantations can become part of the visitor experience. The " +
-      "module emphasises preserving the food tradition as a form of cultural heritage and its value for both " +
-      "the local community and tourism.",
+      "Food in Samoa is far more than nourishment. It expresses respect, hospitality and belonging, and it ties " +
+      "families to the land and sea they care for. This module introduces Samoan food culture as a living " +
+      "heritage: the values of fa'a Samoa that shape how food is served and shared, the root crops, seafood and " +
+      "coconut at the heart of the traditional diet, the umu and the ceremonies around it, and the health and " +
+      "climate challenges facing the food system today. You will then explore how entrepreneurship, " +
+      "agritourism and farm-to-table experiences can bring people back to nutritious local food, support " +
+      "farmers and keep traditions alive, and you will design a respectful food experience of your own.",
     lessons: [
       {
         id: "m5-l1",
-        title: "5.1 Introduction to Samoan food culture",
-        content:
-          "<p>NUS's presentation: in the Samoan way of life, food is not only nutrition but also part of " +
-          "cultural tradition, social structure, respect and connection with the environment. At a Sunday " +
-          "meal, grandparents, parents and church leaders are served first, children wait patiently and learn " +
-          "discipline — hospitality is \"the heart\" of Samoan culture. Traditional food (taro, coconut, " +
-          "breadfruit, fish) reminds Samoans living abroad of their connection to the land and ocean of " +
-          "home.</p>",
+        title: "5.1 Food and Fa'a Samoa: Respect, Hospitality and Community",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>explain how food represents respect, hospitality, collective responsibility and identity in fa'a Samoa;</li>
+<li>describe the significance of serving chiefs, church leaders and other leaders first, and what this order says about social structure;</li>
+<li>identify locally grown and harvested foods as the cultural foundation of Samoan meals;</li>
+<li>explain why visitors to a Samoan community need to understand food protocol.</li>
+</ul>
+<p><em>Key terms:</em> fa'a Samoa, aiga, matai, nu'u, fa'aaloalo, alofa, tautua, to'ona'i, foodways, commensality.</p>
+
+<h3>Why start with food?</h3>
+<p>Think about the last meal that mattered to you. It was probably important not because of the calories, but
+because of who was there, who cooked it and what it meant. Scholars call the whole set of practices around food
+— growing, gathering, preparing, serving, sharing and remembering — <strong>foodways</strong>. Foodways are
+learned, not inherited, which is why a dish can feel ordinary to the host and extraordinary to a guest. A taro
+leaf, a coconut or a fish is a biological fact, but it is also a symbol: everyday food in one setting, a gift that
+honours someone in another. Visitors therefore do not simply buy a meal — they receive meanings, and anyone who
+hosts visitors shares a piece of culture that belongs to someone.</p>
+
+<h3>Fa'a Samoa in brief</h3>
+<p><em>Fa'a Samoa</em> means "the Samoan way", the way of life that organises family, village, church and land:</p>
+<ul>
+<li>the <strong>aiga</strong> (extended family) is the basic unit of life, often spanning many households and generations;</li>
+<li>the <strong>matai</strong> system gives each family and village leadership — matai hold titles on behalf of the family, represent it in the village council (<em>fono</em>) and are responsible for its welfare and land;</li>
+<li>the <strong>nu'u</strong> (village) is governed by its fono and by committees, including women's committees;</li>
+<li>the church (<em>lotu</em>) is central to village life, and Sunday worship shapes the weekly rhythm of meals.</li>
+</ul>
+<p>Three values run through all of these, and all three appear at the table:</p>
+<table>
+<thead><tr><th>Value</th><th>Meaning</th><th>How it appears in food</th></tr></thead>
+<tbody>
+<tr><td>Fa'aaloalo</td><td>Respect</td><td>Serving the right people first, in the right way; not eating before others are served</td></tr>
+<tr><td>Alofa</td><td>Love, care, compassion</td><td>Cooking for the family, feeding visitors well, sharing with those in need</td></tr>
+<tr><td>Tautua</td><td>Service</td><td>Younger or untitled members cooking, serving and working the plantation for the family and its leaders</td></tr>
+</tbody>
+</table>
+<p>The NUS outline adds the <strong>Pasifika Whole of Life</strong> framework, which stresses balance, respect and
+community — and food is one of the clearest places where this balance becomes visible.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m5-l1-mq1"></div>
+
+<h3>Food as respect: who is served first?</h3>
+<p>At formal meals and gatherings, the people honoured with the first and best food are (1) high chiefs and chiefs
+(matai), (2) church leaders and ministers, and (3) government leaders and other officials. The order is not a
+ranking of human worth: it acknowledges the responsibilities leaders carry for the family, the church and the
+community. Orators (<em>tulafale</em>) often speak for the host or chief when food is presented, and those who
+serve — often younger, untitled family members — show tautua through their work.</p>
+<p>The pattern is flexible in ways that reveal its logic. On <strong>White Sunday</strong> (Lotu a Tamaiti),
+children are the guests of honour and are served first by the adults; a visiting party (<em>malaga</em>) is
+likewise honoured through food. Two practical points: serving order is observed, not improvised — guests wait to
+be invited to eat; and respect includes quality and quantity — the best portions go to those being honoured.</p>
+
+<h3>Hospitality, generosity and collective responsibility</h3>
+<p>A family that receives guests is expected to feed them well, often with more than they can eat. Generosity
+brings honour; failing to host properly can bring embarrassment. Eating together as a social act is called
+<strong>commensality</strong>, and the weekly Sunday feast, the <strong>to'ona'i</strong>, is its best-known
+example: after church, families gather for the main meal of the week, often prepared in an umu. Generosity is
+also reciprocal — families give and, over time, receive.</p>
+<p>Many tasks behind a meal are shared: working the plantation (<em>fa'ato'aga</em>), fishing on the reef,
+gathering coconuts, preparing the umu and cooking. Collective responsibility has two sides: a
+<strong>strength</strong> (nobody is left without food, and knowledge passes on by working together) and a
+<strong>pressure</strong> (large gatherings and obligations can be costly for families). A good learner holds both
+facts in mind.</p>
+
+<h3>Food and identity</h3>
+<p>For Samoans at home and abroad, food is a marker of identity. Taro, palusami (taro leaves baked with coconut
+cream) or <em>oka</em> (raw fish with coconut cream) bring back memories of family and village; for the diaspora in
+New Zealand, Australia and the United States, cooking an umu or sharing a Sunday meal keeps fa'a Samoa alive far
+from home. Identity is also tied to the environment: the table cannot be understood without the plantation, the
+reef and the forest (Lesson 5.2).</p>
+
+<h3>Why this matters for agritourism</h3>
+<ul>
+<li><strong>Brief visitors before they arrive</strong> — how food is served, why leaders are served first, what behaviour is expected.</li>
+<li><strong>Do not stage hierarchy as a show without agreement</strong> — if it is demonstrated, the community decides how and says clearly that it is a demonstration.</li>
+<li><strong>Let hosts tell their own stories</strong> — the people who hold the knowledge explain what food means.</li>
+<li><strong>Honour the meaning, not only the menu.</strong></li>
+</ul>
+<p><strong>In practice — a village lunch for visitors.</strong> A coastal village receives eight visitors for a
+farm-to-table lunch. The host family explains beforehand that the matai and the pastor will be welcomed first,
+that visitors will be served after them and that everyone waits for a short blessing. Visitors help carry food
+from the umu, learn the names of the dishes and afterwards ask how the plantation and the reef supply the table.
+<em>Which parts express respect, which hospitality, and what could an unbriefed visitor misunderstand?</em></p>
+
+<h3>Learning activity: Food protocol — "Do and Don't"</h3>
+<p>Decide whether each behaviour is <em>Respectful</em>, <em>Needs guidance</em> or <em>Disrespectful</em>, and
+explain why: a visitor begins eating before the blessing; waits until the hosts invite them to eat; asks about an
+unfamiliar food respectfully; refuses food without explaining politely; interrupts the person presenting the food;
+helps carry food when invited; takes the best portion before others are served.</p>
+
+<h3>Key points</h3>
+<ul>
+<li>In fa'a Samoa, food represents respect, hospitality, collective responsibility and identity.</li>
+<li>Serving chiefs, church leaders and government leaders first reflects social structure and the responsibilities leaders carry.</li>
+<li>The Sunday to'ona'i and other communal meals reinforce family and village bonds.</li>
+<li>Visitors receive meanings as well as meals, which makes briefing and consent essential in agritourism.</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>What do fa'aaloalo, alofa and tautua mean, and how does each show up in a meal?</li>
+<li>Name three groups who are traditionally served first at formal meals.</li>
+<li>Why is serving order different on White Sunday?</li>
+<li>Give one strength and one pressure of collective responsibility for food.</li>
+</ul>`,
         video: {
           youtubeId: "6-8PTVWURdY",
           checkpoints: [
@@ -2917,32 +3083,935 @@ const modules: Module[] = [
             },
           ],
         },
+        aiSummaryPrompt:
+          "Write a short reflection (100–150 words): how does food reflect respect in fa'a Samoa? Use at least two " +
+          "examples from this lesson (for example serving order, the to'ona'i or White Sunday).",
+        microQuizzes: [
+          {
+            id: "m5-l1-mq1",
+            question: "Which value means \"service\" and is shown by younger or untitled family members cooking and serving?",
+            options: ["Tautua", "Fa'aaloalo", "Alofa", "Malaga"],
+            correctIndex: 0,
+          },
+        ],
       },
-      { id: "m5-l2", title: "5.2 Traditional crops (taro, coconut) and their role", content: "<p>Content for this lesson will be provided by partner NUS.</p>" },
-      { id: "m5-l3", title: "5.3 Supporting healthy nutrition in agritourism", content: "<p>Content for this lesson will be provided by partner NUS.</p>" },
-      { id: "m5-l4", title: "5.4 Connecting tradition with the tourism offer", content: "<p>Content for this lesson will be provided by partner NUS.</p>" },
-      { id: "m5-l5", title: "5.5 Case studies from Samoa", content: "<p>Content for this lesson will be provided by partner NUS.</p>" },
+      {
+        id: "m5-l2",
+        title: "5.2 Land, Sea and Seasons: The Local Ingredients of Samoa",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>list the main root crops, fruits, leafy vegetables, coconut products and seafood of the traditional Samoan diet;</li>
+<li>explain what each food group contributes to nutrition;</li>
+<li>describe how the plantation, the reef and the forest supply the Samoan table through the year;</li>
+<li>explain how customary land and village rules shape access to food resources;</li>
+<li>identify pressures on local food supply, and why they matter for agritourism.</li>
+</ul>
+<p><em>Key terms:</em> talo, ta'amu, ulu, fa'i, niu, fa'ato'aga, customary land, staple food, palolo, sense of place.</p>
+
+<h3>An island food system</h3>
+<p>Samoa is a group of volcanic islands — Upolu and Savai'i and several smaller ones — with warm temperatures,
+high rainfall, fertile soils, coral reefs and lagoons. A traditional village is organised around three zones:</p>
+<ul>
+<li><strong>the sea in front</strong> — reef, lagoon and open ocean, for fish, octopus, shellfish and seaweed;</li>
+<li><strong>the village in the middle</strong> — houses, family gardens, coconut palms and fruit trees;</li>
+<li><strong>the plantation and forest behind</strong> — the fa'ato'aga, with root crops and bananas, and the forest, for timber, leaves and wild foods.</li>
+</ul>
+<p>A traditional meal is the end of a short chain that starts a few hundred metres from where it is eaten. This
+link between food and place is sometimes called <strong>terroir</strong> or <strong>sense of place</strong>. In
+Samoa it is not guaranteed by a label; it is held in family knowledge and in the village rules that govern land
+and sea.</p>
+
+<h3>Root crops: the energy foods</h3>
+<ul>
+<li><strong>Talo (taro)</strong> — the best-known staple; the corm is boiled or baked in the umu, and taro is a prestige food in many ceremonies.</li>
+<li><strong>Ta'amu (giant taro)</strong> — a large, hardy root crop.</li>
+<li><strong>Ulu (breadfruit)</strong> — a tree crop baked, boiled or fried; traditionally some was fermented and stored in pits for lean times.</li>
+<li><strong>Fa'i (bananas)</strong> — eaten green (boiled or baked) and ripe.</li>
+<li><strong>Ufi (yams)</strong> and other root crops complement these staples.</li>
+</ul>
+<p><strong>A lesson in resilience — the taro blight of 1993.</strong> Taro was Samoa's main staple and an export
+crop until taro leaf blight spread rapidly across the islands in 1993 and devastated production. Farmers and
+researchers responded with new crops and resistant varieties, and families relied more on bananas, breadfruit and
+giant taro. The lesson: a food system that depends on one crop is fragile, and traditional diversity is a form of
+food security.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m5-l2-mq1"></div>
+
+<h3>Leaves, fruits, coconut and the sea</h3>
+<p>Taro leaves (<em>lu'au</em>) are a staple vegetable — cooked with coconut cream and wrapped, they become
+<strong>palusami</strong>. Papaya, mango, pineapple, bananas and citrus add vitamins and variety. The simple
+three-part pattern: <strong>root crops for energy, fruits and vegetables for vitamins, seafood for protein and
+minerals such as iron</strong>.</p>
+<p>The <strong>coconut</strong> (<em>niu</em>) is at the heart of the kitchen: drinking water, coconut cream,
+cooking oil, leaves, shells and fibre, and copra as a cash product. Coconut cream and oil are nutritious but
+energy-dense; in a traditional diet they flavoured fibre-rich meals balanced by physical work — used in large
+quantities with processed foods and little exercise, they add to weight gain.</p>
+<p>From the <strong>sea</strong> come fish, octopus, shellfish, crabs and seaweed, gathered on the reef at low
+tide, by net, line and trap, and by deep-sea fishing. The <strong>palolo</strong>, a marine worm that rises from
+the reef once a year (usually October or November, a few nights after the full moon), shows how food, the moon and
+the seasons are tied together in local knowledge. Under community-based fisheries management, many villages make
+bylaws and set aside reserves. Pigs (<em>pua'a</em>) and chickens (<em>moa</em>) are closely associated with
+feasts and gifts and were traditionally eaten less often than vegetables and seafood.</p>
+
+<h3>Land, tenure and who decides</h3>
+<p>About four-fifths of land in Samoa is <strong>customary land</strong>, held by families under the authority of
+their matai and not bought and sold like freehold property. A family decides what is grown and who may enter; a
+farm visit usually needs agreement from the family or village; and benefits must be shared in ways they find fair.
+<strong>You cannot design a farm-to-table experience on customary land without the consent of the people who hold
+it.</strong></p>
+
+<h3>Seasons, climate risk and pressures</h3>
+<p>Samoa has a wetter season (about November–April, overlapping with the cyclone season) and a drier season
+(about May–October). Cyclones in 1990 and 1991 showed how quickly crops, breadfruit trees and reefs can be
+damaged; climate change adds heavier storms, drought, warmer seas and rising seas. Local food supply is also under
+pressure from cheap imports, young people moving away from the plantation, the time cost of fresh food and
+environmental damage. Markets such as the Fugalei Fresh Produce Market in Apia show the other side: places where
+growers sell directly and visitors can meet producers.</p>
+
+<table>
+<thead><tr><th>Food group</th><th>Examples</th><th>Main contribution</th><th>Cultural note</th></tr></thead>
+<tbody>
+<tr><td>Root crops and starchy fruits</td><td>talo, ta'amu, ulu, fa'i, ufi</td><td>Carbohydrates, energy, fibre</td><td>Staples at daily meals and feasts</td></tr>
+<tr><td>Leafy vegetables</td><td>lu'au, garden greens</td><td>Vitamins, minerals, fibre</td><td>Palusami is a signature dish</td></tr>
+<tr><td>Fruits</td><td>papaya, mango, pineapple, banana, citrus</td><td>Vitamins, fibre</td><td>Eaten fresh, in desserts, as snacks</td></tr>
+<tr><td>Seafood</td><td>fish, octopus, shellfish, seaweed, palolo</td><td>Protein, minerals such as iron</td><td>Seasonal and community-managed</td></tr>
+<tr><td>Coconut products</td><td>drinking nut, cream, oil</td><td>Energy, flavour</td><td>Used in many dishes; portion size matters</td></tr>
+<tr><td>Animal foods</td><td>pork, chicken</td><td>Protein, fat</td><td>Linked to ceremonies and festive meals</td></tr>
+</tbody>
+</table>
+
+<h3>Why this matters for agritourism</h3>
+<ul>
+<li>Show the full chain: sea, plantation, kitchen and table.</li>
+<li>Name the people: the family, the village and the person who taught the recipe.</li>
+<li>Follow the seasons: serve what is in season rather than relying on imports.</li>
+<li>Respect land and sea rules: ask first, follow village bylaws, avoid damaging gardens or reefs.</li>
+</ul>
+<p><strong>In practice — a plantation walk.</strong> A family farm invites visitors to walk the plantation before
+lunch: taro and giant taro at different stages, a breadfruit tree, banana plants, how the family decides what to
+plant and how the village protects the lagoon. Visitors help harvest taro leaves, and the host says clearly which
+areas are family gardens visitors may enter and which are not.</p>
+
+<h3>Learning activity: Food map and seasonal calendar</h3>
+<p>For ten local foods (e.g. coconut, taro, banana, breadfruit, cassava, tuna, reef fish, octopus, taro leaves,
+papaya), note the main source (land/plantation or sea), who produces or collects it, its season and its food group
+(Worksheet C). Then, with a family member or neighbour, list five foods and the months when they are best
+available.</p>
+
+<h3>Self-check</h3>
+<ul>
+<li>Which three zones structure a traditional Samoan village food system?</li>
+<li>What does each of root crops, vegetables and fruits, and seafood mainly provide?</li>
+<li>Why did the 1993 taro blight matter for food security?</li>
+<li>Why must agritourism planners ask permission before using customary land?</li>
+</ul>`,
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words): name three Samoan staple foods with the main nutrition benefit " +
+          "of each, and explain in one or two sentences what a visitor would learn about the \"sense of place\" on " +
+          "a plantation walk.",
+        microQuizzes: [
+          {
+            id: "m5-l2-mq1",
+            question: "What did the 1993 taro leaf blight show about Samoa's food system?",
+            options: [
+              "Dependence on one crop is fragile, and crop diversity is a form of food security",
+              "Taro cannot be grown in Samoa",
+              "Imported food is always more reliable than local food",
+              "Breadfruit is more vulnerable to disease than taro",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
+      {
+        id: "m5-l3",
+        title: "5.3 The Umu and the Samoan Table: Food Preparation, Ceremony and Food Heritage",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>describe the umu (earth oven) cooking method step by step, including the roles people play;</li>
+<li>name and describe several traditional Samoan dishes and the occasions on which they are served;</li>
+<li>explain the role of food in ceremonies and exchanges, including the Sunday feast;</li>
+<li>explain why food knowledge is living cultural heritage, and what threatens it;</li>
+<li>use the open, adapted or private test to decide what could be shared with visitors.</li>
+</ul>
+<p><em>Key terms:</em> umu, palusami, oka, to'ona'i, fa'alavelave, 'ava, intangible cultural heritage, staged authenticity.</p>
+
+<h3>Cooking is more than a method</h3>
+<p>The NUS presentation describes the umu as an earth oven that uses heated stones and leaves to slow-cook food,
+preserving nutrients and flavour. That is correct, but the most important point is that <strong>the umu is also a
+social event</strong>: it gathers family members around a shared task, follows a rhythm of roles and timing, and
+produces food shared with the whole household and guests. Other methods sit alongside it: boiling, roasting over
+fire or hot stones, wrapping food in leaves, preparing raw fish with citrus and coconut cream, and fermenting
+breadfruit for storage. Food is served from woven baskets, leaves and wooden bowls (<em>umete</em>).</p>
+
+<h3>The umu step by step</h3>
+<p>An umu is usually prepared in the early morning, especially on Sundays before church, or the day before a major
+event. Each family has its own way — treat this as an introduction, not a recipe.</p>
+<ol>
+<li><strong>Prepare the fire and the stones</strong> — firewood is stacked in a shallow pit or on the ground, volcanic stones are placed on top, and the fire burns until the stones are very hot.</li>
+<li><strong>Prepare the food</strong> — taro, breadfruit and bananas are peeled or cleaned, fish and meat seasoned or wrapped, and taro leaves filled with coconut cream and folded into palusami parcels.</li>
+<li><strong>Clear the embers and arrange the stones</strong> — burning wood is raked away and the hot stones spread evenly.</li>
+<li><strong>Load the oven</strong> — sturdier foods such as root crops first, then wrapped and more delicate items, with layers of leaves separating food from stones.</li>
+<li><strong>Cover and cook</strong> — banana leaves, coconut fronds and cloths or mats hold in the steam; the umu cooks slowly, often for an hour or more.</li>
+<li><strong>Open and serve</strong> — the covers are lifted carefully and food is served first to those being honoured (Lesson 5.1).</li>
+</ol>
+<p><strong>Roles.</strong> In many families men mainly prepare the fire, stones and oven, women prepare many
+wrapped dishes, the coconut cream and the table, and young people fetch, carry and clean. Roles are flexible and
+are part of what young people learn by taking part. <strong>Why people value it:</strong> slow steaming uses very
+little added fat, keeps juices and flavour, gives a smoky, earthy taste and feeds many people at once.
+<strong>Safety:</strong> hot stones and open fires carry a real risk of burns — anyone leading an umu for visitors
+must keep a safe distance, prepare food hygienically and manage children carefully.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m5-l3-mq1"></div>
+
+<h3>A table of Samoan dishes</h3>
+<table>
+<thead><tr><th>Dish</th><th>Main ingredients</th><th>How it is made</th><th>Typical occasion</th></tr></thead>
+<tbody>
+<tr><td>Palusami</td><td>Taro leaves, coconut cream</td><td>Leaves filled with cream, wrapped and baked in the umu</td><td>Sunday meal, feasts</td></tr>
+<tr><td>Umu-baked root crops</td><td>Taro, breadfruit, bananas, giant taro</td><td>Baked in the earth oven</td><td>Everyday and ceremonial meals</td></tr>
+<tr><td>Oka</td><td>Raw fish, citrus juice, coconut cream, onion</td><td>Fish marinated in citrus, mixed with coconut cream</td><td>Meals, guests</td></tr>
+<tr><td>Baked pork or chicken</td><td>Pork or chicken</td><td>Cooked in the umu</td><td>Feasts, ceremonies</td></tr>
+<tr><td>Koko Samoa</td><td>Roasted local cocoa, hot water, sugar</td><td>Roasted cocoa ground, shaped into balls and dissolved in hot water</td><td>Breakfast and everyday drink</td></tr>
+<tr><td>Panipopo</td><td>Flour, sugar, coconut cream</td><td>Sweet bread rolls baked in coconut cream</td><td>Breakfast, church events</td></tr>
+</tbody>
+</table>
+<p>Food culture adapts: <em>pisupo</em> (tinned corned beef) is now common and sometimes added to palusami, and
+<em>sapasui</em>, a noodle dish with Chinese influence, is served at celebrations. These adaptations are part of
+living heritage, but they also raise health questions (Lesson 5.4).</p>
+
+<h3>Food in ceremony and exchange</h3>
+<ul>
+<li><strong>The Sunday feast (to'ona'i)</strong> — the main meal of the week after church, often cooked in the umu.</li>
+<li><strong>Life events</strong> — weddings, funerals, the bestowal of a matai title and church events are marked with large shared meals.</li>
+<li><strong>Family exchanges (fa'alavelave)</strong> — relatives contribute food, fine mats (<em>'ie toga</em>), money and labour, and gifts are returned in due course: an obligation as well as a source of pride.</li>
+<li><strong>The 'ava ceremony</strong> — the ceremonial drink of 'ava (kava) is served in strict order of rank, setting the tone of respect.</li>
+<li><strong>Church occasions</strong> — White Sunday, Christmas and fundraising events involve special foods and shared meals.</li>
+</ul>
+<p>Because these events cost money and effort, a visitor experience should never reduce a ceremony to a menu.</p>
+
+<h3>Food as living heritage</h3>
+<p>UNESCO uses the term <strong>intangible cultural heritage</strong> for living knowledge, skills and practices
+passed from one generation to the next. The palusami recipe is only a small part of it: heritage also includes
+selecting the stones, building the fire, judging when the umu is ready, wrapping the leaves, sharing the food in
+the right order and saying the words of thanks. It is fragile when knowledge is not passed on, when practices are
+shortened or staged, or when materials change (foil for leaves, gas for stones, tinned for fresh). Culture is not a
+museum — the important question is <strong>who decides, and whether the community benefits</strong>.</p>
+
+<h3>What can be shared with visitors? The open, adapted and private test</h3>
+<table>
+<thead><tr><th>Circle</th><th>Question</th><th>Examples for discussion</th></tr></thead>
+<tbody>
+<tr><td>Open</td><td>Is this open to sharing with visitors as it is?</td><td>A palusami cooking demonstration or an umu meal prepared for visitors; a plantation walk; tasting koko Samoa</td></tr>
+<tr><td>Adapted</td><td>Can it be shared only in a modified form?</td><td>A shortened welcome with food; an 'ava ceremony explained clearly as a demonstration; a lunch inspired by a feast</td></tr>
+<tr><td>Private</td><td>Is it private or sacred?</td><td>Title-bestowal ceremonies, funeral meals, family protocols and any practice the family or village asks to keep private</td></tr>
+</tbody>
+</table>
+<p>The right answer always comes from the family and village that hold the practice, not from a tour operator or a
+textbook. This connects to <strong>staged authenticity</strong> (Dean MacCannell): a performance that looks like
+everyday life but is arranged for visitors. Staging is not wrong — a cooking class is staged — but it becomes a
+problem when it is hidden, or when private life is exposed without agreement. Honest labelling ("this is a
+demonstration prepared for visitors") protects guests and hosts.</p>
+
+<h3>Women, men, youth and elders</h3>
+<p>Elders hold knowledge of how things used to be done; women often hold deep knowledge of gardens, reef gathering,
+wrapped dishes and everyday cooking; men often lead umu preparation and plantation work; and young people carry the
+future of the practice. Agritourism is fairer and more sustainable when all of these groups take part in planning,
+are paid for their work and are credited for their knowledge. (Module 6 explores women's leadership and
+entrepreneurship in more depth.)</p>
+
+<h3>In practice: a half-day umu experience</h3>
+<table>
+<thead><tr><th>Time</th><th>Step</th><th>Visitor role</th></tr></thead>
+<tbody>
+<tr><td>Early morning</td><td>Gathering firewood and preparing the stones</td><td>Watch and help with simple tasks</td></tr>
+<tr><td>Morning</td><td>Preparing taro, breadfruit, fish and palusami</td><td>Peel, wrap and ask questions</td></tr>
+<tr><td>Morning</td><td>Loading and covering the umu</td><td>Observe from a safe distance</td></tr>
+<tr><td>Late morning</td><td>Welcome and a short story about the family and the food</td><td>Listen and ask questions</td></tr>
+<tr><td>Midday</td><td>Opening the umu, blessing and shared meal</td><td>Eat together, following the host's lead</td></tr>
+<tr><td>Afternoon</td><td>Farewell and feedback</td><td>Share comments</td></tr>
+</tbody>
+</table>
+<p>All steps are led by the host family. <em>Which parts belong in the open circle? What would the family need to
+decide before offering it?</em></p>
+
+<h3>Learning activity: Three circles</h3>
+<p>List five food practices in your community. Place each in the open, adapted or private circle and write who in
+the community should make the decision (Worksheet A). Optional group task: create a 30–60 second Reel showing the
+six stages of the umu in the correct order, with captions, respectful filming and at least one cultural
+explanation.</p>
+
+<h3>Self-check</h3>
+<ul>
+<li>Why is the umu described as both a cooking method and a social event?</li>
+<li>What are the main ingredients of palusami?</li>
+<li>What does intangible cultural heritage mean, and why is food knowledge a good example?</li>
+<li>What are the three circles, and who answers the questions?</li>
+</ul>`,
+        aiSummaryPrompt:
+          "Write a short summary (about 150 words): describe the six steps of the umu method, name two roles people " +
+          "play, and explain why the umu is also a social event.",
+        microQuizzes: [
+          {
+            id: "m5-l3-mq1",
+            question: "In the umu, which foods usually go onto the hot stones first?",
+            options: [
+              "Sturdier foods such as root crops",
+              "Delicate wrapped foods such as palusami",
+              "Raw fish for oka",
+              "Koko Samoa",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
+      {
+        id: "m5-l4",
+        title: "5.4 Food, Nutrition and Climate: Healthy and Sustainable Food Futures",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>explain why the traditional Samoan diet is regarded as nutritious, and where it needs a more careful look;</li>
+<li>describe the nutrition transition in Samoa, its main causes, and its health and cultural consequences;</li>
+<li>propose healthy practical choices based on local foods, without blaming individuals;</li>
+<li>explain the impacts of climate change on Samoa's food system and agritourism;</li>
+<li>recommend sustainable, climate-resilient food practices that combine traditional knowledge with modern approaches.</li>
+</ul>
+<p><em>Key terms:</em> nutrition transition, processed food, non-communicable disease (NCD), food security, food
+environment, climate change, sustainability, climate resilience, food solutions.</p>
+
+<h3>Part A — Food and nutrition</h3>
+<h4>What made the traditional diet nutritious?</h4>
+<p>A typical traditional meal combines a starchy root crop or breadfruit, a leafy vegetable, fish or other
+seafood, and fruit, with coconut as flavouring. Its key features were whole, unprocessed foods; variety; fibre; low
+added sugar and salt (flavour from coconut, citrus, herbs, smoke and leaves); gentle cooking in the umu or by
+boiling; and daily physical activity in gardening, fishing, carrying and cooking. The NUS presentation summarises
+this by saying traditional meals were balanced with physical activity, which supported strong bodies.</p>
+<p><strong>A more careful look.</strong> It is easy to romanticise the past: coconut cream, pork and feast foods
+are energy-dense; traditional life was not free of illness or hardship; and a diet is a <em>pattern</em> — the mix
+of foods, portions and lifestyle determines health, not a single food.</p>
+
+<h4>The nutrition transition</h4>
+<p>In recent decades Samoa, like many Pacific countries, has experienced a <strong>nutrition transition</strong>:
+a shift from traditional diets of local foods towards diets with many imported and processed foods — tinned corned
+beef (pisupo), instant noodles, white rice and bread, fatty imported meat and sugary drinks. This is not simply a
+matter of personal choice. Drivers include imports and trade (cheap, shelf-stable products), the cash economy,
+time and convenience, urbanisation and migration, reduced physical activity, marketing and the food environment,
+and the cost and availability of fresh local food.</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m5-l4-mq1"></div>
+
+<h4>Health and cultural consequences</h4>
+<p>The transition is linked to rising <strong>non-communicable diseases (NCDs)</strong>: obesity, type 2 diabetes,
+hypertension and heart disease, which burden families, communities and the health system. Population surveys found
+obesity among Samoan men aged 25–64 rising from about 28% in 1978 to about 53% in 2013, with levels among women
+higher still. Survey methods differ, so check the most recent national survey (e.g. WHO STEPS, Samoa Demographic
+and Health Survey) before quoting numbers. <strong>A note on language:</strong> obesity and diabetes have many
+causes — genetics, history, poverty, food prices and lifestyle. Use respectful language and focus on conditions
+and solutions, not on blaming people.</p>
+<p>The change in diet is also a change in knowledge: younger generations risk losing traditional farming, fishing
+and cooking practices. Skills are learned by doing, language and stories follow food, crop diversity declines and
+identity weakens. A strategy that improves nutrition without respecting culture is unlikely to last, and one that
+preserves culture without caring about health is incomplete.</p>
+
+<h4>Case study: the turkey tail policy</h4>
+<p>Turkey tails, a cheap and fatty imported cut, became widely eaten in Samoa. In 2007, concerned about obesity,
+Samoa banned their import. During negotiations to join the World Trade Organization the ban became a trade issue;
+Samoa joined in 2012 and the ban was repealed in 2013, after which the government used import duties and nutrition
+policy and education instead. The case shows that price and availability shape diets as much as taste, that public
+health goals can conflict with trade rules, and that local foods compete poorly if they cost more than cheap
+imports. <em>Which policy tools would you choose to promote healthier eating while respecting culture and
+livelihoods?</em></p>
+
+<h4>A traditional and a modern plate</h4>
+<table>
+<thead><tr><th>Aspect</th><th>Traditional meal (umu-baked taro, fish, palusami, fruit)</th><th>Modern processed meal (instant noodles, tinned meat, sugary drink)</th></tr></thead>
+<tbody>
+<tr><td>Processing</td><td>Fresh or lightly prepared</td><td>Highly processed and packaged</td></tr>
+<tr><td>Fibre and vitamins</td><td>Higher</td><td>Usually lower</td></tr>
+<tr><td>Added sugar and salt</td><td>Low</td><td>Often high</td></tr>
+<tr><td>Fat</td><td>From coconut and fish; moderate in typical portions</td><td>Often higher in saturated fat</td></tr>
+<tr><td>Cost</td><td>Depends on whether grown at home or bought</td><td>Often cheap per serving</td></tr>
+<tr><td>Social and cultural value</td><td>High: shared, local, tied to knowledge</td><td>Low</td></tr>
+<tr><td>Environmental footprint</td><td>Local, low packaging</td><td>Imported, packaged, more waste</td></tr>
+</tbody>
+</table>
+<p>This is a simplified teaching comparison, not a claim that every traditional meal is healthy or every modern
+meal is not.</p>
+
+<h4>Healthy choices based on local foods</h4>
+<ul>
+<li>fill more of the plate with vegetables, leafy greens, fruit and fish, with root crops as the energy food;</li>
+<li>use coconut cream and oil in moderation, and choose baking, steaming or boiling over frying;</li>
+<li>choose water and unsweetened drinks instead of sugary drinks;</li>
+<li>keep processed and tinned foods for occasional use and look for lower-salt options;</li>
+<li>plant a home garden, even a small one, and keep active;</li>
+<li>follow national dietary guidelines and Ministry of Health advice for individual needs.</li>
+</ul>
+<p>This is general educational information, not personal medical advice. Individual choices work best when the
+wider environment supports them — affordable local produce, accessible markets, healthy school canteens and
+community events that include local foods.</p>
+
+<h3>Part B — Climate change and food culture sustainability</h3>
+<p><strong>Climate change</strong> refers to long-term changes in temperature, rainfall, sea levels and weather
+patterns. <strong>Sustainability</strong> means using natural resources responsibly so they meet today's needs
+without reducing the ability of future generations to meet theirs — using water and land carefully, protecting soil
+and coasts, growing local and seasonal crops, reducing harmful chemicals and food waste, using renewable energy and
+supporting local producers.</p>
+<h4>Climate impacts on the Samoan food system</h4>
+<ul>
+<li>higher temperatures affect crop growth and livestock;</li>
+<li>heavy rainfall and flooding damage crops, farms and roads, while drought reduces water for crops and animals;</li>
+<li>cyclones and strong winds destroy farms, fruit trees and infrastructure;</li>
+<li>sea-level rise and saltwater intrusion affect coastal farms and freshwater;</li>
+<li>changing ocean conditions affect fish and other marine foods;</li>
+<li>crop damage can raise food prices and increase food insecurity.</li>
+</ul>
+<h4>Traditional knowledge and modern practice</h4>
+<p>Traditional knowledge — seasonal planting and harvest times, choosing crops suited to local conditions, the umu,
+preserving food by drying and smoking, using local plants and marine resources, and sharing food through aiga and
+nu'u — can be strengthened by climate-smart farming, better water management, sustainable fishing, food safety and
+hygiene, improved storage and processing, and solar energy. Combining the two protects food culture while improving
+food security.</p>
+<h4>Food solutions</h4>
+<p>Practical solutions include climate-resilient and locally adapted crops, compost, rainwater harvesting,
+agroforestry and mixed cropping, buying local, reducing food waste, value-added products and renewable energy. For
+agritourism, these solutions can themselves become visitor experiences: farm tours, cooking demonstrations,
+food-growing activities, composting demonstrations and workshops on local food preservation.</p>
+
+<h3>Learning activities</h3>
+<ul>
+<li><strong>Traditional meal vs. fast food:</strong> compare a Sunday to'ona'i with a takeaway meal using the table above — ingredients, fibre, salt and sugar, cost, and connection to family and hospitality.</li>
+<li><strong>Climate scenario:</strong> "A cyclone has damaged a village's taro and banana crops and cut the road to the market." What food problems follow, how are families and tourists affected, and how could the community recover and prepare for the next cyclone?</li>
+<li><strong>Sustainability sorting:</strong> sort composting, overfishing, rainwater harvesting, burning plastic, growing local crops, solar energy, excessive pesticide use and buying imports when local food exists into sustainable or unsustainable, and suggest alternatives.</li>
+</ul>
+
+<h3>Key points</h3>
+<ul>
+<li>The traditional Samoan diet is based on fresh, local, seasonal foods, cooked gently and balanced by activity.</li>
+<li>The nutrition transition is driven by price, convenience, trade, urbanisation and changing lifestyles, and is linked to rising NCDs.</li>
+<li>Healthy choices need a supportive food environment as well as individual action.</li>
+<li>Climate change threatens crops, reefs and food security; traditional knowledge combined with climate-smart practice builds resilience.</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>What is the nutrition transition? Name four health conditions linked to it.</li>
+<li>Give three drivers of the shift that are not simply personal choice.</li>
+<li>Name three climate change impacts on Samoa's food system.</li>
+<li>Give two food solutions that could also become agritourism experiences.</li>
+</ul>`,
+        aiSummaryPrompt:
+          "Write a short summary (100–150 words): explain the nutrition transition in Samoa with two of its causes " +
+          "and two health consequences, and suggest one climate-smart, local-food solution a village could also " +
+          "offer to visitors.",
+        microQuizzes: [
+          {
+            id: "m5-l4-mq1",
+            question: "Which of these is a driver of Samoa's nutrition transition that is NOT simply personal choice?",
+            options: [
+              "Cheap, widely available imported and shelf-stable foods",
+              "A lack of interest in taste",
+              "Higher daily physical activity",
+              "More time available for gardening",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
+      {
+        id: "m5-l5",
+        title: "5.5 From Plantation to Plate: Entrepreneurship, Agritourism and Safeguarding Food Heritage",
+        content: `<h3>Learning objectives</h3>
+<ul>
+<li>explain how entrepreneurship can preserve and promote Samoa's traditional food culture through local food businesses and value-added products;</li>
+<li>define agritourism and farm-to-table, and explain with examples how they link health, culture and livelihoods in Samoa;</li>
+<li>map a simple value chain from plantation to plate and identify who benefits;</li>
+<li>design a respectful, healthy and sustainable food experience and audit it against consent and benefit-sharing criteria.</li>
+</ul>
+<p><em>Key terms:</em> value-added product, agritourism, farm-to-table, Farm to Fork, gastronomy tourism, value
+chain, leakage, consent, benefit-sharing, cultural appropriation.</p>
+
+<h3>Part A — Entrepreneurship and food culture</h3>
+<p>Samoa has many opportunities for small businesses based on locally produced food, and agritourism connects
+farmers and food producers directly with visitors and local consumers: farm tours and farm-to-table meals, local
+food cafés, traditional catering, fruit and vegetable stalls, coconut, cocoa and vanilla products, juices, jams and
+preserves, cooking classes, and sales to markets, hotels and resorts.</p>
+<p><strong>Value addition</strong> means processing or improving a local product so it can be sold at a higher
+price: taro → chips, flour or packaged cooked taro; banana → chips, flour or banana bread; coconut → oil, cream,
+milk or soap; breadfruit → flour or chips; pineapple and other fruits → juice, jam or dried fruit; cocoa → cocoa
+products and chocolate; cassava → chips or flour. Value-added products reduce food losses and give farmers extra
+income.</p>
+<p><strong>Climate-smart agritourism</strong> uses resilient crops, compost, rainwater, solar power, tree planting,
+less plastic and local buying. <strong>Food waste</strong> wastes the water, land, energy and labour used to
+produce food, raises costs and produces greenhouse gases in landfills; businesses can reduce it by planning
+quantities, storing food properly, using leftovers safely, composting and educating visitors. Farmers and
+communities can take part by supplying hotels and restaurants, selling directly to tourists, joining farmers'
+markets, offering farm tours and cooking demonstrations, forming cooperatives and promoting products online.</p>
+<p><strong>Samoan examples to explore:</strong> Ifieleele Plantation, Sunshine Pacific Farm, Aleisa Coffee Samoa
+and the Savaia Giant Clam Sanctuary (see the module's supplementary materials).</p>
+<div class="micro-quiz-slot" data-micro-quiz-id="m5-l5-mq1"></div>
+
+<h3>Part B — Agritourism and farm-to-table in Samoa</h3>
+<p><strong>Agritourism</strong> connects agriculture and tourism: visitors go to farms, plantations and rural
+communities to see how food is grown, learn how it is prepared, take part and eat fresh local food — farm and
+plantation tours, hands-on harvesting, umu demonstrations, tastings and cooking classes, market visits, food trails
+and village stays. It overlaps with <strong>gastronomy tourism</strong> (food-linked experiences), cultural tourism
+and ecotourism. <strong>Farm-to-table</strong> describes a short, transparent chain from producer to plate. The
+AGRI-TOUR project — "Agriculture-Tourism Alliance: From Farm to Fork Strategy Applied in the Pacific Island
+Countries" — is inspired by the EU's <strong>Farm to Fork Strategy</strong> for fairer, healthier and more
+environmentally friendly food systems.</p>
+<p><strong>Agritourism in Samoa</strong> has developed through a 2016 Samoa Tourism Authority (STA) policy workshop
+that recommended an agritourism action plan, and a Gastronomy Tourism Workshop hosted by the Pacific Tourism
+Organisation (SPTO) and STA in November 2025, where the National University of Samoa presented its agritourism
+training and research and STA announced plans for a dedicated taskforce. In practice it includes cocoa plantation
+tours, food trails, umu demonstrations and partnerships in which hotels and restaurants buy local produce.</p>
+<table>
+<thead><tr><th>How agritourism helps</th><th>What happens</th><th>What is needed</th></tr></thead>
+<tbody>
+<tr><td>1. Encourages local, fresh food</td><td>Visitors and communities eat fresh crops, fruit and local fish</td><td>Reliable supply, quality, fair prices</td></tr>
+<tr><td>2. Educates visitors and locals</td><td>People learn the value of traditional foods and cooking skills</td><td>Skilled hosts, accurate nutrition information</td></tr>
+<tr><td>3. Supports farmers and food systems</td><td>Income for farmers, more demand, stronger food security</td><td>Fair payment, regular orders, inclusive planning</td></tr>
+<tr><td>4. Preserves traditional knowledge</td><td>Umu cooking, indigenous crops and practices are valued</td><td>Community consent, elders and youth involved</td></tr>
+<tr><td>5. Shifts demand towards healthy food</td><td>Hotels and restaurants buy more local ingredients</td><td>Procurement agreements, chef training, food safety</td></tr>
+</tbody>
+</table>
+<p><strong>A realistic view.</strong> Agritourism is a useful tool, not a miracle cure: it is small in scale,
+benefits shrink through <strong>leakage</strong> (income leaving the local economy through imported food or outside
+owners), benefits can be unequal, seasons and shocks disrupt it, and poorly designed experiences can commercialise
+what should stay private. Island challenges also include skills, quality standards, transport and cold storage
+(especially in Savai'i and outer areas), land consent and coordination between agriculture, fisheries, tourism,
+health and village authorities.</p>
+
+<h4>Following one product: cocoa from plantation to plate</h4>
+<table>
+<thead><tr><th>Step</th><th>What happens</th><th>Visitor opportunity</th></tr></thead>
+<tbody>
+<tr><td>Growing</td><td>Cocoa trees tended on family land</td><td>Walk through the plantation</td></tr>
+<tr><td>Harvesting</td><td>Ripe pods picked and opened</td><td>Try opening a pod</td></tr>
+<tr><td>Fermenting and drying</td><td>Beans fermented and dried</td><td>See and smell the process</td></tr>
+<tr><td>Roasting and grinding</td><td>Dried beans roasted and ground</td><td>Watch and taste</td></tr>
+<tr><td>Making and serving</td><td>Ground cocoa turned into koko Samoa or chocolate</td><td>Taste and buy</td></tr>
+<tr><td>Selling</td><td>Sold at markets, shops and to visitors</td><td>Buy directly from the producer</td></tr>
+</tbody>
+</table>
+<p>At each step ask <strong>who earns, who decides, who carries the work and who is named</strong>.</p>
+
+<h3>Part C — Designing a respectful, healthy and sustainable food experience</h3>
+<h4>Six guiding principles</h4>
+<ol>
+<li><strong>Consent first</strong> — the family and village that hold the knowledge, land and sea decide whether and how to take part; consent is informed, given before planning, and can be withdrawn.</li>
+<li><strong>Respect for protocol and meaning</strong> — serving order, blessings, dress and ceremonies are honoured; what is private stays private.</li>
+<li><strong>Honesty about what is staged.</strong></li>
+<li><strong>Healthy, local and seasonal food.</strong></li>
+<li><strong>Environmental care</strong> — land, reef and water are protected, and waste is kept low.</li>
+<li><strong>Fair benefit</strong> — income, credit and decisions are shared with those who do the work and hold the knowledge, including women, young people and elders.</li>
+</ol>
+<p>Sustainability has three dimensions that must hold together: <strong>environmental</strong> (buy local, avoid
+single-use plastic, follow fisheries rules, limit group size), <strong>economic</strong> (fair prices, written
+benefit-sharing, local hosts) and <strong>cultural</strong> (consent, elders and youth involved, correct names and
+stories). A project that protects soil but takes recipes without permission is not sustainable — nor is one that
+earns money but harms the reef.</p>
+<p><strong>The experience.</strong> Memorable experiences involve visitors actively (Pine and Gilmore's "experience
+economy"). A simple structure: (1) welcome and protocol briefing, (2) place and story told by a host, (3) hands-on
+activity, (4) shared meal served by custom, (5) farewell, local products and feedback. Send visitors a short
+briefing in advance (greetings, serving order, modest dress, asking before photographs, quiet times such as Sunday
+worship and evening prayer, <em>sa</em>). Keep groups small. Build the menu around root crops, greens, fruit and
+fish, use coconut cream moderately, offer water or coconut water, ask about allergies and dietary or religious needs,
+and follow food safety rules.</p>
+<p><strong>Ethics.</strong> <strong>Cultural appropriation</strong> means using a culture's recipes, names,
+designs or stories without credit, consent or fair benefit. Good practice: ask first, record who gave consent,
+credit recipes and stories to named families or villages, share income, and respect a "no".</p>
+<p><strong>The benefit audit.</strong> Test any activity with four questions — <strong>who earns, who decides, who
+carries the burden, who is credited?</strong> — then score the planning checklist (yes / partly / no) and write
+three actions to improve the weakest items. After each event, gather feedback, keep simple records and review at
+least once a year with the family and village; if a practice causes discomfort, remove it.</p>
+
+<h3>Capstone activity: design a food trail or farm experience</h3>
+<ol>
+<li>Choose the place and host partners (family, farm, village, cooperative or women's committee).</li>
+<li>Map consent: place each food, story and place in the open, adapted or private circle and note who decides.</li>
+<li>Draft a two-hour or half-day storyboard (Worksheet B): welcome, place and story, hands-on activity, shared meal, farewell.</li>
+<li>Plan a local, seasonal, healthy menu and note allergies and dietary needs.</li>
+<li>Plan benefits: how income is shared, who is trained, who is credited.</li>
+<li>Check sustainability and risks: environment, safety, storms or low demand.</li>
+<li>Complete the benefit audit and pitch your proposal in 5–7 minutes.</li>
+</ol>
+
+<h3>Key points</h3>
+<ul>
+<li>Entrepreneurship and value-added products can preserve traditional foods while creating income.</li>
+<li>Agritourism links health, culture and livelihoods, but only with the right conditions; leakage and unequal benefits are real risks.</li>
+<li>Designing a food experience starts with the consent of those who hold the knowledge, land and sea.</li>
+<li>Fair benefit-sharing is judged by four questions: who earns, who decides, who carries the burden and who is credited.</li>
+</ul>
+
+<h3>Self-check</h3>
+<ul>
+<li>What is a value-added product? Give two examples using Samoan crops.</li>
+<li>Define agritourism and farm-to-table. What is leakage, and why is it a problem?</li>
+<li>Name the six guiding principles and the three dimensions of sustainability.</li>
+<li>What is cultural appropriation, and how can it be avoided?</li>
+</ul>
+<p><strong>Tofa soifua!</strong> You have reached the end of the learning units — take the module proficiency
+test when you are ready.</p>`,
+        aiSummaryPrompt:
+          "Write a short proposal (100–150 words) for a food experience in a Samoan village or farm (real or " +
+          "imagined): what visitors do, what stays private, and how you would answer the four benefit questions " +
+          "(who earns, who decides, who carries the burden, who is credited).",
+        microQuizzes: [
+          {
+            id: "m5-l5-mq1",
+            question: "Which is an example of value addition?",
+            options: [
+              "Turning breadfruit into breadfruit flour or chips",
+              "Selling raw taro at the same price",
+              "Importing chips to sell to tourists",
+              "Leaving surplus bananas to rot",
+            ],
+            correctIndex: 0,
+          },
+        ],
+      },
       {
         id: "m5-l6",
         title: "5.6 Module summary and proficiency test",
-        content: "<p>The module summary will be prepared by partner NUS.</p>",
+        content: `<h3>Module summary</h3>
+<ul>
+<li><strong>Food and fa'a Samoa</strong> — food expresses respect (fa'aaloalo), love and care (alofa) and service (tautua); chiefs, church leaders and government leaders are served first at formal meals.</li>
+<li><strong>Land, sea and seasons</strong> — root crops for energy, fruits and vegetables for vitamins, seafood for protein and minerals; about four-fifths of land is customary land, so consent is central.</li>
+<li><strong>The umu and the table</strong> — the umu is both a slow-cooking method and a social event; communities decide what is open, adapted or private.</li>
+<li><strong>Nutrition and climate</strong> — the nutrition transition is linked to rising NCDs; climate change threatens crops and reefs; traditional knowledge plus climate-smart practice builds resilience.</li>
+<li><strong>From plantation to plate</strong> — entrepreneurship, value addition and agritourism can support farmers and healthy food when consent, fair benefit-sharing and honesty about staging are in place.</li>
+</ul>
+<h3>Proficiency test</h3>
+<p>The test has 10 multiple-choice questions with one correct answer each. Pass mark: 7 out of 10. Suggested time:
+about 30 minutes.</p>`,
         quiz: {
           questions: [
-            draftQuestion("m5-q1", "Which traditional crops are key to Samoan cuisine?"),
-            draftQuestion("m5-q2", "How does agritourism support healthy nutrition in Samoa?"),
-            draftQuestion("m5-q3", "How can food tradition be connected to the tourism offer?"),
+            {
+              id: "m5-q1",
+              question: "In fa'a Samoa, which statement best describes the role of food at formal meals?",
+              options: [
+                "Food is mainly a matter of nutrition and has no social rules",
+                "Food expresses respect, hospitality and collective responsibility, and serving order reflects social structure",
+                "Food is a private matter for each individual",
+                "Food is mainly a commercial product",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m5-q2",
+              question: "Which groups are traditionally served first at formal Samoan meals?",
+              options: [
+                "Whoever arrives first",
+                "The young people who did the cooking",
+                "Overseas visitors only",
+                "Chiefs, church leaders and ministers, and government leaders",
+              ],
+              correctIndex: 3,
+            },
+            {
+              id: "m5-q3",
+              question: "Which pairing of food group and main nutrition contribution matches the NUS presentation?",
+              options: [
+                "Root crops: carbohydrates for energy",
+                "Fresh fruits and vegetables: protein and iron",
+                "Seafood: mainly carbohydrates",
+                "Coconut cream: mainly vitamins",
+              ],
+              correctIndex: 0,
+            },
+            {
+              id: "m5-q4",
+              question: "Why does customary land matter for agritourism planning in Samoa?",
+              options: [
+                "The government owns all farms and decides what is grown",
+                "Visitors may enter any family garden they find",
+                "Families and villages hold the land, so their consent is needed before it is used",
+                "Customary land cannot be used to grow food",
+              ],
+              correctIndex: 2,
+            },
+            {
+              id: "m5-q5",
+              question: "What is the umu?",
+              options: [
+                "A raw fish dish with coconut cream",
+                "An earth oven that uses heated stones and leaves to slow-cook food",
+                "A ceremonial bowl for kava",
+                "A taro leaf parcel with coconut cream",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m5-q6",
+              question: "Which action best respects food heritage when designing a visitor experience?",
+              options: [
+                "Shortening a ceremonial meal so it fits the tour schedule",
+                "Presenting a demonstration as a private family ritual",
+                "Selling a family's recipe under the business's own name",
+                "Asking the community what is open, adapted or private, and letting hosts tell their own stories",
+              ],
+              correctIndex: 3,
+            },
+            {
+              id: "m5-q7",
+              question: "What does the nutrition transition in Samoa refer to?",
+              options: [
+                "A shift from traditional diets of local foods to diets with many imported, processed foods",
+                "A move from cooked food to raw food",
+                "An increase in daily physical activity",
+                "A shift from eating fish to eating only crops",
+              ],
+              correctIndex: 0,
+            },
+            {
+              id: "m5-q8",
+              question: "Which set of conditions is linked to the shift to processed foods?",
+              options: [
+                "Taro leaf blight and cyclone damage",
+                "Higher physical activity and better fibre intake",
+                "Rising obesity, type 2 diabetes, hypertension and heart disease",
+                "Faster growth of coral reefs",
+              ],
+              correctIndex: 2,
+            },
+            {
+              id: "m5-q9",
+              question: "Which statement best defines agritourism?",
+              options: [
+                "Any holiday near a hotel swimming pool",
+                "Tourism based on farms, food and cultural experiences, where visitors learn how food is grown and enjoy local produce",
+                "Tourism that consists only of buying souvenirs",
+                "Tourism that serves imported food to visitors",
+              ],
+              correctIndex: 1,
+            },
+            {
+              id: "m5-q10",
+              question: "Which four questions test whether benefits from a food experience are shared fairly?",
+              options: [
+                "Who pays, who travels, who cooks, who photographs?",
+                "How many visitors, how long, how far, how cheap?",
+                "Who is oldest, who is richest, who is nearest, who is first?",
+                "Who earns, who decides, who carries the burden, who is credited?",
+              ],
+              correctIndex: 3,
+            },
           ],
         },
       },
     ],
     supplementaryMaterials: [
-      draftMaterial("m5-mat1", "photo-story", "Ifieleele plantation — farm-to-table in Samoa", "Real video — https://www.youtube.com/watch?v=W5eh77T9hA0"),
-      draftMaterial("m5-mat2", "fact-sheet", "Fact sheet: glossary of traditional ingredients", "TBD from NUS"),
-      draftMaterial("m5-mat3", "case-study", "Sunshine Farm in Samoa", "Real video — https://www.youtube.com/watch?v=Qekfu7mShEY"),
-      draftMaterial("m5-mat4", "worksheet", "Worksheet: design a farm-to-table experience", "TBD from NUS"),
-      draftMaterial("m5-mat5", "case-study", "Manusina beach fale (Samoa)", "Real video — https://www.youtube.com/watch?v=kgGya2P9e9s"),
+      {
+        id: "m5-mat1",
+        type: "fact-sheet",
+        title: "Glossary of Samoan food culture",
+        note: "Real content — NUS Module \"Samoan Culture of Food — Farm to table\", Glossary",
+        body:
+          "<dl>" +
+          MODULE5_GLOSSARY.map(({ term, definition }) => `<dt>${term}</dt><dd>${definition}</dd>`).join("") +
+          "</dl>",
+        glossaryGame: MODULE5_GLOSSARY,
+      },
+      {
+        id: "m5-mat2",
+        type: "fact-sheet",
+        title: "Fact sheet: Samoan food at a glance",
+        note: "Real content — NUS Module, Supplementary material S4",
+        body: `<table>
+<thead><tr><th>Topic</th><th>Key facts</th></tr></thead>
+<tbody>
+<tr><td>Way of life</td><td>Fa'a Samoa organises life around the aiga (family), matai (chiefs), nu'u (village) and lotu (church)</td></tr>
+<tr><td>Values at the table</td><td>Fa'aaloalo (respect), alofa (love and care), tautua (service)</td></tr>
+<tr><td>Serving order</td><td>Chiefs, church leaders and ministers, and government leaders are served first at formal meals; children are honoured on White Sunday</td></tr>
+<tr><td>Weekly feast</td><td>To'ona'i, the Sunday meal after church, often cooked in an umu</td></tr>
+<tr><td>Staples</td><td>Talo (taro), ta'amu (giant taro), ulu (breadfruit), fa'i (banana), ufi (yam), coconut</td></tr>
+<tr><td>Sea foods</td><td>Fish, octopus, shellfish, seaweed, and the seasonal palolo</td></tr>
+<tr><td>Cooking</td><td>Umu earth oven with hot stones and leaves; boiling; roasting; raw fish dishes</td></tr>
+<tr><td>Signature dishes</td><td>Palusami, oka, umu-baked root crops, baked pork, koko Samoa, panipopo</td></tr>
+<tr><td>Land</td><td>About four-fifths of land is customary land held by families under matai</td></tr>
+<tr><td>Diet change</td><td>More imported and processed foods; rising obesity, type 2 diabetes, hypertension and heart disease</td></tr>
+<tr><td>Agritourism</td><td>Food and gastronomy workshops, farm and cocoa tours, food trails, cooking demonstrations, farmer and tourism partnerships</td></tr>
+<tr><td>Key idea</td><td>Agritourism links health, culture and livelihoods and encourages a return to nutritious traditional foods</td></tr>
+</tbody>
+</table>`,
+      },
+      {
+        id: "m5-mat3",
+        type: "case-study",
+        title: "Case studies: cocoa tour, 2025 Gastronomy Tourism Workshop, turkey tail policy, Pacific comparisons",
+        note: "Real content — NUS Module, Supplementary material S1",
+        body: `<h4>Case 1: A cocoa plantation tour in Samoa</h4>
+<p>Visitors walk through a family cocoa plantation, learn how pods are harvested, fermented, dried and roasted, and
+taste koko Samoa and chocolate. The tour links a crop, a family, a place and a product in one story.
+<em>Which parts of the farm give visitors a sense of place? What should be behind the scenes? Who earns at each
+step?</em></p>
+<h4>Case 2: The 2025 Gastronomy Tourism Workshop, Samoa</h4>
+<p>On 19 November 2025 the Pacific Tourism Organisation (SPTO) and the Samoa Tourism Authority (STA) hosted a
+Gastronomy Tourism Workshop focused on localising cuisine in the visitor experience, developing food trails and
+integrating culinary heritage into sustainable itineraries. Tour operators, hoteliers, small businesses, NGOs and
+training institutions took part, and the National University of Samoa presented its agritourism training and
+research. Participants discussed a national agritourism strategy, and STA announced plans for a dedicated
+taskforce. <em>Who should be at the table when a national agritourism strategy is written? What role should
+villages and women's committees play?</em></p>
+<h4>Case 3: The turkey tail policy</h4>
+<p>In 2007 Samoa banned imports of turkey tails because of health concerns. During negotiations to join the WTO the
+ban became a trade issue and was removed as part of the accession process (accession in 2012; ban repealed in
+2013), with high import duties used instead. The Ministry of Health later commissioned a study on a trade-compliant
+nutrition policy. <em>Why were turkey tails popular? What alternatives to a ban could improve diets without
+harming livelihoods or culture?</em></p>
+<h4>Case 4: Pacific comparisons</h4>
+<p>In Fiji, an ACIAR-supported programme helped five agritourism businesses become market-ready, including a
+crop-to-cup coffee tour near Sigatoka where guests see beans being dried. In Vanuatu, a project under the banner of
+Regenerative Vanua has been recognised for building regenerative agritourism and gastronomy experiences while
+respecting Indigenous knowledge systems. <em>What can Samoan hosts learn from these examples? How can tourism
+support Indigenous knowledge without taking it over?</em></p>`,
+      },
+      {
+        id: "m5-mat4",
+        type: "checklist",
+        title: "Checklist: planning a Samoan food experience",
+        note: "Real content — NUS Module, Supplementary material S2",
+        checklistItems: [
+          "The family and village have agreed which foods, stories and places are shared, and who gave consent is recorded",
+          "A host from the community leads the storytelling",
+          "The programme says honestly what is a demonstration and what is daily life",
+          "Ingredients are local and seasonal wherever possible",
+          "The menu is built around local root crops, greens, fruit and fish, with moderate coconut cream and no sugary drinks",
+          "Visitors take part actively (harvest, prepare, cook or eat together)",
+          "Visitors receive a briefing on protocol before arrival",
+          "Allergy, dietary and religious needs are asked in advance",
+          "Safety rules are in place for the umu (fire, hot stones, children) and for food hygiene",
+          "Waste is reduced, and leaves, baskets and reusable items replace single-use plastic",
+          "Income is shared fairly, and the split is written down",
+          "Women, young people and elders have roles and are credited",
+          "Group size respects the land, reef and community",
+          "Feedback from hosts and visitors is collected after each event",
+        ],
+      },
+      worksheetMaterialM5("m5-mat5", "Worksheet A – Three circles: open, adapted or private", [
+        "Food practice 1 — open / adapted / private, who decides, and why",
+        "Food practice 2 — open / adapted / private, who decides, and why",
+        "Food practice 3 — open / adapted / private, who decides, and why",
+        "Food practice 4 — open / adapted / private, who decides, and why",
+        "Food practice 5 — open / adapted / private, who decides, and why",
+      ]),
+      worksheetMaterialM5("m5-mat6", "Worksheet B – Experience storyboard (two-hour food experience)", [
+        "1 Welcome — what happens, who hosts, story told, what stays private",
+        "2 Place and story — what happens, who hosts, story told, what stays private",
+        "3 Hands-on activities — what happens, who hosts, story told, what stays private",
+        "4 Shared meal — what happens, who hosts, story told, what stays private",
+        "5 Farewell and feedback — what happens, who hosts, story told, what stays private",
+      ]),
+      worksheetMaterialM5("m5-mat7", "Worksheet C – Nutrition matching and food map", [
+        "Talo (taro) — main contribution, where it comes from, season",
+        "Ulu (breadfruit) — main contribution, where it comes from, season",
+        "Taro leaves — main contribution, where it comes from, season",
+        "Papaya — main contribution, where it comes from, season",
+        "Fish — main contribution, where it comes from, season",
+        "Coconut cream — main contribution, where it comes from, season",
+      ]),
+      {
+        id: "m5-mat8",
+        type: "worksheet",
+        title: "Interview guide: elders and food change",
+        note: "Real content — NUS Module, Supplementary material S6. Interview an elder, farmer, fisher or cook for about 20 minutes, with permission to record; afterwards write a 150-word summary and thank the interviewee.",
+        worksheetFields: [
+          "What foods did you eat most when you were a child?",
+          "Who taught you to grow, catch or prepare them?",
+          "Which foods do you eat less now, and why?",
+          "What do you think changed the way families eat?",
+          "When is the umu prepared in your family, and who does what?",
+          "What would you like young people to know about traditional food?",
+          "What parts of food culture would you share with visitors, and what would you keep private?",
+          "150-word summary of the interview (with quotes you have permission to use)",
+        ],
+      },
+      {
+        id: "m5-mat9",
+        type: "photo-story",
+        title: "Photo story brief: one dish from plantation or reef to table",
+        note: "Real content — NUS Module, Supplementary material S5",
+        body:
+          "<p>Create six to ten photographs telling the story of one dish from plantation or reef to table: the " +
+          "place, the producer, the preparation, the meal and the people. Add a one-line caption to each. Obtain " +
+          "written consent from everyone shown, avoid photographing sacred items or ceremonies without permission, " +
+          "and credit the photographer and the family. Submit as a short slide deck or PDF.</p>",
+      },
+      {
+        id: "m5-mat10",
+        type: "infographic",
+        title: "Infographic briefs: the traditional and modern plate; from plantation to plate",
+        note: "Real content — NUS Module, Supplementary material S7 (briefs; final graphics to be produced)",
+        body:
+          "<p><strong>Infographic 1: The traditional plate and the modern plate.</strong> One page comparing two " +
+          "meals: what is on each plate, where each food comes from, and the main differences in fibre, added sugar " +
+          "and salt, cost and social meaning. Use plain language and local icons, and avoid blaming people.</p>" +
+          "<p><strong>Infographic 2: From plantation to plate.</strong> One page showing five steps (grow, harvest, " +
+          "prepare, share, remember), the people involved at each step and one sustainability action for each. Use " +
+          "local images with permission.</p>",
+      },
+      {
+        id: "m5-mat11",
+        type: "recommended-links",
+        title: "Recommended reading and links",
+        note: "Real content — NUS Module, Supplementary material S8 and Units 5–6 linked materials",
+        body: `<ul>
+<li><a href="https://www.ifieleele.com/" target="_blank" rel="noopener">Ifieleele Plantation</a></li>
+<li><a href="https://www.samoa.travel/plan-book/activities/savaia-giant-clam-sanctuary/" target="_blank" rel="noopener">Savaia Giant Clam Sanctuary (Samoa Tourism Authority)</a></li>
+<li><a href="https://www.samoa.travel/discover/our-food-and-cuisine/samoan-food/" target="_blank" rel="noopener">Samoa Tourism Authority — Samoan food</a></li>
+<li><a href="https://southpacificislands.travel/sustainable/gastronomy-tourism-project/" target="_blank" rel="noopener">Pacific Sustainable Tourism Portal — Gastronomy Tourism Project</a></li>
+<li><a href="https://www.aciar.gov.au/media-search/blogs/growing-agritourism-pacific" target="_blank" rel="noopener">ACIAR — Growing agritourism in the Pacific</a></li>
+<li><a href="https://extranet.who.int/ncdsmicrodata/index.php/catalog/study/WSM_2013_STEPS_v01" target="_blank" rel="noopener">WHO — Samoa STEPS survey 2013</a></li>
+<li><a href="https://www.agri-tour.eu/" target="_blank" rel="noopener">AGRI-TOUR project website</a> and <a href="https://www.youtube.com/@AgriTourProject" target="_blank" rel="noopener">YouTube channel</a></li>
+</ul>`,
+      },
+      {
+        id: "m5-mat12",
+        type: "case-study",
+        title: "Ifieleele plantation — farm-to-table in Samoa (video)",
+        url: "https://www.youtube.com/watch?v=W5eh77T9hA0",
+        note: "Real video",
+      },
+      {
+        id: "m5-mat13",
+        type: "case-study",
+        title: "Sunshine Farm in Samoa (video)",
+        url: "https://www.youtube.com/watch?v=Qekfu7mShEY",
+        note: "Real video",
+      },
+      {
+        id: "m5-mat14",
+        type: "case-study",
+        title: "Manusina beach fale, Samoa (video)",
+        url: "https://www.youtube.com/watch?v=kgGya2P9e9s",
+        note: "Real video",
+      },
     ],
-    references: ["TBD — reference list to be provided by partner NUS"],
+    references: [
+      "National University of Samoa (NUS), Samoan Culture of Food — Farm to Table: AGRI-TOUR MOOC module (D3.2, final version 2026)",
+      "NUS presentation, Samoan Food Culture: Promoting Healthy Food through Agritourism (21 slides)",
+      "ACIAR, Growing agritourism in the Pacific: https://www.aciar.gov.au/media-search/blogs/growing-agritourism-pacific",
+      "ACIAR, Vanuatu's regenerative agritourism: https://www.aciar.gov.au/media-search/blogs/vanuatus-regenerative-agritourism",
+      "AGRI-TOUR project website: https://www.agri-tour.eu/",
+      "CoCoNet, Localising agri-tourism: https://www.thecoconet.tv/coco-talanoa/coco-news/localising-agri-tourism-bringing-home-tourism/",
+      "Gastronomy Tourism Project, Pacific Sustainable Tourism Portal: https://southpacificislands.travel/sustainable/gastronomy-tourism-project/",
+      "South Pacific Tourism Organisation, Samoa strengthens culinary tourism through regional collaboration and capacity building (19 December 2025): https://southpacificislands.travel/samoa-strengthens-culinary-tourism-through-regional-collaboration-and-capacity-building/",
+      "University of the South Pacific, Project advances sustainable agritourism in the Pacific: https://www.usp.ac.fj/news/project-advances-sustainable-agritourism-in-the-pacific/",
+      "UN Tourism and FAO Mountain Partnership, sustainable gastronomy tourism in Pacific SIDS: https://www.fao.org/mountain-partnership/news/newsroom/news-detail/un-tourism-and-fao-mountain-partnership-launch-sustainable-gastronomy-tourism-project-in-pacific-sids/en",
+      "NPR, Samoans await the return of the tasty turkey tail (2013): https://www.npr.org/sections/thesalt/2013/05/14/182568333/samoans-await-the-return-of-the-tasty-turkey-tail",
+      "Penn State and Unizin, Food in Samoa: https://psu.pb.unizin.org/internatag/chapter/food-in-samoa/",
+      "Samoa Tourism Authority, Samoan food: https://www.samoa.travel/discover/our-food-and-cuisine/samoan-food/",
+      "Things to Do in Samoa, Food culture: https://thingstodoinsamoa.com/food-culture/",
+      "US National Park Service, Samoan food and culture: https://home.nps.gov/npsa/learn/historyculture/samoan-food-and-culture.htm",
+      "World Health Organization, Samoa STEPS surveys (2002 and 2013): https://extranet.who.int/ncdsmicrodata/index.php/catalog/study/WSM_2013_STEPS_v01",
+      "Counihan, C., Van Esterik, P. and Julier, A. (eds), Food and Culture: A Reader (Routledge)",
+      "Douglas, M. (1966), Purity and Danger (Routledge)",
+      "Hall, C.M. and Sharples, L. (eds) (2003), Food Tourism Around the World (Butterworth-Heinemann)",
+      "Long, L. (ed.) (2004), Culinary Tourism (University Press of Kentucky)",
+      "MacCannell, D. (1976), The Tourist: A New Theory of the Leisure Class (Schocken)",
+      "Pine, B.J. and Gilmore, J.H. (1998), Welcome to the experience economy, Harvard Business Review",
+      "Sutton, D. (2001), Remembrance of Repasts: An Anthropology of Food and Memory (Berg)",
+      "UNESCO (2003), Convention for the Safeguarding of the Intangible Cultural Heritage",
+    ],
   },
   {
     id: "m6",
